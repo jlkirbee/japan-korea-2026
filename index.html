@@ -1,0 +1,3384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Tokyo → Kyoto → Seoul · Feb–Mar 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Light Mode */
+  --bg: #faf8f5;
+  --bg-card: #ffffff;
+  --bg-nav: rgba(250, 248, 245, 0.92);
+  --text: #1a1a1a;
+  --text-muted: #6b6b6b;
+  --text-light: #999;
+  --border: #e8e4df;
+  --border-light: #f0ece7;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --accent-jp: #c0392b;
+  --accent-jp-light: #fdf2f0;
+  --accent-jp-border: #e8c4bf;
+  --accent-kr: #2d5f8a;
+  --accent-kr-light: #edf3f8;
+  --accent-kr-border: #b8cfe0;
+  --accent-kyoto: #8b6914;
+  --accent-kyoto-light: #faf5e8;
+  --accent-kyoto-border: #ddd0a8;
+  --badge-book: #c0392b;
+  --badge-walkin: #27ae60;
+  --badge-line: #f39c12;
+  --tag-bg: #f5f2ee;
+  --tag-text: #5a5a5a;
+  --highlight: #fff8e1;
+  --quick-ref-bg: #f0ece7;
+  --details-bg: #faf8f5;
+  --font-sans: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --nav-height: 52px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141210;
+    --bg-card: #1e1c19;
+    --bg-nav: rgba(20, 18, 16, 0.94);
+    --text: #e8e4df;
+    --text-muted: #a09a90;
+    --text-light: #706a60;
+    --border: #2e2a25;
+    --border-light: #252220;
+    --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+    --accent-jp: #e05a4f;
+    --accent-jp-light: #2a1814;
+    --accent-jp-border: #4a2520;
+    --accent-kr: #5a9fd4;
+    --accent-kr-light: #141e28;
+    --accent-kr-border: #1e3348;
+    --accent-kyoto: #c4a240;
+    --accent-kyoto-light: #221e10;
+    --accent-kyoto-border: #3a3218;
+    --badge-book: #e05a4f;
+    --badge-walkin: #2ecc71;
+    --badge-line: #f1c40f;
+    --tag-bg: #252220;
+    --tag-text: #a09a90;
+    --highlight: #2a2510;
+    --quick-ref-bg: #1e1c19;
+    --details-bg: #1a1816;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--nav-height) + 56px);
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 80px;
+}
+
+/* ========== NAVIGATION ========== */
+.nav-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-nav);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  height: var(--nav-height);
+}
+
+.nav-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.nav-title span {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.nav-tabs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 12px 10px;
+  gap: 6px;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-tab:hover, .nav-tab:active { background: var(--border); }
+.nav-tab.active-tokyo { background: var(--accent-jp); color: #fff; }
+.nav-tab.active-kyoto { background: var(--accent-kyoto); color: #fff; }
+.nav-tab.active-seoul { background: var(--accent-kr); color: #fff; }
+.nav-tab.active-ref { background: var(--text); color: var(--bg); }
+
+/* ========== HERO ========== */
+.hero {
+  padding: 32px 16px 24px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.hero .subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.hero .route {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.hero .route-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.hero .route-line {
+  width: 24px;
+  height: 1px;
+  background: var(--border);
+}
+.dot-tokyo { background: var(--accent-jp); }
+.dot-kyoto { background: var(--accent-kyoto); }
+.dot-seoul { background: var(--accent-kr); }
+
+/* ========== SECTIONS ========== */
+.section {
+  padding: 0 16px;
+  margin-bottom: 32px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-top: 8px;
+}
+.section-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.section-accent {
+  width: 4px;
+  height: 28px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.accent-tokyo { background: var(--accent-jp); }
+.accent-kyoto { background: var(--accent-kyoto); }
+.accent-seoul { background: var(--accent-kr); }
+.accent-ref { background: var(--text-muted); }
+
+/* ========== QUICK REFERENCE ========== */
+.quick-ref {
+  background: var(--quick-ref-bg);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  margin: 0 16px 24px;
+}
+.quick-ref h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.qr-grid {
+  display: grid;
+  gap: 12px;
+}
+.qr-item {
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  border: 1px solid var(--border-light);
+}
+.qr-item h4 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.qr-item p, .qr-item li {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.qr-item ul {
+  list-style: none;
+  padding: 0;
+}
+.qr-item li {
+  padding: 3px 0;
+}
+.qr-item li::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* ========== CARDS ========== */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.card-body {
+  padding: 16px;
+}
+
+/* ========== DAY CARDS (collapsible) ========== */
+.day-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.day-card summary {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  gap: 12px;
+  -webkit-tap-highlight-color: transparent;
+}
+.day-card summary::-webkit-details-marker { display: none; }
+.day-card summary::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(-45deg);
+  transition: transform 0.2s;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.day-card[open] summary::after {
+  transform: rotate(45deg);
+}
+.day-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: #fff;
+}
+.day-tokyo { background: var(--accent-jp); }
+.day-kyoto { background: var(--accent-kyoto); }
+.day-seoul { background: var(--accent-kr); }
+.day-info {
+  flex: 1;
+  min-width: 0;
+}
+.day-info .day-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.day-info .day-date {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.day-content {
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--border-light);
+  margin-top: 0;
+  padding-top: 14px;
+}
+.day-content .timeline-item {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+}
+.timeline-time {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 52px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+.timeline-desc {
+  font-size: 13px;
+  line-height: 1.55;
+  flex: 1;
+}
+.timeline-desc strong {
+  font-weight: 600;
+}
+.timeline-desc .tip {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  font-style: italic;
+}
+
+/* ========== VENUE CARDS ========== */
+.venue-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+  margin-bottom: 10px;
+  padding: 14px 16px;
+}
+.venue-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.venue-emoji {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.venue-info {
+  flex: 1;
+  min-width: 0;
+}
+.venue-name {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.venue-area {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+.venue-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-book { background: #fde8e8; color: var(--badge-book); }
+.badge-walkin { background: #e8f8ef; color: var(--badge-walkin); }
+.badge-line { background: #fef9e7; color: #c87f0a; }
+.badge-price { background: var(--tag-bg); color: var(--tag-text); }
+.badge-source { background: var(--tag-bg); color: var(--text-muted); font-weight: 500; }
+
+@media (prefers-color-scheme: dark) {
+  .badge-book { background: rgba(224, 90, 79, 0.15); color: #e87a70; }
+  .badge-walkin { background: rgba(46, 204, 113, 0.15); color: #5dde9e; }
+  .badge-line { background: rgba(241, 196, 15, 0.15); color: #f1c40f; }
+  .badge-price { background: var(--tag-bg); }
+}
+
+.venue-desc {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.venue-desc .rec {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* ========== COLLAPSIBLE SUBSECTIONS ========== */
+.sub-section {
+  margin-bottom: 16px;
+}
+.sub-section summary {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px 0;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.sub-section summary::-webkit-details-marker { display: none; }
+.sub-section summary::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(-45deg);
+  transition: transform 0.2s;
+  margin-left: auto;
+}
+.sub-section[open] summary::after {
+  transform: rotate(45deg);
+}
+.sub-section .sub-content {
+  padding-bottom: 8px;
+}
+
+/* ========== HOTEL CARD ========== */
+.hotel-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.hotel-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.hotel-card .hotel-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.hotel-card .hotel-detail {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+}
+.hotel-card .fhr-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #b8860b, #d4a017);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.hotel-card .pts-tag {
+  display: inline-block;
+  background: var(--accent-jp);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ========== INFO BLOCKS ========== */
+.info-block {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.info-block h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.info-block ul {
+  list-style: none;
+  padding: 0;
+}
+.info-block li {
+  padding: 3px 0;
+  position: relative;
+  padding-left: 14px;
+}
+.info-block li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.info-block p {
+  margin-bottom: 6px;
+}
+
+.callout {
+  background: var(--highlight);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--accent-kyoto);
+}
+.callout strong {
+  font-weight: 700;
+}
+
+.skip-item {
+  display: flex;
+  gap: 8px;
+  padding: 8px 0;
+  font-size: 13px;
+  line-height: 1.5;
+  border-bottom: 1px solid var(--border-light);
+}
+.skip-item:last-child { border-bottom: none; }
+.skip-icon {
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+/* ========== CHECKLIST ========== */
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 13px;
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-priority {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+}
+.priority-now { background: var(--badge-book); }
+.priority-soon { background: var(--badge-line); }
+.priority-ok { background: var(--badge-walkin); }
+.checklist-text { flex: 1; line-height: 1.5; }
+.checklist-text small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+/* ========== PACKING ========== */
+.pack-grid {
+  display: grid;
+  gap: 8px;
+}
+.pack-category {
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  padding: 12px 14px;
+}
+.pack-category h4 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.pack-category li {
+  font-size: 12px;
+  padding: 2px 0;
+  color: var(--text);
+  list-style: none;
+  padding-left: 16px;
+  position: relative;
+}
+.pack-category li::before {
+  content: '☐';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+/* ========== APP LIST ========== */
+.app-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.app-item:last-child { border-bottom: none; }
+.app-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--tag-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.app-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+.app-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ========== PHRASES TABLE ========== */
+.phrase-table {
+  width: 100%;
+  font-size: 13px;
+}
+.phrase-table td {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+}
+.phrase-table td:first-child {
+  font-weight: 600;
+  width: 40%;
+  padding-right: 8px;
+}
+.phrase-table td:last-child {
+  color: var(--text-muted);
+}
+
+/* ========== WEATHER TABLE ========== */
+.weather-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.weather-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  padding: 10px;
+  text-align: center;
+}
+.weather-card .city-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.weather-card .temp {
+  font-size: 18px;
+  font-weight: 700;
+}
+.weather-card .temp-low {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.weather-card .cond {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ========== BUDGET TABLE ========== */
+.budget-table {
+  width: 100%;
+  font-size: 12px;
+  border-collapse: collapse;
+}
+.budget-table th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-muted);
+  padding: 6px 4px;
+  border-bottom: 2px solid var(--border);
+}
+.budget-table td {
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--border-light);
+}
+.budget-table tr:last-child td {
+  font-weight: 700;
+  border-bottom: none;
+}
+
+/* ========== QUOTE BLOCK ========== */
+.quote-block {
+  background: var(--details-bg);
+  border-left: 3px solid var(--border);
+  padding: 12px 14px;
+  margin: 10px 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.quote-block cite {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  font-style: normal;
+  color: var(--text-light);
+}
+
+/* ========== DIVIDER ========== */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 24px 16px;
+}
+
+/* ========== SCROLL TO TOP ========== */
+.scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 50;
+  -webkit-tap-highlight-color: transparent;
+}
+.scroll-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  text-align: center;
+  padding: 32px 16px;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* ========== UTILITY ========== */
+.mt-sm { margin-top: 8px; }
+.mt-md { margin-top: 12px; }
+.mb-sm { margin-bottom: 8px; }
+.mb-md { margin-bottom: 12px; }
+.text-muted { color: var(--text-muted); }
+.text-sm { font-size: 12px; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+
+/* Hide sections initially for tab switching */
+.city-section { display: none; }
+.city-section.active { display: block; }
+
+/* Safe area for notch phones */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+  .scroll-top { bottom: calc(20px + env(safe-area-inset-bottom)); }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav-wrapper" id="nav">
+  <div class="nav-top">
+    <div class="nav-title">🗾🇰🇷 Travel Guide <span>Feb–Mar 2026</span></div>
+  </div>
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab active-ref" data-target="quickref" onclick="switchTab(this)">⚡ Quick Ref</button>
+    <button class="nav-tab" data-target="tokyo" data-active="active-tokyo" onclick="switchTab(this)">🗼 Tokyo</button>
+    <button class="nav-tab" data-target="kyoto" data-active="active-kyoto" onclick="switchTab(this)">⛩️ Kyoto</button>
+    <button class="nav-tab" data-target="seoul" data-active="active-seoul" onclick="switchTab(this)">🇰🇷 Seoul</button>
+    <button class="nav-tab" data-target="practical" data-active="active-ref" onclick="switchTab(this)">📋 Practical</button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <h1>Tokyo → Kyoto → Seoul</h1>
+  <p class="subtitle">John + Amy · Feb 16 – Mar 3, 2026</p>
+  <div class="route">
+    <span class="route-dot dot-tokyo"></span><span>Tokyo</span>
+    <span class="route-line"></span>
+    <span class="route-dot dot-kyoto"></span><span>Kyoto</span>
+    <span class="route-line"></span>
+    <span class="route-dot dot-seoul"></span><span>Seoul</span>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- QUICK REFERENCE -->
+<!-- ========================================== -->
+<div class="city-section active" id="sec-quickref">
+
+  <div class="quick-ref">
+    <h3>⚡ Quick Reference Cheat Sheet</h3>
+    <div class="qr-grid">
+
+      <div class="qr-item">
+        <h4>🏨 Hotels</h4>
+        <ul>
+          <li><strong>Tokyo:</strong> Park Hyatt Tokyo — Shinjuku Park Tower, 39–52F. Lobby on 41F. <em>160k Hyatt pts.</em></li>
+          <li><strong>Kyoto:</strong> Dusit Thani Kyoto — near Nishiki Market. <em>Amex FHR: breakfast + $100 F&B + upgrade + late checkout.</em></li>
+          <li><strong>Seoul:</strong> Conrad Seoul — Yeouido. Connected to IFC Mall. <em>Amex FHR: same perks.</em></li>
+        </ul>
+      </div>
+
+      <div class="qr-item">
+        <h4>🚨 Emergency</h4>
+        <ul>
+          <li><strong>Japan:</strong> Police 110 · Ambulance/Fire 119</li>
+          <li><strong>Korea:</strong> Police 112 · Ambulance/Fire 119</li>
+          <li><strong>US Embassy Tokyo:</strong> 03-3224-5000</li>
+          <li><strong>US Embassy Seoul:</strong> 02-397-4114</li>
+        </ul>
+      </div>
+
+      <div class="qr-item">
+        <h4>📱 Essential Apps</h4>
+        <ul>
+          <li><strong>Japan:</strong> Google Maps · SmartEX · GO (taxi) · Ramen Beast · Tabelog</li>
+          <li><strong>Korea:</strong> Naver Map (NOT Google!) · KakaoMap · Kakao T (taxi) · Papago (translate)</li>
+          <li><strong>Both:</strong> Google Translate (camera) · Airalo/Ubigi (eSIM)</li>
+        </ul>
+      </div>
+
+      <div class="qr-item">
+        <h4>📶 eSIM / Data</h4>
+        <ul>
+          <li><strong>Airalo:</strong> ~$18/10GB — easiest setup, works JP + KR</li>
+          <li><strong>Ubigi:</strong> ~$14/10GB — slightly faster speeds</li>
+          <li>Install BEFORE departure. Activate on arrival.</li>
+          <li>10GB covers the trip on hotel WiFi evenings. Heavy users get 15–20GB.</li>
+        </ul>
+      </div>
+
+      <div class="qr-item">
+        <h4>💴 Cash & Payments</h4>
+        <ul>
+          <li><strong>Japan:</strong> Carry ¥10,000–20,000 ($67–135). Many small spots are cash-only. Refill at <strong>7-Eleven ATMs</strong> (best rates).</li>
+          <li><strong>Korea:</strong> Mostly card-friendly. T-Money card for transit (₩2,500 at any konbini).</li>
+          <li>Don't exchange at the airport — ATMs give better rates.</li>
+          <li>Visa/MC widely accepted. Amex is spottier in Japan.</li>
+        </ul>
+      </div>
+
+      <div class="qr-item">
+        <h4>🚇 Transit Cards</h4>
+        <ul>
+          <li><strong>Japan:</strong> Suica/Pasmo via Apple Wallet or Welcome Suica at airport. Load ¥3,000–5,000.</li>
+          <li><strong>Korea:</strong> T-Money card at any convenience store. ₩2,500 for card + load up.</li>
+        </ul>
+      </div>
+
+      <div class="qr-item">
+        <h4>⚡ Key Phrases</h4>
+        <ul>
+          <li>🇯🇵 <strong>Sumimasen</strong> — excuse me / sorry / thank you (multipurpose king)</li>
+          <li>🇯🇵 <strong>Kore kudasai</strong> — this one please (point + say)</li>
+          <li>🇯🇵 <strong>Okaikei onegai shimasu</strong> — check please</li>
+          <li>🇰🇷 <strong>Kamsahamnida</strong> — thank you</li>
+          <li>🇰🇷 <strong>Igeo juseyo</strong> — this one please</li>
+          <li>🇰🇷 <strong>Gyesanniyo</strong> — check please</li>
+        </ul>
+      </div>
+
+      <div class="qr-item">
+        <h4>🔑 Key Tips</h4>
+        <ul>
+          <li><strong>No tipping</strong> in Japan or Korea. Ever.</li>
+          <li>Shoes off indoors (temples, some restaurants, homes).</li>
+          <li>Quiet on trains in Japan — no phone calls.</li>
+          <li>Korea: Use <strong>Naver Maps</strong>, not Google Maps.</li>
+          <li>JR Pass: <strong>NOT worth it</strong> for this trip. Buy individual tickets.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ========================================== -->
+<!-- TOKYO SECTION -->
+<!-- ========================================== -->
+<div class="city-section" id="sec-tokyo">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-accent accent-tokyo"></div>
+      <h2>🗼 Tokyo</h2>
+    </div>
+    <p class="text-sm text-muted mb-md">Feb 17–19 · Park Hyatt Tokyo · 3 days</p>
+
+    <!-- Hotel -->
+    <div class="hotel-card">
+      <h4>Park Hyatt Tokyo <span class="pts-tag">160k Hyatt pts</span></h4>
+      <p class="hotel-sub">Shinjuku Park Tower · Floors 39–52 · Freshly renovated Dec 2025</p>
+      <p class="hotel-detail">The "Lost in Translation" hotel. New York Bar on 52F with piano jazz and city views. Lobby on 41F — jaw drops at the panorama. Room IS the experience.</p>
+    </div>
+
+    <!-- Day 1 -->
+    <details class="day-card" open>
+      <summary>
+        <div class="day-number day-tokyo">1</div>
+        <div class="day-info">
+          <div class="day-title">Arrival Day</div>
+          <div class="day-date">Feb 17 (Tue)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">3–4pm</div>
+          <div class="timeline-desc"><strong>Land at Narita.</strong> Take Narita Express (N'EX) to Shinjuku (~80 min, ¥3,250/~$22).</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">5:30pm</div>
+          <div class="timeline-desc"><strong>Check into Park Hyatt.</strong> Go up to the 52F lobby — jaw drops at the view.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">6:30pm</div>
+          <div class="timeline-desc"><strong>Omoide Yokocho</strong> (Memory Lane / Piss Alley) — tiny yakitori stalls by Shinjuku Station. Perfect jet-lag dinner. Casual, atmospheric, cheap (~$15pp).
+          <span class="tip">Alternative: Room service + early sleep. You're in the Park Hyatt — the room IS the experience.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">8pm</div>
+          <div class="timeline-desc"><strong>New York Bar</strong> (your hotel, 52F). Skip dinner (overpriced), just cocktails ($18–22 each). Piano jazz + city views are free with your drink.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 2 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-tokyo">2</div>
+        <div class="day-info">
+          <div class="day-title">Full Day Tokyo</div>
+          <div class="day-date">Feb 18 (Wed)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">8am</div>
+          <div class="timeline-desc"><strong>Breakfast</strong> — Walk to a konbini (7-Eleven/Lawson). Japan convenience store breakfast is a legit experience: onigiri, egg sandwiches, great coffee.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">9:30am</div>
+          <div class="timeline-desc"><strong>Koffee Mameya</strong> in Omotesando — world-class coffee. Staff gives handwritten brewing recipes. <span class="tip">Ryan's rec.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">11am</div>
+          <div class="timeline-desc"><strong>Meiji Shrine</strong> — free, peaceful, beautiful even in winter. Walk through the torii gate in the Yoyogi Park forest.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">12:30pm</div>
+          <div class="timeline-desc"><strong>Butagumi</strong> — premium tonkatsu in a gorgeous 60-year-old house. ~$25–35pp lunch. <span class="tip">Ryan's rec. Eater Top 38.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">2:30pm</div>
+          <div class="timeline-desc"><strong>Explore Shibuya</strong> — cross the scramble (once is enough), browse Miyashita Park.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">4pm</div>
+          <div class="timeline-desc"><strong>Sato Yosuke</strong> (Ginza) — handmade Inaniwa udon, ~$15–20pp. <span class="tip">Janice's rec.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">6pm</div>
+          <div class="timeline-desc"><strong>Wander Yanaka or Shimokitazawa</strong> — small shops, quiet streets, local vibes, minimal tourist chaos. Amy will love these.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">8pm</div>
+          <div class="timeline-desc"><strong>Pizza Marumo</strong> (Ebisu) — by a former kaiseki chef. Charred mochi-like dough. ~$30–40pp. Book ahead. <span class="tip">Janice's rec. Eater Top 38.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">10pm</div>
+          <div class="timeline-desc"><strong>Bar Benfiddich</strong> (Shinjuku) or <strong>C-Shell</strong> — craft cocktails, intimate settings.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 3 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-tokyo">3</div>
+        <div class="day-info">
+          <div class="day-title">Morning Tokyo → Kyoto</div>
+          <div class="day-date">Feb 19 (Thu)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">8am</div>
+          <div class="timeline-desc"><strong>Tsukiji Outer Market</strong> — walk, eat tamagoyaki, fresh seafood skewers. Crowded but worth one visit. Go early.
+          <span class="tip">Skip places with English-speaking touts outside.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">10:30am</div>
+          <div class="timeline-desc"><strong>Check out</strong> Park Hyatt. Luggage to Shinjuku Station.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">11:30am</div>
+          <div class="timeline-desc"><strong>Shinkansen to Kyoto</strong> — Nozomi, ¥14,170/~$95pp, 2h15m. Book via SmartEX.
+          <span class="tip">Sit on RIGHT side (E-seats) for possible Mt. Fuji view. Feb has excellent visibility on clear days.</span></div>
+        </div>
+      </div>
+    </details>
+
+    <div class="divider" style="margin: 24px 0;"></div>
+
+    <!-- TOKYO FOOD -->
+    <details class="sub-section" open>
+      <summary>🍽️ All Restaurants</summary>
+      <div class="sub-content">
+
+        <h4 style="font-size:14px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Breakfast & Morning</h4>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🏪</div>
+            <div class="venue-info">
+              <div class="venue-name">7-Eleven / Lawson / FamilyMart</div>
+              <div class="venue-area">Everywhere</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$3–5</span>
+          </div>
+          <div class="venue-desc">Onigiri, egg sando, Lawson's fried chicken, coffee. Japan konbini food is better than most US restaurants. Not a joke.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">L'ambre</div>
+              <div class="venue-area">Shinjuku · Kissaten</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$8–12</span>
+            <span class="badge badge-source">Eater Top 38</span>
+          </div>
+          <div class="venue-desc">1950s retro cafe. Red velvet seats, classical music. Pizza toast, tuna egg sando. 10 min walk from Park Hyatt.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🏬</div>
+            <div class="venue-info">
+              <div class="venue-name">Isetan Depachika</div>
+              <div class="venue-area">Shinjuku · Dept store B1</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$10–20</span>
+          </div>
+          <div class="venue-desc">Department store basement food hall. Mind-blowing bento boxes, wagashi, pastries. Take a bento to the rooftop garden.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍩</div>
+            <div class="venue-info">
+              <div class="venue-name">Higuma Doughnuts</div>
+              <div class="venue-area">Omotesando / Various</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$3–5</span>
+            <span class="badge badge-source">Ryan's rec</span>
+          </div>
+          <div class="venue-desc">Light, fluffy, not too sweet. Any donut is good.</div>
+        </div>
+
+        <h4 style="font-size:14px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Lunch</h4>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🐷</div>
+            <div class="venue-info">
+              <div class="venue-name">Butagumi</div>
+              <div class="venue-area">Nishiazabu</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in lunch</span>
+            <span class="badge badge-book">🔴 Book dinner</span>
+            <span class="badge badge-price">$25–40</span>
+            <span class="badge badge-source">Ryan's rec · Eater Top 38</span>
+          </div>
+          <div class="venue-desc">Premium tonkatsu — choose your pork breed. Set in a gorgeous 60-year-old traditional house.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Sato Yosuke Ginza</div>
+              <div class="venue-area">Ginza</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Short line</span>
+            <span class="badge badge-price">$15–20</span>
+            <span class="badge badge-source">Janice's rec</span>
+          </div>
+          <div class="venue-desc">Inaniwa udon (tempura seiro set). Handmade noodles are spectacular.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Tamawarai</div>
+              <div class="venue-area">Omotesando</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Up to 1hr line</span>
+            <span class="badge badge-price">$15–25</span>
+            <span class="badge badge-source">Eater Top 38</span>
+          </div>
+          <div class="venue-desc">Handmade soba + yuba side dish. No reservations. Worth it if you love soba.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🐷</div>
+            <div class="venue-info">
+              <div class="venue-name">Ginza Katsukami</div>
+              <div class="venue-area">Ginza</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$20–30</span>
+            <span class="badge badge-source">Janice's rec</span>
+          </div>
+          <div class="venue-desc">Quality pork cutlet. Excellent katsu set.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🐟</div>
+            <div class="venue-info">
+              <div class="venue-name">Katsuo Shokudo</div>
+              <div class="venue-area">Shibuya</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve online</span>
+            <span class="badge badge-price">$15–20</span>
+            <span class="badge badge-source">Eater</span>
+          </div>
+          <div class="venue-desc">Katsuobushi shaved over rice set. A unique experience. New on Eater's map.</div>
+        </div>
+
+        <h4 style="font-size:14px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Dinner</h4>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍕</div>
+            <div class="venue-info">
+              <div class="venue-name">Pizza Marumo</div>
+              <div class="venue-area">Ebisu</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Book ahead</span>
+            <span class="badge badge-price">$30–45</span>
+            <span class="badge badge-source">Janice's rec · Eater Top 38</span>
+          </div>
+          <div class="venue-desc">Former kaiseki chef making Tokyo-style pizza. Wagyu carpaccio, any pizza. Charred dough has mochi-like texture.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍕</div>
+            <div class="venue-info">
+              <div class="venue-name">PST Higashi Azabu</div>
+              <div class="venue-area">Azabu</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$25–40</span>
+            <span class="badge badge-source">Janice's rec</span>
+          </div>
+          <div class="venue-desc">Neapolitan-style pizza. If you need a second pizza night.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍣</div>
+            <div class="venue-info">
+              <div class="venue-name">Ginza Hachigou</div>
+              <div class="venue-area">Ginza</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve</span>
+            <span class="badge badge-price">$50–80</span>
+            <span class="badge badge-source">Ryan's rec</span>
+          </div>
+          <div class="venue-desc">Omakase/course. Higher end. Worth the splurge for a special night.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🥩</div>
+            <div class="venue-info">
+              <div class="venue-name">Hikiniku to Come</div>
+              <div class="venue-area">Various locations</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$15–25</span>
+            <span class="badge badge-source">Janice's rec</span>
+          </div>
+          <div class="venue-desc">Specialty hamburg steak. Juicy, well-crafted ground meat.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">⭐</div>
+            <div class="venue-info">
+              <div class="venue-name">Den</div>
+              <div class="venue-area">Jingumae · Michelin 2★</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Extremely hard to book</span>
+            <span class="badge badge-price">$150–200</span>
+          </div>
+          <div class="venue-desc">Kaiseki tasting menu. The famous "Dentucky Fried Chicken" is a must. Try Omakase.in or Tableall to book.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍢</div>
+            <div class="venue-info">
+              <div class="venue-name">Omoide Yokocho (Piss Alley)</div>
+              <div class="venue-area">Shinjuku</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$10–20</span>
+          </div>
+          <div class="venue-desc">Atmospheric tiny alley of smoke-filled yakitori stalls. Perfect first-night jet-lag food.</div>
+        </div>
+
+        <h4 style="font-size:14px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">💎 Value Fine Dining & Omakase</h4>
+
+        <div class="callout">
+          <strong>The Hack:</strong> Japan's Michelin lunch sets are insanely underpriced vs. dinner. This is your best play — world-class food at a fraction of the cost.
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">⭐</div>
+            <div class="venue-info">
+              <div class="venue-name">Ryuzu</div>
+              <div class="venue-area">Michelin 2★ · French-Japanese</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Book 2–4 weeks ahead</span>
+            <span class="badge badge-price">Lunch ~$87pp</span>
+          </div>
+          <div class="venue-desc">"One of the best meals of my life" — Reddit. Book via Omakase.in.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">⭐</div>
+            <div class="venue-info">
+              <div class="venue-name">Le Sputnik</div>
+              <div class="venue-area">Michelin 1★</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Book ahead</span>
+            <span class="badge badge-price">Lunch $55–80pp</span>
+          </div>
+          <div class="venue-desc">"Better value at lunch — you get the signature rose dish either way."</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">⭐</div>
+            <div class="venue-info">
+              <div class="venue-name">Faro</div>
+              <div class="venue-area">Michelin 1★</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Book ahead</span>
+            <span class="badge badge-price">$67–100pp</span>
+            <span class="badge badge-source">Reddit r/finedining fav</span>
+          </div>
+          <div class="venue-desc">"Outstanding value" — Reddit's favorite for budget fine dining.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍣</div>
+            <div class="venue-info">
+              <div class="venue-name">Sushi Ya no Uokin</div>
+              <div class="venue-area">Various</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Book ahead</span>
+            <span class="badge badge-price">~$59pp</span>
+          </div>
+          <div class="venue-desc">24-dish sushi tasting. "Feels too good to be true, but it's legit" — Reddit.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍣</div>
+            <div class="venue-info">
+              <div class="venue-name">Yurakucho Kakida</div>
+              <div class="venue-area">Yurakucho</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Book direct</span>
+            <span class="badge badge-price">$135–200pp</span>
+          </div>
+          <div class="venue-desc">20+ course omakase where you can REPEAT any piece.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍣</div>
+            <div class="venue-info">
+              <div class="venue-name">Ichiu</div>
+              <div class="venue-area">Kaiseki + Sushi fusion</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Book ahead</span>
+            <span class="badge badge-price">$100–135pp</span>
+          </div>
+          <div class="venue-desc">Chef speaks English. "Exceptional value for dinner in Tokyo."</div>
+        </div>
+
+        <h4 style="font-size:14px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">🍩 Desserts & Sweets</h4>
+
+        <div class="info-block">
+          <ul>
+            <li><strong>Higuma Doughnuts</strong> — light and fresh (Ryan's rec)</li>
+            <li><strong>Iyoshi Cola</strong> — artisanal craft cola. Sounds weird, tastes amazing. (Janice's rec)</li>
+            <li><strong>Isetan Depachika wagashi counter</strong> — Japanese confections, a whole world</li>
+            <li><strong>Konbini sweets</strong> — 7-Eleven purin (pudding), mochi ice cream, cream puffs</li>
+          </ul>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- TOKYO COFFEE -->
+    <details class="sub-section">
+      <summary>☕ Coffee Shops</summary>
+      <div class="sub-content">
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">Koffee Mameya</div>
+              <div class="venue-area">Omotesando</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$5–10</span>
+            <span class="badge badge-source">Ryan's rec</span>
+          </div>
+          <div class="venue-desc">Standing counter, minimal. Staff gives handwritten brewing recipes. Primarily a bean shop — you may feel pressure to finish your drink.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">Koffee Mameya Kakeru</div>
+              <div class="venue-area">Kiyosumi Shirakawa</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reservation only</span>
+            <span class="badge badge-price">$15–25 (course)</span>
+          </div>
+          <div class="venue-desc">Seated coffee course experience. Some find it gimmicky, others love it. Book 1 week ahead.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">Glitch Coffee</div>
+              <div class="venue-area">Jimbocho</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$5–8</span>
+          </div>
+          <div class="venue-desc">Specialty, geeky staff. Great pour-over. Ethiopian Gesha if you want to splurge.
+          <span class="rec">⚠️ Getting "overrated" chatter on Reddit. Still good, but not the revelation it once was.</span></div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">Fuglen</div>
+              <div class="venue-area">Asakusa / Tomigaya</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$5–8</span>
+          </div>
+          <div class="venue-desc">Norwegian roots, Scandinavian design. Great vibes for Amy.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">Onibus Coffee</div>
+              <div class="venue-area">Nakameguro</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$5–7</span>
+          </div>
+          <div class="venue-desc">Minimalist, riverside. Beautiful walk along the canal afterward.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">Light Up Coffee</div>
+              <div class="venue-area">Kichijoji</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$5–7</span>
+          </div>
+          <div class="venue-desc">Bright, friendly. Worth it if exploring west Tokyo.</div>
+        </div>
+
+        <div class="callout">
+          <strong>📱 Ramen Beast App</strong> (Ryan's rec) — Download it. Best way to find legit ramen near wherever you are. Way better than Google Maps for ramen.
+        </div>
+
+      </div>
+    </details>
+
+    <!-- TOKYO BARS -->
+    <details class="sub-section">
+      <summary>🍸 Bars</summary>
+      <div class="sub-content">
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🎹</div>
+            <div class="venue-info">
+              <div class="venue-name">New York Bar</div>
+              <div class="venue-area">Park Hyatt 52F · Your hotel!</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 No cover (hotel guest)</span>
+            <span class="badge badge-price">$18–25/drink</span>
+          </div>
+          <div class="venue-desc">Iconic views, live piano jazz. Go for cocktails, skip the food. The views are free with your drink.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🥃</div>
+            <div class="venue-info">
+              <div class="venue-name">Bar Benfiddich</div>
+              <div class="venue-area">Shinjuku</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$20–30/drink</span>
+          </div>
+          <div class="venue-desc">"A real speakeasy joint." Up an unassuming stairwell. Intimate, craft cocktails with foraged ingredients.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍸</div>
+            <div class="venue-info">
+              <div class="venue-name">C-Shell</div>
+              <div class="venue-area">Various</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$18–25/drink</span>
+          </div>
+          <div class="venue-desc">Tiny, intimate, husband-wife team. "Fantastic bespoke drinks." Perfect for Amy.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍸</div>
+            <div class="venue-info">
+              <div class="venue-name">Roku Nana</div>
+              <div class="venue-area">Roppongi</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$15–20/drink</span>
+          </div>
+          <div class="venue-desc">Hidden between buildings, no sign. Unique layout. Intimate and interesting.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍸</div>
+            <div class="venue-info">
+              <div class="venue-name">Bar Trench</div>
+              <div class="venue-area">Ebisu</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$18–22/drink</span>
+            <span class="badge badge-source">Asia's 50 Best</span>
+          </div>
+          <div class="venue-desc">"VERY tiny and intimate and beautiful." DJ on weekend nights after 10pm.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍶</div>
+            <div class="venue-info">
+              <div class="venue-name">Orihara Shoten</div>
+              <div class="venue-area">Koto-ku</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$5–8/glass</span>
+          </div>
+          <div class="venue-desc">Standing sake bar + retail shop. Old-school, locals, cheap. Great to rub shoulders with the neighborhood crowd.</div>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- TOKYO ACTIVITIES -->
+    <details class="sub-section">
+      <summary>🏯 Activities & Experiences</summary>
+      <div class="sub-content">
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 8px 0; text-transform:uppercase; letter-spacing:0.5px;">Must-Do (Free or Cheap)</h4>
+        <div class="info-block">
+          <ul>
+            <li><strong>Meiji Shrine</strong> — free, peaceful, beautiful. Walk through the torii gate in the Yoyogi Park forest.</li>
+            <li><strong>Ueno Park</strong> (Ryan's rec) — museums, temples, a zoo. Tokyo National Museum ¥1,000/$7.</li>
+            <li><strong>Walk Shimokitazawa</strong> — Tokyo's coolest neighborhood. Vintage clothing, tiny cafes, record shops. Zero tourists. Amy will love this.</li>
+            <li><strong>Walk Yanaka</strong> — old Tokyo vibes. Traditional shopping street, temples, cats. Like stepping back in time.</li>
+            <li><strong>Shibuya Crossing</strong> — do it once. Watch from the Starbucks 2F in TSUTAYA building.</li>
+            <li><strong>Shinjuku Gyoen</strong> — gorgeous garden, ¥500/$3.50. Peaceful escape.</li>
+            <li><strong>Nakameguro canal</strong> — beautiful walk, great cafes + shops along the water.</li>
+            <li><strong>Imperial Palace East Gardens</strong> — free, open to the public.</li>
+          </ul>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">Worth the Splurge</h4>
+        <div class="info-block">
+          <ul>
+            <li><strong>Omakase dinner</strong> — even a $60–100 sushi omakase will blow your mind. THE thing to spend money on.</li>
+            <li><strong>TeamLab Borderless</strong> (Azabudai Hills) — immersive digital art. ~¥4,800/$32pp. Go weekday, buy timed tickets. Stunning.</li>
+            <li><strong>Onsen / Sento</strong> — public bath. <strong>Thermae-Yu</strong> in Kabukicho is 24hrs and foreigner-friendly.</li>
+          </ul>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">Rainy Day Options</h4>
+        <div class="info-block">
+          <ul>
+            <li><strong>Dept store food halls</strong> — Isetan, Takashimaya, Mitsukoshi — hours of browsing</li>
+            <li><strong>Museums</strong> — Mori Art Museum, 21_21 Design Sight, National Art Center Tokyo</li>
+            <li><strong>Konbini + hotel</strong> — grab snacks, stay in. The Park Hyatt room is worth enjoying.</li>
+          </ul>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- TOKYO TRANSPORT -->
+    <details class="sub-section">
+      <summary>🚆 Transportation</summary>
+      <div class="sub-content">
+        <div class="info-block">
+          <h4>✈️ Airport → Hotel</h4>
+          <ul>
+            <li><strong>Narita Express (N'EX):</strong> ~80 min to Shinjuku. ¥3,250/$22. Best option.</li>
+            <li><strong>Limousine Bus:</strong> ~85–120 min, ¥3,200. Fine but slower.</li>
+            <li><strong>Skip taxi</strong> from Narita (~$200+). Not worth it.</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>🏙️ Getting Around</h4>
+          <ul>
+            <li><strong>Suica/Pasmo IC card:</strong> Load via Apple Wallet or Welcome Suica at airport. ¥3,000–5,000 to start.</li>
+            <li><strong>Subway/JR:</strong> Google Maps works perfectly for routes.</li>
+            <li><strong>Taxi:</strong> Use <strong>GO app</strong>. Metered, honest, no tipping. ¥500–1500/$3–10.</li>
+            <li><strong>Walking:</strong> Tokyo is very walkable. Best finds are between stations.</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>🚅 Tokyo → Kyoto</h4>
+          <ul>
+            <li><strong>Shinkansen Nozomi:</strong> 2h15m, ¥14,170/$95pp. Book via SmartEX app.</li>
+            <li><strong>JR Pass: NOT WORTH IT.</strong> After 2023 price hike, 7-day pass is ¥50,000/$335. One-way is much cheaper.</li>
+            <li><strong>Pro tip:</strong> E-seats (right side heading west) for Mt. Fuji view.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- TOKYO TIPS -->
+    <details class="sub-section">
+      <summary>💡 Practical Tips</summary>
+      <div class="sub-content">
+        <div class="info-block">
+          <h4>💴 Money</h4>
+          <ul>
+            <li>Cash still important. Small restaurants, shrines, some izakayas are cash-only.</li>
+            <li>Carry ¥10,000–20,000 ($67–135). Refill at <strong>7-Eleven ATMs</strong>.</li>
+            <li>Visa/MC widely accepted. Amex is spottier.</li>
+            <li>Don't exchange at the airport — ATMs give better rates.</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>🏪 Konbini Gems</h4>
+          <ul>
+            <li><strong>Onigiri</strong> — rice balls, ¥120–180. A legit meal.</li>
+            <li><strong>Egg sandwiches</strong> — fluffy, Japanese-style. ¥200–300.</li>
+            <li><strong>Lawson's karaage</strong> — best fast food in Japan.</li>
+            <li><strong>BOSS coffee</strong> — hot canned coffee from vending machines. ¥130.</li>
+            <li><strong>Strong Zero</strong> — ¥150 for a 9% canned cocktail. Proceed with caution. 😅</li>
+            <li><strong>Heattech from UNIQLO</strong> — buy base layers on arrival if you forgot.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- TOKYO SKIP -->
+    <details class="sub-section">
+      <summary>❌ Skip These (Overrated)</summary>
+      <div class="sub-content">
+        <div class="info-block">
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Ichiran Ramen</strong> — overpriced for what it is. Any random ramen shop with a ticket machine will be as good.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Robot Restaurant</strong> — closed, and a hard skip if it reopens.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Restaurants near Senso-ji</strong> — tourist trap pricing, mediocre food.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Gonpachi ("Kill Bill" restaurant)</strong> — overpriced, relies on movie fame.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>English menus on the street</strong> — usually a sign of tourist pricing.</span></div>
+          <div class="skip-item"><span class="skip-icon">⚠️</span><span><strong>Tsukiji Outer Market</strong> — touristy but still worth one visit. Go early morning.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Ghibli Museum</strong> — hard to get tickets and not worth it. Not much to do.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Akihabara</strong> — unless you're genuinely into anime. Overwhelming for non-fans.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Kabukicho</strong> — walk through once but don't linger. Tourist traps everywhere.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Tokyo Tower/Skytree decks</strong> — you're on the 52nd floor of the Park Hyatt. You already have the best view. For free.</span></div>
+        </div>
+      </div>
+    </details>
+
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- KYOTO SECTION -->
+<!-- ========================================== -->
+<div class="city-section" id="sec-kyoto">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-accent accent-kyoto"></div>
+      <h2>⛩️ Kyoto</h2>
+    </div>
+    <p class="text-sm text-muted mb-md">Feb 19–24 · Dusit Thani Kyoto · 5 days</p>
+
+    <!-- Hotel -->
+    <div class="hotel-card">
+      <h4>Dusit Thani Kyoto <span class="fhr-tag">Amex FHR</span></h4>
+      <p class="hotel-sub">Near Nishiki Market · ~$250/night</p>
+      <p class="hotel-detail">Thai-Japanese fusion luxury. Central location. FHR perks: breakfast at Kati restaurant + $100 F&B credit + room upgrade + late checkout.</p>
+    </div>
+
+    <!-- Day 3 arrival -->
+    <details class="day-card" open>
+      <summary>
+        <div class="day-number day-kyoto">3</div>
+        <div class="day-info">
+          <div class="day-title">Arrive in Kyoto</div>
+          <div class="day-date">Feb 19 (Thu)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">2pm</div>
+          <div class="timeline-desc"><strong>Arrive Kyoto Station.</strong> Taxi or subway to Dusit Thani (~15 min).</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">3pm</div>
+          <div class="timeline-desc"><strong>Check in.</strong> Beautifully located — Nishiki Market is walkable.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">4pm</div>
+          <div class="timeline-desc"><strong>Nishiki Market</strong> — "Kitchen of Kyoto." 400m of food stalls. Soy milk donuts, yuba skewers, pickles, fresh tofu.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">6:30pm</div>
+          <div class="timeline-desc"><strong>Wajoryomen Sugari</strong> — incredible dipping ramen with torched beef. ~$12–15pp. Expect ~30 min line. <span class="tip">Ryan's rec.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">8:30pm</div>
+          <div class="timeline-desc"><strong>Evening stroll through Gion</strong> — the geisha district is magical after dark. Lantern-lit streets, tourist crowds thinned out.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 4 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-kyoto">4</div>
+        <div class="day-info">
+          <div class="day-title">Temples & East Side</div>
+          <div class="day-date">Feb 20 (Fri)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">8am</div>
+          <div class="timeline-desc"><strong>Breakfast at Dusit Thani</strong> — use your FHR benefit. Kati restaurant does excellent Thai-Japanese breakfast.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">9:30am</div>
+          <div class="timeline-desc"><strong>Fushimi Inari</strong> — GO EARLY. By 10am it's packed. Keep going past where everyone stops — 20 min up the mountain you'll be nearly alone. Full loop: 2–3 hours.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">12pm</div>
+          <div class="timeline-desc"><strong>Lunch near Fushimi</strong> — grab a set meal at a local spot.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">1:30pm</div>
+          <div class="timeline-desc"><strong>Philosopher's Path</strong> — beautiful even in winter. Cherry trees bare but the canal and temples are peaceful.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">2:30pm</div>
+          <div class="timeline-desc"><strong>Ginkakuji</strong> (Silver Pavilion) — underrated vs Kinkakuji. Stunning zen garden and moss gardens.
+          <span class="tip">Reddit consensus: Ginkakuji > Kinkakuji.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">3:30pm</div>
+          <div class="timeline-desc"><strong>Nanzenji</strong> — massive temple gate (Sanmon) you can climb for views. Free grounds.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">5pm</div>
+          <div class="timeline-desc"><strong>Kagizen Yoshifusa</strong> — 300-year-old wagashi shop with tea room. ~$8–10 for matcha and sweets.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">7pm</div>
+          <div class="timeline-desc"><strong>Splurge kaiseki dinner</strong> — <strong>Ryō-shō</strong> ("some of the finest meals I have ever had") or <strong>Ungetsu</strong> (~$67pp). Book ahead.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 5 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-kyoto">5</div>
+        <div class="day-info">
+          <div class="day-title">West Side + Arashiyama</div>
+          <div class="day-date">Feb 21 (Sat)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">8am</div>
+          <div class="timeline-desc"><strong>Arashiyama Bamboo Grove</strong> — ONLY worth it before 9am when empty. After that it's shoulder-to-shoulder.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">9am</div>
+          <div class="timeline-desc"><strong>Tenryuji Temple</strong> — World Heritage site, gorgeous garden. Adjacent to bamboo grove.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">10am</div>
+          <div class="timeline-desc"><strong>Kameyamaya</strong> — Reddit raves. Always a wait but "soooooo worth it."</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">11:30am</div>
+          <div class="timeline-desc">Train back to central Kyoto.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">12:30pm</div>
+          <div class="timeline-desc"><strong>Yamamoto Menzou</strong> — "the best udon I had in Kyoto." Or <strong>Okakita</strong> for tentoji udon ("Top 5 in Japan").</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">2pm</div>
+          <div class="timeline-desc"><strong>Nijo Castle</strong> — "nightingale floors" (squeaking floorboards to detect ninjas). Lovely grounds.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">3:30pm</div>
+          <div class="timeline-desc"><strong>Pontocho Alley</strong> — narrow atmospheric street along Kamo River. Restaurants and bars.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">5pm</div>
+          <div class="timeline-desc"><strong>Northeast temple cluster</strong> — Konpuku-ji, Enkō-ji, Shisen-dō. Reddit's underrated gems. Beautiful, barely any tourists.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">7pm</div>
+          <div class="timeline-desc"><strong>Gogyo</strong> for burnt miso ramen (~$12) or <strong>Pontocho</strong> for river-view dining (~$50–80pp).</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 6 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-kyoto">6</div>
+        <div class="day-info">
+          <div class="day-title">Half Day / Explore</div>
+          <div class="day-date">Feb 22 (Sun)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">Morning</div>
+          <div class="timeline-desc"><strong>Sleep in.</strong> Use the hotel spa or facilities.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">10am</div>
+          <div class="timeline-desc"><strong>Kiyomizu-dera</strong> — touristy, but the wooden terrace and views ARE worth it. Nice shops on Higashiyama streets.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">12pm</div>
+          <div class="timeline-desc">Lunch in Higashiyama area.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">Afternoon</div>
+          <div class="timeline-desc"><strong>Optional: Day trip to Uji</strong> (~30 min by train). Reddit's "hidden gem" — matcha capital, Byodo-in Temple (the one on the 10-yen coin), scenic river. Far fewer tourists.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">Evening</div>
+          <div class="timeline-desc">Relax, casual dinner. Save energy for remaining days.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 7 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-kyoto">7</div>
+        <div class="day-info">
+          <div class="day-title">Kyoto or Osaka Day Trip</div>
+          <div class="day-date">Feb 23 (Mon)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">Option A</div>
+          <div class="timeline-desc"><strong>Day trip to Osaka</strong> (~30 min train). Street food in <strong>Dotonbori</strong> (takoyaki, okonomiyaki). <strong>Shinsekai</strong> for retro vibes + kushikatsu. <strong>Shinsaibashi</strong> for shopping.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">Option B</div>
+          <div class="timeline-desc"><strong>Slow Kyoto day</strong> — revisit favorites, explore <strong>Ichijoji</strong> area (local ramen street, original mitarashi dango cafe), browse vintage kimono shops in Teramachi.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 8 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-kyoto">8</div>
+        <div class="day-info">
+          <div class="day-title">Last Day Japan / Travel</div>
+          <div class="day-date">Feb 24 (Tue)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">Morning</div>
+          <div class="timeline-desc">Final Kyoto exploration or souvenir shopping.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">Afternoon</div>
+          <div class="timeline-desc">Head to Osaka. JR Haruka Express Kyoto → KIX ~75 min, ~¥3,600/$24pp.</div>
+        </div>
+      </div>
+    </details>
+
+    <div class="divider" style="margin: 24px 0;"></div>
+
+    <!-- KYOTO FOOD -->
+    <details class="sub-section" open>
+      <summary>🍽️ All Restaurants</summary>
+      <div class="sub-content">
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 8px 0; text-transform:uppercase; letter-spacing:0.5px;">Breakfast</h4>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🏨</div>
+            <div class="venue-info">
+              <div class="venue-name">Dusit Thani — Kati Restaurant</div>
+              <div class="venue-area">Your hotel</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 FHR breakfast</span>
+          </div>
+          <div class="venue-desc">Thai-Japanese fusion breakfast. Highly reviewed. Use your FHR benefit.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">% Arabica</div>
+              <div class="venue-area">Higashiyama (+ others)</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Line gets long</span>
+            <span class="badge badge-price">$4–5</span>
+          </div>
+          <div class="venue-desc">Kyoto's famous coffee chain. Higashiyama location has stunning views. Go early.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">Inoda Coffee</div>
+              <div class="venue-area">Central Kyoto · Since 1940</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">~$8</span>
+          </div>
+          <div class="venue-desc">Kyoto's most beloved kissaten. "Kyoto Morning" set: ham, eggs, juice, coffee. Very local feel.</div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">Lunch & Dinner</h4>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Wajoryomen Sugari</div>
+              <div class="venue-area">Central Kyoto</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 ~30 min line</span>
+            <span class="badge badge-price">$12–15</span>
+            <span class="badge badge-source">Ryan's rec</span>
+          </div>
+          <div class="venue-desc">Incredible dipping ramen. Thick chewy noodles, unique toppings including torched beef. Line moves fast.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Yamamoto Menzou</div>
+              <div class="venue-area">Central Kyoto</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Line expected</span>
+            <span class="badge badge-price">$10–15</span>
+            <span class="badge badge-source">Reddit favorite</span>
+          </div>
+          <div class="venue-desc">"The best udon I had in Kyoto" — multiple Reddit users. Chewy, thick, perfect texture.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Okakita</div>
+              <div class="venue-area">Nijo Dori</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$12–18</span>
+          </div>
+          <div class="venue-desc">Tentoji udon (with shellfish). Recommended as "Top 5 udon in Japan" by VP of Toridoll.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">⭐</div>
+            <div class="venue-info">
+              <div class="venue-name">Ryō-shō</div>
+              <div class="venue-area">Modern Kaiseki</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve</span>
+            <span class="badge badge-price">$80–150</span>
+          </div>
+          <div class="venue-desc">"Some of the finest meals I have ever had" — Reddit. Modern twist on kaiseki. Carefully considered use of Western flavors.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Gogyo</div>
+              <div class="venue-area">Central Kyoto</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$12–15</span>
+          </div>
+          <div class="venue-desc">The "burnt miso ramen" is famous. Rich, smoky, satisfying.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍱</div>
+            <div class="venue-info">
+              <div class="venue-name">Kameyamaya</div>
+              <div class="venue-area">Arashiyama</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Line expected</span>
+            <span class="badge badge-price">$15–20</span>
+          </div>
+          <div class="venue-desc">"PLEASE go here, so worth it" — Reddit. Japanese set meal. Get there before the line builds.</div>
+        </div>
+
+        <div class="callout">
+          <strong>Kyoto hack:</strong> Kaiseki lunch sets (¥5,000–8,000) at restaurants that charge ¥15,000–30,000 for dinner. Also look for <strong>obanzai</strong> — Kyoto's home-style cooking. Small dishes, seasonal vegetables, tofu, pickles.
+        </div>
+
+      </div>
+    </details>
+
+    <!-- KYOTO COFFEE -->
+    <details class="sub-section">
+      <summary>☕ Coffee Shops</summary>
+      <div class="sub-content">
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">☕</div><div class="venue-info"><div class="venue-name">% Arabica Higashiyama</div><div class="venue-area">Near Kiyomizu</div></div></div>
+          <div class="venue-meta"><span class="badge badge-line">🟡 Line gets long</span><span class="badge badge-price">$4–5</span></div>
+          <div class="venue-desc">The Kyoto OG. Photogenic, good espresso. Go early.</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">☕</div><div class="venue-info"><div class="venue-name">Weekenders Coffee</div><div class="venue-area">Central Kyoto</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–7</span></div>
+          <div class="venue-desc">Locals' favorite. Great pour-over. Specialty, minimal.</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">☕</div><div class="venue-info"><div class="venue-name">Walden Woods Kyoto</div><div class="venue-area">Near Nanzenji</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–7</span></div>
+          <div class="venue-desc">Cozy, bookish. Hidden, quiet, surrounded by trees. Perfect Amy cafe.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- KYOTO BARS -->
+    <details class="sub-section">
+      <summary>🍸 Bars</summary>
+      <div class="sub-content">
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🥃</div><div class="venue-info"><div class="venue-name">Bar K6</div><div class="venue-area">Gion</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$15–20/drink</span></div>
+          <div class="venue-desc">Legendary Kyoto cocktail bar. Classic, intimate, proper Japanese bartending.</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍶</div><div class="venue-info"><div class="venue-name">Fushimi Sake Breweries</div><div class="venue-area">Fushimi district</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$2–3/tasting</span></div>
+          <div class="venue-desc">Kyoto's #2 sake production area. Visit <strong>Gekkeikan Okura</strong> or <strong>Kizakura Kappa Country</strong>. ¥300–500 tastings.</div>
+        </div>
+        <div class="info-block">
+          <h4>🏮 Pontocho Alley</h4>
+          <p>Walk the alley and pick one. Many have riverside seating (though Feb might be too cold for that).</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- KYOTO ACTIVITIES -->
+    <details class="sub-section">
+      <summary>🏯 Activities & Experiences</summary>
+      <div class="sub-content">
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 8px 0; text-transform:uppercase; letter-spacing:0.5px;">Must-Do</h4>
+        <div class="info-block">
+          <ul>
+            <li><strong>Fushimi Inari</strong> — GO BEFORE 9AM. Keep walking past where everyone stops. The mountain loop is the real experience.</li>
+            <li><strong>Ginkakuji + Philosopher's Path + Nanzenji</strong> — the single best temple walk in Kyoto. 2–3 hours.</li>
+            <li><strong>Arashiyama Bamboo Grove</strong> — ONLY at dawn (before 8:30am). Then visit Tenryuji and Togetsukyo Bridge.</li>
+            <li><strong>Nijo Castle</strong> — nightingale floors, beautiful gardens, Tokugawa history.</li>
+            <li><strong>Gion evening walk</strong> — after dark, the lantern-lit streets are magical. You might spot a geiko.</li>
+            <li><strong>Nishiki Market</strong> — even if touristy, a foodie must. Walk slowly, sample, enjoy.</li>
+          </ul>
+        </div>
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">Hidden Gems</h4>
+        <div class="info-block">
+          <ul>
+            <li><strong>Uji</strong> (30 min south) — matcha capital. Byodo-in Temple (the one on the 10-yen coin). Far fewer tourists. Reddit's #1 day trip.</li>
+            <li><strong>Northeast temple cluster</strong> — Konpuku-ji, Enkō-ji, Shisen-dō, Tanukidani Fudō-in. "Almost no tourists, incredible views." — Reddit</li>
+            <li><strong>Ichijoji area</strong> — local ramen street, original mitarashi dango cafe, cute trains back to center.</li>
+            <li><strong>Back of temple paths</strong> — rear paths lead to imperial tombs with stunning views. Signs may say "do not enter" but they're open to the public.</li>
+          </ul>
+        </div>
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">💑 Couple-Friendly</h4>
+        <div class="info-block">
+          <ul>
+            <li><strong>Matcha experience</strong> — many teahouses offer informal tea ceremonies for couples.</li>
+            <li><strong>Kimono rental</strong> — walk Gion or Higashiyama in kimono. ~$30–40pp/day. Feb = fewer crowds = better photos.</li>
+            <li><strong>Evening walk in Gion</strong> — deeply romantic after dark.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- KYOTO TRANSPORT -->
+    <details class="sub-section">
+      <summary>🚆 Transportation</summary>
+      <div class="sub-content">
+        <div class="info-block">
+          <h4>🏙️ Getting Around</h4>
+          <ul>
+            <li><strong>Buses</strong> — main public transit. IC card per ride (¥230/$1.50).</li>
+            <li><strong>Subway</strong> — only 2 lines. For Kyoto Station or Nijo.</li>
+            <li><strong>Walking</strong> — best way to experience Kyoto.</li>
+            <li><strong>Rent bikes</strong> — Kyoto is flat and bikeable. ~¥1,000–1,500/$7–10/day.</li>
+            <li><strong>Taxi</strong> — GO app. Helpful when temple-tired.</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>🚅 Kyoto → Osaka</h4>
+          <ul>
+            <li><strong>JR Special Rapid:</strong> 30 min, ¥580/$4. Cheapest.</li>
+            <li><strong>Hankyu Railway:</strong> 40 min, ¥410/$3. To Umeda.</li>
+            <li><strong>Kyoto → KIX:</strong> JR Haruka Express, 75 min, ~¥3,600/$24.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- KYOTO SKIP -->
+    <details class="sub-section">
+      <summary>❌ Skip These (Overrated)</summary>
+      <div class="sub-content">
+        <div class="info-block">
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Kinkakuji (Golden Pavilion)</strong> — "overrated." One angle, one photo, leave. Grounds aren't interesting. <em>Go to Ginkakuji instead.</em></span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Bamboo Grove after 9am</strong> — shoulder-to-shoulder tourist nightmare.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Tourist shops on Matsubara-dori</strong> — overpriced souvenirs on the street to Kiyomizu.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Monkey Park (Arashiyama)</strong> — uphill climb for some monkeys. Meh.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Toei Kyoto Studio Park</strong> — tourist trap masquerading as culture.</span></div>
+        </div>
+        <div class="callout mt-sm">
+          <strong>✅ Ginkakuji > Kinkakuji.</strong> Reddit strongly recommends the Silver Pavilion over the Golden one. Better gardens, less crowds, more atmosphere.
+        </div>
+      </div>
+    </details>
+
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- SEOUL SECTION -->
+<!-- ========================================== -->
+<div class="city-section" id="sec-seoul">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-accent accent-seoul"></div>
+      <h2>🇰🇷 Seoul</h2>
+    </div>
+    <p class="text-sm text-muted mb-md">Feb 25 – Mar 3 · Conrad Seoul · 7 days · Sister joins Feb 26</p>
+
+    <!-- Hotel -->
+    <div class="hotel-card">
+      <h4>Conrad Seoul <span class="fhr-tag">Amex FHR</span></h4>
+      <p class="hotel-sub">Yeouido · ~$580 total · Han River views</p>
+      <p class="hotel-detail">Lobby on 5th floor. Connected to IFC Mall. Not the most exciting neighborhood, but well-connected by subway (Lines 5 & 9). FHR perks: breakfast + $100 F&B + upgrade + late checkout. VVERTIGO rooftop bar on-site.</p>
+    </div>
+
+    <!-- Day 9 -->
+    <details class="day-card" open>
+      <summary>
+        <div class="day-number day-seoul">9</div>
+        <div class="day-info">
+          <div class="day-title">Osaka → Seoul Arrival</div>
+          <div class="day-date">Feb 25 (Wed)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">AM/PM</div>
+          <div class="timeline-desc"><strong>Fly KIX → ICN.</strong> Budget airlines ~$80–150, full-service ~$200–300.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">2–3pm</div>
+          <div class="timeline-desc"><strong>Arrive Incheon.</strong> AREX Express to Seoul Station (~43 min, ~$7) then subway. Or taxi direct (~$35–45).
+          <span class="tip">⚠️ AREX-to-subway transfer at Seoul Station is a LONG walk. With heavy luggage, consider the taxi.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">4pm</div>
+          <div class="timeline-desc"><strong>Check into Conrad Seoul.</strong> 5th floor lobby with Yeouido skyline views.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">Evening</div>
+          <div class="timeline-desc">Ease into Seoul. <strong>IFC Mall</strong> (connected to Conrad) for dinner, or cab to <strong>Yongsan</strong> for more interesting food.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 10 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-seoul">10</div>
+        <div class="day-info">
+          <div class="day-title">Sister Arrives!</div>
+          <div class="day-date">Feb 26 (Thu)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">9am</div>
+          <div class="timeline-desc"><strong>Breakfast at Conrad</strong> (FHR benefit).</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">11am</div>
+          <div class="timeline-desc"><strong>Sister arrives</strong> from Jeju via Gimpo Airport (much closer to Yeouido).</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">12pm</div>
+          <div class="timeline-desc"><strong>Goryeo Samgyetang</strong> — classic ginseng chicken soup. Perfect restorative welcome meal. ~$12–15pp. <span class="tip">Ryan's rec.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">2pm</div>
+          <div class="timeline-desc"><strong>Bukchon Hanok Village</strong> — traditional Korean houses on a hillside. Go early afternoon when less packed. Amy will love the quiet alleys.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">3:30pm</div>
+          <div class="timeline-desc"><strong>Changdeokgung Palace</strong> — the BEST palace in Seoul. Secret Garden tour is worth the extra ~$5. Book the English tour.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">5pm</div>
+          <div class="timeline-desc"><strong>Fritz Coffee Wonseo</strong> — gorgeous hanok-style cafe near the palace. Great pastries (try the Pear Bread). ~$5–8pp. <span class="tip">Ryan's rec. Perfect for Amy.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">7pm</div>
+          <div class="timeline-desc"><strong>First Korean BBQ night!</strong> 🔥 See food section for picks.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 11 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-seoul">11</div>
+        <div class="day-info">
+          <div class="day-title">Neighborhoods Day</div>
+          <div class="day-date">Feb 27 (Fri)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">9am</div>
+          <div class="timeline-desc">Breakfast at Conrad or <strong>Isaac Toast</strong> (Korean chain, cheap + good).</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">10am</div>
+          <div class="timeline-desc"><strong>Ikseon-dong</strong> — Seoul's cutest hanok cafe district. Tiny alleys, converted traditional houses now cafes & boutiques. 100% Amy's vibe. Try <strong>Jayeondo</strong> salt bread.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">12pm</div>
+          <div class="timeline-desc">Lunch at a local spot in Jongno area.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">1:30pm</div>
+          <div class="timeline-desc"><strong>Mangwon Market</strong> — the market Koreans ACTUALLY go to. Fresh pancakes, tteok, rice cakes. Next to Mangwon Hangang Park for a riverside walk.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">3pm</div>
+          <div class="timeline-desc"><strong>Seongsu-dong</strong> — "Brooklyn of Seoul." Warehouse cafes, boutique shops. <strong>Cafe Onion</strong> (former factory) is iconic.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">5pm</div>
+          <div class="timeline-desc"><strong>Daechung Yuwonji</strong> (Mapo-gu) — "best coffee in Seoul. They know their stuff." — Reddit</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">7pm</div>
+          <div class="timeline-desc">Dinner — see food section.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 12 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-seoul">12</div>
+        <div class="day-info">
+          <div class="day-title">Culture Day</div>
+          <div class="day-date">Feb 28 (Sat)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">9am</div>
+          <div class="timeline-desc"><strong>Gyeongbokgung Palace</strong> — rent hanbok (~$15–20pp for the day) = FREE admission + great photos.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">11am</div>
+          <div class="timeline-desc"><strong>Insadong</strong> — traditional art, ceramics, tea shops.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">12:30pm</div>
+          <div class="timeline-desc">Lunch: Korean stew or bibimbap in Jongno area.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">2pm</div>
+          <div class="timeline-desc"><strong>Namsan Tower hike</strong> — walk up (30–40 min, great views). Skip the cable car (insane tourist lines).</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">4pm</div>
+          <div class="timeline-desc"><strong>Hongdae</strong> — indie fashion, vinyl stores, street performers. Best on Saturday evening.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">7pm</div>
+          <div class="timeline-desc"><strong>Korean BBQ Round 2.</strong> 🔥</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 13 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-seoul">13</div>
+        <div class="day-info">
+          <div class="day-title">Chill Day · Independence Day</div>
+          <div class="day-date">Mar 1 (Sun)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="callout" style="margin-bottom:12px;">
+          <strong>🇰🇷 March 1 is Independence Movement Day</strong> — national holiday. Some businesses may be closed.
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">10am</div>
+          <div class="timeline-desc"><strong>Sleep in.</strong> Late brunch at a Gangnam cafe.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">12pm</div>
+          <div class="timeline-desc"><strong>COEX Mall</strong> (Gangnam) — the <strong>Starfield Library</strong> is stunning (giant open library atrium). Also has an aquarium.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">2pm</div>
+          <div class="timeline-desc"><strong>Garosu-gil</strong> (Sinsa) — tree-lined street, boutique shopping, cafes, galleries. Less tourist chaos than Myeongdong.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">5pm</div>
+          <div class="timeline-desc"><strong>Dragon Hill Spa</strong> (Yongsan) — jjimjilbang. Multi-story: saunas, pools, salt rooms, sleeping quarters, food court. ~$15pp. Great for 3 people.
+          <span class="tip">Gendered nude bathing (separate). Co-ed common areas in provided pajamas.</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">8pm</div>
+          <div class="timeline-desc"><strong>Korean fried chicken + beer</strong> (chimaek). The perfect ending.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 14 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-seoul">14</div>
+        <div class="day-info">
+          <div class="day-title">Last Full Day</div>
+          <div class="day-date">Mar 2 (Mon)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">10am</div>
+          <div class="timeline-desc">Anything you missed. <strong>Namdaemun Market</strong> for last-minute shopping.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">12pm</div>
+          <div class="timeline-desc">Final KBBQ or Korean meal of choice. 🔥</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">2pm</div>
+          <div class="timeline-desc">Pack, souvenir runs. <strong>Olive Young</strong> for Korean skincare (they're everywhere).</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">7pm</div>
+          <div class="timeline-desc"><strong>Farewell dinner</strong> — splurge on something special.</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Day 15 -->
+    <details class="day-card">
+      <summary>
+        <div class="day-number day-seoul">15</div>
+        <div class="day-info">
+          <div class="day-title">Depart Seoul ✈️</div>
+          <div class="day-date">Mar 3 (Tue)</div>
+        </div>
+      </summary>
+      <div class="day-content">
+        <div class="timeline-item">
+          <div class="timeline-time">AM</div>
+          <div class="timeline-desc">Check out Conrad. AREX to Incheon or taxi. <strong>Allow 3+ hours for ICN.</strong></div>
+        </div>
+      </div>
+    </details>
+
+    <div class="divider" style="margin: 24px 0;"></div>
+
+    <!-- SEOUL FOOD -->
+    <details class="sub-section" open>
+      <summary>🔥 Korean BBQ — The Main Event</summary>
+      <div class="sub-content">
+
+        <div class="quote-block">
+          "The food/restaurant scene is very competitive in Seoul. You don't need to visit the most popular place to get good food."
+          <cite>— Korean local, Reddit</cite>
+        </div>
+        <div class="quote-block mt-sm">
+          "My recommendation for tourists is to eat at any restaurant that has a bunch of taxis parked outside."
+          <cite>— Korean native, Reddit</cite>
+        </div>
+
+        <div class="venue-card mt-md">
+          <div class="venue-top">
+            <div class="venue-emoji">🔥</div>
+            <div class="venue-info">
+              <div class="venue-name">Mongtan</div>
+              <div class="venue-area">Yongsan</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Long lines — go at opening (11am)</span>
+            <span class="badge badge-price">$30–50pp</span>
+          </div>
+          <div class="venue-desc">Udae galbi seared over straw fire. The hype is real. Top-tier beef.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🔥</div>
+            <div class="venue-info">
+              <div class="venue-name">Ggupdang</div>
+              <div class="venue-area">Gangnam (near Sinsa Stn)</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Book via Naver</span>
+            <span class="badge badge-price">$30–40pp</span>
+            <span class="badge badge-source">Michelin Guide</span>
+          </div>
+          <div class="venue-desc">"Michelin restaurant for three years, easily the best restaurant in Korea I've been to." 15-day prepared pork. Friendly staff.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🔥</div>
+            <div class="venue-info">
+              <div class="venue-name">Wangbijib</div>
+              <div class="venue-area">Various locations</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$25–40pp</span>
+          </div>
+          <div class="venue-desc">"Korean beef literally melts in your mouth, staff cook your meal to perfection EVERY TIME." Charcoal grill, curated banchan.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🔥</div>
+            <div class="venue-info">
+              <div class="venue-name">Namyeong Pork</div>
+              <div class="venue-area">Yongsan</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$15–25pp</span>
+          </div>
+          <div class="venue-desc">Local favorite. No-frills pork BBQ. "Would fly back just to eat here." — Reddit</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🥩</div>
+            <div class="venue-info">
+              <div class="venue-name">Majang Meat Market</div>
+              <div class="venue-area">Majang</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$20–40pp</span>
+          </div>
+          <div class="venue-desc">Buy Grade 1++ Hanwoo at the market, take it upstairs to a restaurant that cooks it. The authentic experience. Cheapest way to try premium Hanwoo beef.</div>
+        </div>
+
+        <div class="callout">
+          <strong>🥩 What to order:</strong> Start with <strong>samgyeopsal</strong> (pork belly, cheapest), then <strong>chadolbaegi</strong> (brisket), then <strong>galbi</strong> (short rib). Splurge: <strong>Hanwoo</strong> (Korean wagyu). Always wrap in lettuce with ssamjang, garlic, and kimchi.
+        </div>
+
+        <div class="info-block mt-sm">
+          <h4>❌ Skip These KBBQ</h4>
+          <ul>
+            <li><strong>Born and Bred</strong> — "overhyped, only tourists go there."</li>
+            <li><strong>Samwon Garden</strong> — "looks like an expensive tourist trap."</li>
+          </ul>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- SEOUL OTHER FOOD -->
+    <details class="sub-section">
+      <summary>🍽️ Korean Essentials</summary>
+      <div class="sub-content">
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍲</div><div class="venue-info"><div class="venue-name">Goryeo Samgyetang</div><div class="venue-area">Various</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$12–15</span><span class="badge badge-source">Ryan's rec</span></div>
+          <div class="venue-desc">Ginseng chicken soup. Perfect restorative lunch.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍜</div><div class="venue-info"><div class="venue-name">Myeongdong Kyoja</div><div class="venue-area">Myeongdong</div></div></div>
+          <div class="venue-meta"><span class="badge badge-line">🟡 Line expected</span><span class="badge badge-price">$8–10</span></div>
+          <div class="venue-desc">Kalguksu (knife-cut noodle soup) + mandu. Iconic and worth the wait.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍙</div><div class="venue-info"><div class="venue-name">Ssada Gimbap</div><div class="venue-area">Various</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$3–5</span></div>
+          <div class="venue-desc">No-frills late night gimbap + noodles + rice cake soup.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍗</div><div class="venue-info"><div class="venue-name">Korean Fried Chicken</div><div class="venue-area">Everywhere</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$12–18 whole chicken</span></div>
+          <div class="venue-desc"><strong>Kyochon</strong> (seasoned, the OG) or any local spot. Order with beer for chimaek culture.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🥟</div><div class="venue-info"><div class="venue-name">Bindaetteok</div><div class="venue-area">Markets</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$3–5</span></div>
+          <div class="venue-desc">Mung bean pancake. Best at Mangwon Market or Namdaemun. Crispy, savory, amazing.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍜</div><div class="venue-info"><div class="venue-name">Jjajangmyeon</div><div class="venue-area">Any Chinese-Korean spot</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$6–8</span></div>
+          <div class="venue-desc">Black bean noodles. A Korea-only dish. Ultimate comfort food.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🌶️</div><div class="venue-info"><div class="venue-name">Tteokbokki</div><div class="venue-area">Street stalls</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$3–5</span></div>
+          <div class="venue-desc">Spicy rice cakes. Cheap, spicy, addictive.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍔</div><div class="venue-info"><div class="venue-name">Mom's Touch</div><div class="venue-area">Everywhere (chain)</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–8</span></div>
+          <div class="venue-desc">Korean-style chicken burger chain. Locals love it. Reddit approved.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🌭</div><div class="venue-info"><div class="venue-name">Myungrang Hotdog</div><div class="venue-area">Everywhere (chain)</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$3–4</span></div>
+          <div class="venue-desc">Korean corndog with crispy coating. Add potato bits for texture.</div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🍧 Desserts & Sweets</h4>
+        <div class="info-block">
+          <ul>
+            <li><strong>Bingsu</strong> — shaved ice with red bean, fruit, or injeolmi. ~$10–15 to share. Even in winter.</li>
+            <li><strong>Hotteok</strong> — sweet stuffed pancake from street vendors. ~$1–2 each.</li>
+            <li><strong>Soha Salt Pond</strong> — salt breads with different fillings. Near Jayeondo in Ikseon-dong.</li>
+            <li><strong>Paris Baguette / Tous Les Jours</strong> — on every block. Cheap, decent pastries.</li>
+          </ul>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- SEOUL MARKETS -->
+    <details class="sub-section">
+      <summary>🏪 Markets — The Honest Assessment</summary>
+      <div class="sub-content">
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">⚠️</div><div class="venue-info"><div class="venue-name">Gwangjang Market</div><div class="venue-area">Jongno</div></div></div>
+          <div class="venue-meta"><span class="badge badge-book" style="background:#fef9e7;color:#c87f0a;">⚠️ Tourist trap — SKIP for food</span></div>
+          <div class="venue-desc">"Overpriced," "below average food," "I will never go again." Prices inflated, quality declined. The yukhoe (raw beef) is still good, everything else skippable.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">✅</div><div class="venue-info"><div class="venue-name">Mangwon Market</div><div class="venue-area">Mangwon-dong</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span></div>
+          <div class="venue-desc"><strong>GO HERE INSTEAD.</strong> "The market Koreans actually go to." Fresh pancakes, tteok, rice cakes. Next to Mangwon Hangang Park. Reddit's overwhelming recommendation.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">✅</div><div class="venue-info"><div class="venue-name">Namdaemun Market</div><div class="venue-area">Namdaemun</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span></div>
+          <div class="venue-desc">Massive, traditional, more local. Good street food. Less overrun than Gwangjang.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">✅</div><div class="venue-info"><div class="venue-name">Tongin Market</div><div class="venue-area">Tongin-dong</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span></div>
+          <div class="venue-desc">Famous for lunch box cafe — buy coins and fill your own tray from different vendors. Unique fun experience.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">⚠️</div><div class="venue-info"><div class="venue-name">Myeongdong Night Market</div><div class="venue-area">Myeongdong</div></div></div>
+          <div class="venue-meta"><span class="badge badge-book" style="background:#fef9e7;color:#c87f0a;">⚠️ Overpriced</span></div>
+          <div class="venue-desc">Fun for atmosphere once, but don't eat here as a meal. "It is def overpriced compared to other markets."</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- SEOUL CAFES -->
+    <details class="sub-section">
+      <summary>☕ Cafes — Seoul's Insane Cafe Culture</summary>
+      <div class="sub-content">
+        <p class="text-sm text-muted mb-md">Seoul has more cafes per capita than anywhere on earth.</p>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">☕</div><div class="venue-info"><div class="venue-name">Fritz Coffee Wonseo</div><div class="venue-area">Anguk / Bukchon</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–8</span><span class="badge badge-source">Ryan's rec</span></div>
+          <div class="venue-desc">Hanok-style, dark academia, cozy. Beautiful traditional building. Great pastries — try the Pear Bread. Near palaces. Perfect for Amy.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">☕</div><div class="venue-info"><div class="venue-name">Fritz Coffee Dohwa</div><div class="venue-area">Gongdeok / Mapo</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–8</span></div>
+          <div class="venue-desc">The original Fritz. Industrial chic. Also excellent.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">☕</div><div class="venue-info"><div class="venue-name">Cafe Onion</div><div class="venue-area">Seongsu / Anguk</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–8</span></div>
+          <div class="venue-desc">Two iconic locations. Seongsu: converted factory. Anguk: renovated hanok. Both are must-visits.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">☕</div><div class="venue-info"><div class="venue-name">Namusae</div><div class="venue-area">Insadong</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–8</span></div>
+          <div class="venue-desc">"Beautiful hanok cafe... cozy and I cannot forget that ripe persimmon smoothie" — Reddit.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">☕</div><div class="venue-info"><div class="venue-name">Daechung Yuwonji</div><div class="venue-area">Mapo-gu (Yeonnam)</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–8</span></div>
+          <div class="venue-desc">"Best coffee in Seoul, they know their stuff" — Reddit. Serious specialty coffee.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">☕</div><div class="venue-info"><div class="venue-name">Lusso Barista Lab</div><div class="venue-area">Various</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–8</span></div>
+          <div class="venue-desc">"Can't go wrong with any signature drink" — Reddit. Comfortable and cozy.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🧂</div><div class="venue-info"><div class="venue-name">Jayeondo</div><div class="venue-area">Ikseon-dong</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$3–5</span></div>
+          <div class="venue-desc">"As good as everyone says!" — Reddit. Salt bread specialist. Try all the varieties.</div>
+        </div>
+
+        <div class="callout">
+          <strong>Best cafe neighborhoods:</strong> Ikseon-dong · Seongsu-dong · Yeonnam-dong · Anguk/Bukchon
+        </div>
+
+        <div class="info-block mt-sm">
+          <p><strong>📱 Use tasteseoul.com</strong> — built by a Korean native for tourists. Mapped restaurant guide with no ads or viral bias. Also use <strong>Naver Maps</strong> for restaurant info (better than Google in Korea).</p>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- SEOUL BARS -->
+    <details class="sub-section">
+      <summary>🍸 Bars</summary>
+      <div class="sub-content">
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍸</div><div class="venue-info"><div class="venue-name">Bar Cham</div><div class="venue-area">Various</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$15–20/drink</span><span class="badge badge-source">Asia's 50 Best</span></div>
+          <div class="venue-desc">"Quiet, almost meditative." Great for couples or Amy needing a calm space.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🐇</div><div class="venue-info"><div class="venue-name">Alice Cheongdam</div><div class="venue-area">Cheongdam</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$18–25/drink</span><span class="badge badge-source">Asia's 50 Best</span></div>
+          <div class="venue-desc">Whimsical Alice in Wonderland theme. Fun and playful cocktails.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍸</div><div class="venue-info"><div class="venue-name">Bar Swallow</div><div class="venue-area">Itaewon</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$12–18/drink</span></div>
+          <div class="venue-desc">Cozy, niche, intimate. Mentioned by locals as a favorite.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍸</div><div class="venue-info"><div class="venue-name">Soko Bar</div><div class="venue-area">Hannam-dong</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$15–20/drink</span></div>
+          <div class="venue-desc">Korean ingredients, intimate. Going since 2017. Part of Seoul's cocktail renaissance.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍷</div><div class="venue-info"><div class="venue-name">Hills & Europa</div><div class="venue-area">Various</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$12–18/drink</span><span class="badge badge-source">Ryan's rec</span></div>
+          <div class="venue-desc">Wine and cocktails. Good vibes.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🌃</div><div class="venue-info"><div class="venue-name">VVERTIGO</div><div class="venue-area">Conrad Seoul rooftop · Your hotel!</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$15–20/drink</span></div>
+          <div class="venue-desc">Your hotel's sky bar. Convenient, great views. Worth one night.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🏮</div><div class="venue-info"><div class="venue-name">Pojangmacha (Soju Tent Bars)</div><div class="venue-area">Jongno, Euljiro, Sinchon alleys</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–10</span></div>
+          <div class="venue-desc">Plastic tents, street vibes. THE most authentic Seoul bar experience. Order soju + anju (bar food).</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- SEOUL SHOPPING -->
+    <details class="sub-section">
+      <summary>🛍️ Shopping Guide</summary>
+      <div class="sub-content">
+        <div class="info-block">
+          <ul>
+            <li><strong>Garosu-gil (Sinsa)</strong> — boutique fashion, cafes, galleries. Tree-lined, aesthetic. Best for Amy.</li>
+            <li><strong>Hongdae</strong> — indie fashion, vinyl, street culture. Best on weekends.</li>
+            <li><strong>Myeongdong</strong> — THE place for skincare. <strong>Olive Young</strong> has the biggest selection.</li>
+            <li><strong>Gangnam / COEX Mall</strong> — high-end. Starfield Library is stunning.</li>
+            <li><strong>Insadong</strong> — traditional crafts, art, tea. Hanok shops. Good for gifts.</li>
+            <li><strong>Seongsu-dong</strong> — hip boutiques, pop-up shops. Walk and discover.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- SEOUL ACTIVITIES -->
+    <details class="sub-section">
+      <summary>🏯 Activities & Experiences</summary>
+      <div class="sub-content">
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 8px 0; text-transform:uppercase; letter-spacing:0.5px;">Must-Do</h4>
+        <div class="info-block">
+          <ul>
+            <li><strong>Changdeokgung Palace + Secret Garden</strong> — "#1 tourist attraction in Seoul." Book the English tour.</li>
+            <li><strong>Bukchon Hanok Village</strong> — traditional houses on hillside. Free to walk. Beautiful photos.</li>
+            <li><strong>Gyeongbokgung Palace</strong> — rent hanbok (~$15–20) = FREE admission + great photos.</li>
+            <li><strong>Namsan Tower hike</strong> — walk up (30–40 min). Skip the cable car (tourist trap lines).</li>
+            <li><strong>Dragon Hill Spa (jjimjilbang)</strong> — multi-story: saunas, pools, salt rooms, food court. ~$15pp. Cultural must-do.</li>
+            <li><strong>Han River parks</strong> — walk or bike. Grab ramyeon from riverside convenience stores.</li>
+          </ul>
+        </div>
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">👩‍👩‍👧 With Sister (Group of 3)</h4>
+        <div class="info-block">
+          <ul>
+            <li><strong>Korean BBQ</strong> — perfect group activity. Order lots, share everything.</li>
+            <li><strong>Jjimjilbang</strong> — Dragon Hill Spa or Siloam Sauna. Great bonding.</li>
+            <li><strong>Cafe hopping</strong> — Ikseon-dong → Seongsu-dong → Bukchon crawl.</li>
+            <li><strong>Cooking class</strong> — making kimchi, bibimbap in Insadong/Jongno. ~$30–50pp.</li>
+            <li><strong>Noraebang</strong> (karaoke) — private rooms. ~$10–15/hour. Way more fun than American karaoke.</li>
+            <li><strong>Starfield Library</strong> — COEX Mall. Stunning architecture, good photos.</li>
+            <li><strong>Mangwon Market → Hangang Park walk</strong> — great afternoon for 3 people.</li>
+          </ul>
+        </div>
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🌧️ Rainy Day Options</h4>
+        <div class="info-block">
+          <ul>
+            <li><strong>COEX Mall / Starfield Library</strong> — massive underground complex.</li>
+            <li><strong>War Memorial of Korea</strong> (Yongsan) — excellent museum, free.</li>
+            <li><strong>Korean cooking class</strong></li>
+            <li><strong>Cafe crawl</strong> — Seongsu-dong or Ikseon-dong.</li>
+            <li><strong>Hyundai Seoul</strong> (Yeouido, near Conrad!) — incredible food hall on B2.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- SEOUL TRANSPORT -->
+    <details class="sub-section">
+      <summary>🚆 Transportation</summary>
+      <div class="sub-content">
+        <div class="info-block">
+          <h4>✈️ Airport → Hotel</h4>
+          <ul>
+            <li><strong>AREX Express:</strong> Incheon → Seoul Station, 43 min, ~$7. Then subway to Yeouido.</li>
+            <li><strong>Taxi from ICN:</strong> ₩50,000–65,000 ($35–45). Flat rate. Easy with luggage.</li>
+            <li>⚠️ AREX-to-subway transfer at Seoul Station = LONG walk. Heavy luggage? Take the taxi.</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>🏙️ Getting Around</h4>
+          <ul>
+            <li><strong>T-Money Card:</strong> Buy at any konbini (₩2,500/$1.75). Works on all subway + buses.</li>
+            <li><strong>Subway:</strong> Clean, frequent, English signage. ₩1,350/~$1 per ride. Covers the whole city.</li>
+            <li><strong>Taxi:</strong> Cheap + easy. ₩4,800 base (~$3.50). Use <strong>Kakao T</strong> app.</li>
+            <li><strong>Walking:</strong> Many neighborhoods very walkable.</li>
+            <li><strong>📱 Naver Maps > Google Maps.</strong> Google is unreliable in Korea.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- SEOUL SKIP -->
+    <details class="sub-section">
+      <summary>❌ Skip These (Overrated)</summary>
+      <div class="sub-content">
+        <div class="info-block">
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Gwangjang Market for food</strong> — tourist trap pricing, declining quality.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Myeongdong restaurants</strong> — overpriced everything. Shop for skincare, eat elsewhere.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>N Seoul Tower cable car</strong> — insane lines. Walk up Namsan instead.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Hangang River cruises</strong> — meh. Walk along the river for free.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Any KBBQ that's mostly tourists</strong> — Born and Bred, etc.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>K-pop stores/cafes</strong> — unless you're a fan.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Lotte World Tower observation</strong> — $25pp. Save your money.</span></div>
+          <div class="skip-item"><span class="skip-icon">❌</span><span><strong>Jogyesa Temple</strong> — fine but unremarkable after Japanese temples.</span></div>
+        </div>
+      </div>
+    </details>
+
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- PRACTICAL SECTION -->
+<!-- ========================================== -->
+<div class="city-section" id="sec-practical">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-accent accent-ref"></div>
+      <h2>📋 Practical Info</h2>
+    </div>
+
+    <!-- BUDGET -->
+    <details class="sub-section" open>
+      <summary>💰 Budget Summary</summary>
+      <div class="sub-content">
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 8px 0; text-transform:uppercase; letter-spacing:0.5px;">Daily Spend (2 people)</h4>
+
+        <div class="info-block">
+          <h4>🗼 Tokyo (3 days)</h4>
+          <table class="budget-table">
+            <tr><th>Category</th><th>Low</th><th>Mid</th><th>Splurge</th></tr>
+            <tr><td>Food & drink</td><td>$60</td><td>$100</td><td>$200</td></tr>
+            <tr><td>Transport</td><td>$15</td><td>$25</td><td>$40</td></tr>
+            <tr><td>Activities</td><td>$0</td><td>$20</td><td>$60</td></tr>
+            <tr><td><strong>Daily total</strong></td><td><strong>$75</strong></td><td><strong>$145</strong></td><td><strong>$300</strong></td></tr>
+          </table>
+        </div>
+
+        <div class="info-block">
+          <h4>⛩️ Kyoto (3.5 days)</h4>
+          <table class="budget-table">
+            <tr><th>Category</th><th>Low</th><th>Mid</th><th>Splurge</th></tr>
+            <tr><td>Food & drink</td><td>$50</td><td>$90</td><td>$180</td></tr>
+            <tr><td>Transport</td><td>$10</td><td>$20</td><td>$30</td></tr>
+            <tr><td>Activities</td><td>$0</td><td>$15</td><td>$50</td></tr>
+            <tr><td><strong>Daily total</strong></td><td><strong>$60</strong></td><td><strong>$125</strong></td><td><strong>$260</strong></td></tr>
+          </table>
+        </div>
+
+        <div class="info-block">
+          <h4>🇰🇷 Seoul (6 days)</h4>
+          <table class="budget-table">
+            <tr><th>Category</th><th>Low</th><th>Mid</th><th>Splurge</th></tr>
+            <tr><td>Food & drink</td><td>$40</td><td>$80</td><td>$150</td></tr>
+            <tr><td>Transport</td><td>$8</td><td>$15</td><td>$30</td></tr>
+            <tr><td>Activities</td><td>$0</td><td>$15</td><td>$40</td></tr>
+            <tr><td><strong>Daily total</strong></td><td><strong>$48</strong></td><td><strong>$110</strong></td><td><strong>$220</strong></td></tr>
+          </table>
+        </div>
+
+        <div class="info-block">
+          <h4>📌 Fixed Costs</h4>
+          <ul>
+            <li><strong>Hotels:</strong> ~$1,455 total (160k Hyatt pts + FHR nights)</li>
+            <li><strong>Osaka→Seoul flight:</strong> $80–300 (budget ~$100)</li>
+            <li><strong>Shinkansen (2 people):</strong> $190</li>
+            <li><strong>JR Haruka to KIX (2 people):</strong> $48</li>
+            <li><strong>eSIM:</strong> $15–25 each</li>
+          </ul>
+        </div>
+
+        <div class="callout">
+          <strong>💰 Splurge on:</strong> One omakase/kaiseki dinner · One high-end KBBQ with Hanwoo beef · Coffee everywhere · Park Hyatt New York Bar cocktails<br><br>
+          <strong>💸 Save on:</strong> JR Pass (don't buy it!) · Breakfast (konbini in Japan, hotel FHR elsewhere) · Lunch (Michelin lunch sets at 1/3 dinner price) · Transport (subway everywhere)
+        </div>
+
+      </div>
+    </details>
+
+    <!-- RESERVATIONS -->
+    <details class="sub-section">
+      <summary>📝 Reservation Checklist</summary>
+      <div class="sub-content">
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 8px 0; text-transform:uppercase; letter-spacing:0.5px;">🔴 Book NOW (or ASAP)</h4>
+        <div class="info-block">
+          <div class="checklist-item">
+            <div class="checklist-priority priority-now">!</div>
+            <div class="checklist-text"><strong>Osaka → Seoul flight (Feb 25)</strong><small>Google Flights, Skyscanner. Peach/Jin Air/T'way $80–150. Korean Air/JAL $200–300.</small></div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-priority priority-now">!</div>
+            <div class="checklist-text"><strong>Shinkansen (SmartEX)</strong><small>Register now with credit card. Book a few days before.</small></div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-priority priority-now">!</div>
+            <div class="checklist-text"><strong>Den</strong> (if you want Tokyo's hottest kaiseki)<small>Omakase.in, Tableall, or direct. 30–60 days out.</small></div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-priority priority-now">!</div>
+            <div class="checklist-text"><strong>Ryuzu lunch</strong> (2★ Michelin)<small>Omakase.in. 2–4 weeks ahead.</small></div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-priority priority-now">!</div>
+            <div class="checklist-text"><strong>Any high-end omakase</strong><small>Omakase.in, Tableall. 2–4 weeks minimum.</small></div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-priority priority-now">!</div>
+            <div class="checklist-text"><strong>TeamLab Borderless</strong> (if going)<small>teamlab.art. Timed entry. Buy ahead. Weekday recommended.</small></div>
+          </div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🟡 Book 1–2 Days Before</h4>
+        <div class="info-block">
+          <div class="checklist-item">
+            <div class="checklist-priority priority-soon">~</div>
+            <div class="checklist-text"><strong>Pizza Marumo</strong><small>Website. Popular but doable with a few days notice.</small></div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-priority priority-soon">~</div>
+            <div class="checklist-text"><strong>Butagumi dinner</strong><small>Website/phone. Lunch is walk-in OK.</small></div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-priority priority-soon">~</div>
+            <div class="checklist-text"><strong>Koffee Mameya Kakeru</strong><small>Website. 1 week ahead recommended.</small></div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-priority priority-soon">~</div>
+            <div class="checklist-text"><strong>Ggupdang</strong> (Seoul KBBQ)<small>Naver booking or phone.</small></div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-priority priority-soon">~</div>
+            <div class="checklist-text"><strong>Changdeokgung Secret Garden</strong><small>On-site or online. English tours at specific times.</small></div>
+          </div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🟢 Walk-In OK</h4>
+        <div class="info-block">
+          <ul>
+            <li>All ramen shops (Sugari, Gogyo, etc.)</li>
+            <li>All udon shops (Sato Yosuke, Yamamoto Menzou, Okakita)</li>
+            <li>Konbini breakfast</li>
+            <li>Markets (Nishiki, Mangwon, Namdaemun)</li>
+            <li>Most coffee shops</li>
+            <li>Temples and shrines</li>
+            <li>All Seoul BBQ except Michelin ones</li>
+          </ul>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- WEATHER & PACKING -->
+    <details class="sub-section">
+      <summary>🧳 Weather & Packing</summary>
+      <div class="sub-content">
+
+        <div class="weather-grid">
+          <div class="weather-card">
+            <div class="city-label" style="color:var(--accent-jp);">Tokyo</div>
+            <div class="temp">10°C</div>
+            <div class="temp-low">Low: 2°C</div>
+            <div class="cond">Dry, sunny 70–75%</div>
+          </div>
+          <div class="weather-card">
+            <div class="city-label" style="color:var(--accent-kyoto);">Kyoto</div>
+            <div class="temp">9°C</div>
+            <div class="temp-low">Low: 1°C</div>
+            <div class="cond">Slightly colder</div>
+          </div>
+          <div class="weather-card">
+            <div class="city-label" style="color:var(--accent-kr);">Seoul</div>
+            <div class="temp">3°C</div>
+            <div class="temp-low">Low: -6°C</div>
+            <div class="cond">COLD. Dry, windy.</div>
+          </div>
+        </div>
+
+        <div class="callout">
+          ⚠️ <strong>Seoul is significantly colder than Japan.</strong> Pack warm layers for the Korea leg.
+        </div>
+
+        <div class="pack-grid mt-md">
+          <div class="pack-category">
+            <h4>👕 Clothing — Layers Strategy</h4>
+            <ul>
+              <li>2–3 Uniqlo Heattech tops (buy in Japan tax-free)</li>
+              <li>1–2 Heattech leggings/tights</li>
+              <li>2 warm sweaters or fleeces (merino ideal)</li>
+              <li>1 warm, wind-blocking jacket (easy to remove — Japan cranks heat indoors)</li>
+              <li>2–3 dark pants/comfortable travel pants</li>
+              <li>Comfortable walking shoes (15K–25K steps/day!). Easy slip on/off for Japan.</li>
+            </ul>
+          </div>
+          <div class="pack-category">
+            <h4>🧣 Seoul Extras (Essential)</h4>
+            <ul>
+              <li>Warm hat</li>
+              <li>Gloves</li>
+              <li>Scarf</li>
+              <li>Seoul in Feb is no joke</li>
+            </ul>
+          </div>
+          <div class="pack-category">
+            <h4>🔌 Tech & Essentials</h4>
+            <ul>
+              <li>Portable charger (phone = lifeline)</li>
+              <li>Universal adapter — Japan: Type A (same as US). Korea: Type C/F (Euro round). Bring both.</li>
+              <li>Compact travel umbrella</li>
+              <li>Small crossbody bag (cash, phone, IC card)</li>
+              <li>Reusable water bottle</li>
+            </ul>
+          </div>
+          <div class="pack-category">
+            <h4>💊 Misc</h4>
+            <ul>
+              <li>Masks (still commonly worn in JP/KR)</li>
+              <li>Tissues/handkerchief (JP restrooms often lack paper towels)</li>
+              <li>Zip-lock bags (for snacks/souvenirs)</li>
+              <li>Medicine: Advil, antacids, Imodium, allergy meds, prescriptions</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- APPS -->
+    <details class="sub-section">
+      <summary>📱 Apps to Download</summary>
+      <div class="sub-content">
+        <div class="info-block">
+          <div class="app-item">
+            <div class="app-icon">🗺️</div>
+            <div><div class="app-name">Google Maps</div><div class="app-desc">Navigation in Japan (reliable)</div></div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">🗺️</div>
+            <div><div class="app-name">Naver Map</div><div class="app-desc">ESSENTIAL for Korea — Google Maps unreliable there</div></div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">🗺️</div>
+            <div><div class="app-name">KakaoMap</div><div class="app-desc">Backup Korea nav + restaurant info</div></div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">🚅</div>
+            <div><div class="app-name">SmartEX</div><div class="app-desc">Book Shinkansen tickets</div></div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">🍜</div>
+            <div><div class="app-name">Ramen Beast</div><div class="app-desc">Find great ramen anywhere in Japan (Ryan's rec)</div></div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">⭐</div>
+            <div><div class="app-name">Tabelog</div><div class="app-desc">Japan's Yelp. 3.5+ = good, 3.8+ = excellent, 4.0+ = world-class</div></div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">🚕</div>
+            <div><div class="app-name">GO</div><div class="app-desc">Taxi app for Japan</div></div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">🚕</div>
+            <div><div class="app-name">Kakao T</div><div class="app-desc">Taxi app for Korea</div></div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">🌐</div>
+            <div><div class="app-name">Papago</div><div class="app-desc">Translation — best for Korean (by Naver)</div></div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">📷</div>
+            <div><div class="app-name">Google Translate</div><div class="app-desc">Camera translation (point at menus)</div></div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">💳</div>
+            <div><div class="app-name">Suica (Apple Wallet)</div><div class="app-desc">IC card for Japan transit</div></div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">📶</div>
+            <div><div class="app-name">Airalo or Ubigi</div><div class="app-desc">eSIM data for both countries</div></div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- ETIQUETTE -->
+    <details class="sub-section">
+      <summary>🎌 Etiquette & Phrases</summary>
+      <div class="sub-content">
+        <div class="info-block">
+          <h4>🇯🇵 Japan</h4>
+          <ul>
+            <li><strong>No tipping.</strong> Ever. It's considered rude.</li>
+            <li><strong>Shoes off</strong> indoors — ryokans, some restaurants, temples.</li>
+            <li><strong>Chopstick rules:</strong> Don't stick upright in rice (funeral). Don't pass food chopstick-to-chopstick.</li>
+            <li><strong>Quiet on trains.</strong> No phone calls, whisper conversations.</li>
+            <li><strong>Line up.</strong> Queuing culture is sacred. Don't cut.</li>
+            <li><strong>Bow slightly</strong> when greeting or thanking.</li>
+            <li><strong>"Sumimasen"</strong> — your most useful word. Excuse me / sorry / thank you.</li>
+            <li><strong>Trash cans are rare.</strong> Carry your trash. Konbini have bins inside.</li>
+          </ul>
+        </div>
+
+        <div class="info-block">
+          <h4>🇰🇷 Korea</h4>
+          <ul>
+            <li><strong>No tipping.</strong> Same as Japan.</li>
+            <li><strong>Shoes off</strong> at traditional restaurants and homes.</li>
+            <li><strong>Pour drinks for others</strong> (especially elders) with two hands. Turn away from elders when drinking.</li>
+            <li><strong>Age matters.</strong> If asked your age, it's cultural curiosity.</li>
+            <li><strong>"Kamsahamnida"</strong> = thank you. Most useful Korean phrase.</li>
+            <li><strong>"Bballi bballi"</strong> = hurry hurry. Korea runs fast. Don't dawdle on escalators.</li>
+          </ul>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🇯🇵 Essential Japanese</h4>
+        <div class="info-block">
+          <table class="phrase-table">
+            <tr><td>すみません (Sumimasen)</td><td>Excuse me / Sorry / Thank you</td></tr>
+            <tr><td>ありがとう (Arigatou)</td><td>Thank you (casual)</td></tr>
+            <tr><td>いただきます (Itadakimasu)</td><td>Said before eating</td></tr>
+            <tr><td>ごちそうさま (Gochisousama)</td><td>Said after eating</td></tr>
+            <tr><td>お会計お願いします (Okaikei onegai shimasu)</td><td>Check please</td></tr>
+            <tr><td>これください (Kore kudasai)</td><td>This one please (point + say)</td></tr>
+            <tr><td>英語のメニュー (Eigo no menyu)</td><td>English menu</td></tr>
+          </table>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🇰🇷 Essential Korean</h4>
+        <div class="info-block">
+          <table class="phrase-table">
+            <tr><td>감사합니다 (Kamsahamnida)</td><td>Thank you (formal)</td></tr>
+            <tr><td>주세요 (Juseyo)</td><td>Please give me</td></tr>
+            <tr><td>이거 주세요 (Igeo juseyo)</td><td>This one please</td></tr>
+            <tr><td>얼마예요? (Eolmayeyo?)</td><td>How much?</td></tr>
+            <tr><td>맛있어요 (Mashisseoyo)</td><td>It's delicious!</td></tr>
+            <tr><td>계산이요 (Gyesanniyo)</td><td>Check please</td></tr>
+            <tr><td>화장실 (Hwajangshil)</td><td>Bathroom</td></tr>
+          </table>
+        </div>
+
+      </div>
+    </details>
+
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <p>🗾🇰🇷 Tokyo → Kyoto → Seoul · Feb 16 – Mar 3, 2026</p>
+  <p style="margin-top:4px;">Have an incredible trip, John & Amy! ❤️</p>
+  <p style="margin-top:8px; font-size:11px;">Researched from 20+ Reddit threads, Eater, Infatuation, Condé Nast, and local recommendations.</p>
+</footer>
+
+<!-- ===== SCROLL TO TOP ===== -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// Tab switching
+function switchTab(btn) {
+  const target = btn.dataset.target;
+  const activeClass = btn.dataset.active || 'active-ref';
+
+  // Reset all tabs
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    t.className = 'nav-tab';
+  });
+
+  // Activate clicked tab
+  btn.classList.add(activeClass);
+
+  // Show/hide sections
+  document.querySelectorAll('.city-section').forEach(s => {
+    s.classList.remove('active');
+  });
+  const sec = document.getElementById('sec-' + target);
+  if (sec) {
+    sec.classList.add('active');
+    // Scroll to top of section
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// Scroll to top button
+const scrollTopBtn = document.getElementById('scrollTop');
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
+// Active tab tracking based on initial load
+document.addEventListener('DOMContentLoaded', () => {
+  // Check URL hash
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    const tab = document.querySelector(`[data-target="${hash}"]`);
+    if (tab) switchTab(tab);
+  }
+});
+</script>
+
+</body>
+</html>

@@ -14,34 +14,34 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Light Mode — Warm minimalist · Indigo (JP) + Celadon (KR) accents */
-  --bg: #f6f4ef;
-  --bg-card: #ffffff;
-  --bg-nav: rgba(246, 244, 239, 0.92);
-  --text: #2c2926;
-  --text-muted: #7a756d;
-  --text-light: #a8a29e;
-  --border: #e5e1da;
-  --border-light: #eeeae3;
-  --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
-  --shadow-lg: 0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.03);
-  --accent-jp: #3d5a80;          /* Indigo — 藍色 ai-iro */
-  --accent-jp-light: #edf1f6;
-  --accent-jp-border: #c3cedc;
-  --accent-kr: #5b8a72;          /* Celadon — 청자 cheongja */
-  --accent-kr-light: #edf5f1;
-  --accent-kr-border: #bdd5c7;
-  --accent-kyoto: #8b7355;       /* Earthen ochre — 茶室 chashitsu */
-  --accent-kyoto-light: #f5f0e8;
-  --accent-kyoto-border: #d9cfbe;
-  --badge-book: #b8614e;         /* Warm terracotta */
-  --badge-walkin: #5b8a72;       /* Celadon */
-  --badge-line: #c4a24d;         /* Warm amber */
-  --tag-bg: #f0ece5;
-  --tag-text: #6b655c;
-  --highlight: #f8f3e6;
-  --quick-ref-bg: #ede9e0;
-  --details-bg: #f6f4ef;
+  /* Light Mode — Warm linen · Muted indigo (JP) + Celadon (KR) accents */
+  --bg: #F3F0E8;
+  --bg-card: #FBFAF7;
+  --bg-nav: rgba(243, 240, 232, 0.92);
+  --text: #2B2622;
+  --text-muted: #847E74;
+  --text-light: #ADA89F;
+  --border: #DDD9D0;
+  --border-light: #EBE8E1;
+  --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  --shadow-lg: 0 4px 14px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.02);
+  --accent-jp: #4E5B7E;          /* Faded ai-iro — 藍色 muted indigo */
+  --accent-jp-light: #ECEEF4;
+  --accent-jp-border: #C0C7D6;
+  --accent-kr: #6E8C7D;          /* Aged celadon — 청자 cheongja */
+  --accent-kr-light: #ECF2EE;
+  --accent-kr-border: #B8CCBF;
+  --accent-kyoto: #8E7B60;       /* Hinoki wood — 茶室 chashitsu */
+  --accent-kyoto-light: #F2EDE4;
+  --accent-kyoto-border: #D4C9B5;
+  --badge-book: #B5695A;         /* Weathered terracotta */
+  --badge-walkin: #6E8C7D;       /* Celadon */
+  --badge-line: #BF9E48;         /* Warm gold */
+  --tag-bg: #ECE8DF;
+  --tag-text: #6D675E;
+  --highlight: #F5EFE0;
+  --quick-ref-bg: #EAE6DC;
+  --details-bg: #F3F0E8;
   --font-sans: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --radius: 12px;
   --radius-sm: 8px;
@@ -50,33 +50,33 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #16140f;
-    --bg-card: #201e18;
-    --bg-nav: rgba(22, 20, 15, 0.94);
-    --text: #e5e0d8;
-    --text-muted: #9a9489;
-    --text-light: #6b655c;
-    --border: #302c25;
-    --border-light: #282420;
+    --bg: #181510;
+    --bg-card: #211E18;
+    --bg-nav: rgba(24, 21, 16, 0.94);
+    --text: #E2DDD4;
+    --text-muted: #968F83;
+    --text-light: #6A645A;
+    --border: #322D25;
+    --border-light: #2A2620;
     --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-    --shadow-lg: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
-    --accent-jp: #6b8db5;
-    --accent-jp-light: #1a2030;
-    --accent-jp-border: #2a3a50;
-    --accent-kr: #7aac94;
-    --accent-kr-light: #142018;
-    --accent-kr-border: #1e3828;
-    --accent-kyoto: #b8a07a;
-    --accent-kyoto-light: #241e14;
-    --accent-kyoto-border: #3a3018;
-    --badge-book: #cf7e68;
-    --badge-walkin: #7aac94;
-    --badge-line: #d4b85e;
-    --tag-bg: #282420;
-    --tag-text: #9a9489;
-    --highlight: #2a2510;
-    --quick-ref-bg: #201e18;
-    --details-bg: #1c1a14;
+    --shadow-lg: 0 4px 14px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+    --accent-jp: #7A8FB5;
+    --accent-jp-light: #1C2130;
+    --accent-jp-border: #2E3A50;
+    --accent-kr: #85AB96;
+    --accent-kr-light: #16211A;
+    --accent-kr-border: #223A2C;
+    --accent-kyoto: #B9A37E;
+    --accent-kyoto-light: #261F14;
+    --accent-kyoto-border: #3E3420;
+    --badge-book: #CF806A;
+    --badge-walkin: #85AB96;
+    --badge-line: #D4B85E;
+    --tag-bg: #2A2620;
+    --tag-text: #968F83;
+    --highlight: #2C2712;
+    --quick-ref-bg: #211E18;
+    --details-bg: #1E1B14;
   }
 }
 
@@ -446,16 +446,16 @@ body {
   font-size: 11px;
   font-weight: 600;
 }
-.badge-book { background: #fceee8; color: var(--badge-book); }
-.badge-walkin { background: #ebf5f0; color: var(--badge-walkin); }
-.badge-line { background: #faf5e6; color: #a88930; }
+.badge-book { background: #F5EAE5; color: var(--badge-book); }
+.badge-walkin { background: #EAF1EC; color: var(--badge-walkin); }
+.badge-line { background: #F5F0E2; color: #A38E38; }
 .badge-price { background: var(--tag-bg); color: var(--tag-text); }
 .badge-source { background: var(--tag-bg); color: var(--text-muted); font-weight: 500; }
 
 @media (prefers-color-scheme: dark) {
-  .badge-book { background: rgba(207, 126, 104, 0.12); color: #cf7e68; }
-  .badge-walkin { background: rgba(122, 172, 148, 0.12); color: #7aac94; }
-  .badge-line { background: rgba(212, 184, 94, 0.12); color: #d4b85e; }
+  .badge-book { background: rgba(181, 105, 90, 0.13); color: #CF806A; }
+  .badge-walkin { background: rgba(133, 171, 150, 0.13); color: #85AB96; }
+  .badge-line { background: rgba(191, 158, 72, 0.13); color: #D4B85E; }
   .badge-price { background: var(--tag-bg); }
 }
 
@@ -531,7 +531,7 @@ body {
 }
 .hotel-card .fhr-tag {
   display: inline-block;
-  background: linear-gradient(135deg, #8b7355, #a89470);
+  background: linear-gradient(135deg, #8E7B60, #A69272);
   color: #fff;
   font-size: 10px;
   font-weight: 700;
@@ -912,7 +912,7 @@ body {
 }
 .fb-btn:active { transform: scale(0.93); }
 .fb-btn.fb-active-must { background: var(--accent-kr-light); border-color: var(--accent-kr-border); color: var(--accent-kr); }
-.fb-btn.fb-active-skip { background: #fceee8; border-color: #e0c0b0; color: var(--badge-book); }
+.fb-btn.fb-active-skip { background: #F5EAE5; border-color: #DCC5B8; color: var(--badge-book); }
 .fb-btn.fb-active-comment { background: var(--accent-jp-light); border-color: var(--accent-jp-border); color: var(--accent-jp); }
 
 /* Comment textarea */
@@ -1020,7 +1020,7 @@ body {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(43, 38, 34, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1594,7 +1594,7 @@ body {
             </div>
           </div>
           <div class="venue-meta">
-            <span class="badge badge-book" style="background:var(--highlight);color:#a88930;">⚠️ Walk through only</span>
+            <span class="badge badge-book" style="background:var(--highlight);color:#A38E38;">⚠️ Walk through only</span>
             <span class="badge badge-price">$10–20</span>
           </div>
           <div class="venue-desc">Atmospheric tiny alley of smoke-filled yakitori stalls. Walk through to see it, but <strong>⚠️ skip eating here.</strong> Overpriced and known for scamming tourists — inflated bills, bait-and-switch menus. Get yakitori anywhere else in Shinjuku; it'll be better and cheaper.</div>
@@ -2975,7 +2975,7 @@ body {
       <div class="sub-content">
         <div class="venue-card">
           <div class="venue-top"><div class="venue-emoji">⚠️</div><div class="venue-info"><div class="venue-name">Gwangjang Market</div><div class="venue-area">Jongno</div></div></div>
-          <div class="venue-meta"><span class="badge badge-book" style="background:#fef9e7;color:#c87f0a;">⚠️ Tourist trap — SKIP for food</span></div>
+          <div class="venue-meta"><span class="badge badge-book" style="background:#F5F0E2;color:#B08830;">⚠️ Tourist trap — SKIP for food</span></div>
           <div class="venue-desc">"Overpriced," "below average food," "I will never go again." Prices inflated, quality declined. The yukhoe (raw beef) is still good, everything else skippable.</div>
         </div>
 
@@ -2999,7 +2999,7 @@ body {
 
         <div class="venue-card">
           <div class="venue-top"><div class="venue-emoji">⚠️</div><div class="venue-info"><div class="venue-name">Myeongdong Night Market</div><div class="venue-area">Myeongdong</div></div></div>
-          <div class="venue-meta"><span class="badge badge-book" style="background:#fef9e7;color:#c87f0a;">⚠️ Overpriced</span></div>
+          <div class="venue-meta"><span class="badge badge-book" style="background:#F5F0E2;color:#B08830;">⚠️ Overpriced</span></div>
           <div class="venue-desc">Fun for atmosphere once, but don't eat here as a meal. "It is def overpriced compared to other markets."</div>
         </div>
       </div>

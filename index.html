@@ -14,34 +14,34 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Light Mode */
-  --bg: #faf8f5;
+  /* Light Mode — Warm minimalist · Indigo (JP) + Celadon (KR) accents */
+  --bg: #f6f4ef;
   --bg-card: #ffffff;
-  --bg-nav: rgba(250, 248, 245, 0.92);
-  --text: #1a1a1a;
-  --text-muted: #6b6b6b;
-  --text-light: #999;
-  --border: #e8e4df;
-  --border-light: #f0ece7;
-  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-lg: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-  --accent-jp: #c0392b;
-  --accent-jp-light: #fdf2f0;
-  --accent-jp-border: #e8c4bf;
-  --accent-kr: #2d5f8a;
-  --accent-kr-light: #edf3f8;
-  --accent-kr-border: #b8cfe0;
-  --accent-kyoto: #8b6914;
-  --accent-kyoto-light: #faf5e8;
-  --accent-kyoto-border: #ddd0a8;
-  --badge-book: #c0392b;
-  --badge-walkin: #27ae60;
-  --badge-line: #f39c12;
-  --tag-bg: #f5f2ee;
-  --tag-text: #5a5a5a;
-  --highlight: #fff8e1;
-  --quick-ref-bg: #f0ece7;
-  --details-bg: #faf8f5;
+  --bg-nav: rgba(246, 244, 239, 0.92);
+  --text: #2c2926;
+  --text-muted: #7a756d;
+  --text-light: #a8a29e;
+  --border: #e5e1da;
+  --border-light: #eeeae3;
+  --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.03);
+  --accent-jp: #3d5a80;          /* Indigo — 藍色 ai-iro */
+  --accent-jp-light: #edf1f6;
+  --accent-jp-border: #c3cedc;
+  --accent-kr: #5b8a72;          /* Celadon — 청자 cheongja */
+  --accent-kr-light: #edf5f1;
+  --accent-kr-border: #bdd5c7;
+  --accent-kyoto: #8b7355;       /* Earthen ochre — 茶室 chashitsu */
+  --accent-kyoto-light: #f5f0e8;
+  --accent-kyoto-border: #d9cfbe;
+  --badge-book: #b8614e;         /* Warm terracotta */
+  --badge-walkin: #5b8a72;       /* Celadon */
+  --badge-line: #c4a24d;         /* Warm amber */
+  --tag-bg: #f0ece5;
+  --tag-text: #6b655c;
+  --highlight: #f8f3e6;
+  --quick-ref-bg: #ede9e0;
+  --details-bg: #f6f4ef;
   --font-sans: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --radius: 12px;
   --radius-sm: 8px;
@@ -1282,8 +1282,8 @@ body {
         </div>
         <div class="timeline-item">
           <div class="timeline-time">6:30pm</div>
-          <div class="timeline-desc"><strong>Omoide Yokocho</strong> (Memory Lane / Piss Alley) — tiny yakitori stalls by Shinjuku Station. Perfect jet-lag dinner. Casual, atmospheric, cheap (~$15pp).
-          <span class="tip">Alternative: Room service + early sleep. You're in the Park Hyatt — the room IS the experience.</span></div>
+          <div class="timeline-desc"><strong>Omoide Yokocho</strong> (Memory Lane / Piss Alley) — walk through for the atmosphere, but ⚠️ skip eating here (overpriced, tourist traps). Find yakitori elsewhere in Shinjuku.
+          <span class="tip">Better option: Room service + early sleep. You're in the Park Hyatt — the room IS the experience.</span></div>
         </div>
         <div class="timeline-item">
           <div class="timeline-time">8pm</div>
@@ -1389,7 +1389,7 @@ body {
             <span class="badge badge-walkin">🟢 Walk-in</span>
             <span class="badge badge-price">$3–5</span>
           </div>
-          <div class="venue-desc">Onigiri, egg sando, Lawson's fried chicken, coffee. Japan konbini food is better than most US restaurants. Not a joke.</div>
+          <div class="venue-desc">Onigiri, egg sando, fried chicken, coffee. Japan konbini food is better than most US restaurants. Not a joke. <strong>Pro tip:</strong> Family Mart fried chicken beats Lawson's for the egg sando combo. Egg sando thickness varies by day — some days Lawson's is thicker, some days FamilyMart. Try both.</div>
         </div>
 
         <div class="venue-card">
@@ -1615,7 +1615,7 @@ body {
             <span class="badge badge-walkin">🟢 Walk-in</span>
             <span class="badge badge-price">$10–20</span>
           </div>
-          <div class="venue-desc">Atmospheric tiny alley of smoke-filled yakitori stalls. Perfect first-night jet-lag food.</div>
+          <div class="venue-desc">Atmospheric tiny alley of smoke-filled yakitori stalls. Walk through to see it, but <strong>⚠️ skip eating here</strong> — overpriced and known for scamming tourists. Get yakitori elsewhere.</div>
         </div>
 
         <h4 style="font-size:14px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">💎 Value Fine Dining & Omakase</h4>
@@ -1999,6 +1999,15 @@ body {
             <li><strong>Shinkansen Nozomi:</strong> 2h15m, ¥14,170/$95pp. Book via SmartEX app.</li>
             <li><strong>JR Pass: NOT WORTH IT.</strong> After 2023 price hike, 7-day pass is ¥50,000/$335. One-way is much cheaper.</li>
             <li><strong>Pro tip:</strong> E-seats (right side heading west) for Mt. Fuji view.</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>📦 Luggage Forwarding (Yamato)</h4>
+          <ul>
+            <li><strong>Use Yamato Transport (クロネコヤマト)</strong> when moving between cities. Send your bags ahead and travel light.</li>
+            <li><strong>How:</strong> Drop bags at hotel front desk or any konbini. Fill out a form (staff help). Next-day delivery ~¥2,000–3,000/bag.</li>
+            <li><strong>When:</strong> Tokyo→Kyoto, Kyoto→airport. Don't drag suitcases on the Shinkansen if you don't have to.</li>
+            <li><strong>Sister's rec:</strong> "If you're moving cities, definitely use luggage service."</li>
           </ul>
         </div>
       </div>

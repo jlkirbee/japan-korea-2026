@@ -539,8 +539,9 @@ body {
   background: var(--bg-card);
   border-radius: var(--radius);
   border: 1px solid var(--border-light);
+  border-left: 3px solid var(--border);
   box-shadow: var(--shadow);
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   padding: 14px 16px;
 }
 .venue-top {
@@ -560,13 +561,13 @@ body {
   min-width: 0;
 }
 .venue-name {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.3;
 }
 .venue-area {
-  font-size: 12px;
-  color: var(--text-muted);
+  font-size: 11px;
+  color: var(--text-light);
   margin-top: 1px;
 }
 .venue-meta {
@@ -598,7 +599,7 @@ body {
 }
 
 .venue-desc {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text);
   line-height: 1.5;
 }
@@ -608,6 +609,87 @@ body {
   margin-top: 4px;
   font-style: italic;
 }
+
+/* ========== VENUE CARD COLLAPSE/EXPAND ========== */
+.venue-card .vc-chevron {
+  font-size: 11px;
+  color: var(--text-light);
+  flex-shrink: 0;
+  width: 14px;
+  text-align: center;
+  line-height: 22px;
+  transition: color 0.15s ease;
+  user-select: none;
+}
+.venue-card .venue-top {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.venue-card .venue-top:hover .vc-chevron { color: var(--text-muted); }
+
+.venue-card.vc-collapsed .venue-top { margin-bottom: 0; }
+.venue-card.vc-collapsed .venue-meta,
+.venue-card.vc-collapsed .venue-desc,
+.venue-card.vc-collapsed .fb-row,
+.venue-card.vc-collapsed .fb-comment-box,
+.venue-card.vc-collapsed .fb-aggregate { display: none; }
+.venue-card.vc-collapsed { padding: 10px 14px; }
+
+.venue-card.vc-expanded .venue-top { margin-bottom: 6px; }
+
+.vc-vote-summary {
+  display: none;
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  gap: 8px;
+  align-items: center;
+  color: var(--text-muted);
+  padding-left: 8px;
+}
+.venue-card.vc-collapsed .vc-vote-summary { display: flex; }
+
+/* ========== FILTER BAR ========== */
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: var(--bg);
+  padding: 10px 16px;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border-light);
+}
+.filter-btn {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1.3;
+}
+.filter-btn:active { transform: scale(0.93); }
+.filter-btn.filter-active {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+.filter-count {
+  font-size: 10px;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+.vc-filtered-out { display: none !important; }
 
 /* ========== COLLAPSIBLE SUBSECTIONS ========== */
 .sub-section {
@@ -1444,6 +1526,14 @@ body {
     <span class="route-line"></span>
     <span class="route-dot dot-seoul"></span><span>Seoul</span>
   </div>
+</div>
+
+<!-- ===== FILTER BAR ===== -->
+<div class="filter-bar" id="filterBar" style="display:none;">
+  <button class="filter-btn filter-active" data-filter="all">All <span class="filter-count">0</span></button>
+  <button class="filter-btn" data-filter="must">🔥 Must Go <span class="filter-count">0</span></button>
+  <button class="filter-btn" data-filter="skip">❌ Skip <span class="filter-count">0</span></button>
+  <button class="filter-btn" data-filter="undecided">🤷 Undecided <span class="filter-count">0</span></button>
 </div>
 
 <!-- ========================================== -->
@@ -5337,6 +5427,207 @@ document.addEventListener('DOMContentLoaded', () => {
   // Reset border on input
   nameInput.addEventListener('input', function() { nameInput.style.borderColor = ''; });
   textInput.addEventListener('input', function() { textInput.style.borderColor = ''; });
+})();
+</script>
+
+<!-- ============================
+     VISUAL DECLUTTER: Collapse/Expand + Filter Bar
+     ============================ -->
+<script>
+(function() {
+  'use strict';
+
+  function initVisualDeclutter() {
+    // ========== COLLAPSE / EXPAND ==========
+    var EXPANDED_KEY = 'travel-vc-expanded';
+    var expandedSet = {};
+    try { expandedSet = JSON.parse(sessionStorage.getItem(EXPANDED_KEY) || '{}'); } catch(e) { expandedSet = {}; }
+
+    function saveExpanded() {
+      sessionStorage.setItem(EXPANDED_KEY, JSON.stringify(expandedSet));
+    }
+
+    function getVenueId(card) {
+      var nameEl = card.querySelector('.venue-name');
+      return nameEl ? nameEl.textContent.trim() : null;
+    }
+
+    function updateVoteSummary(card, summaryEl) {
+      var agg = card.querySelector('.fb-agg-counts');
+      if (agg && agg.textContent.trim()) {
+        summaryEl.innerHTML = agg.innerHTML;
+      } else {
+        summaryEl.innerHTML = '';
+      }
+    }
+
+    document.querySelectorAll('.venue-card').forEach(function(card) {
+      var venueId = getVenueId(card);
+      if (!venueId) return;
+
+      var top = card.querySelector('.venue-top');
+      if (!top) return;
+
+      // Insert chevron before emoji
+      var chevron = document.createElement('span');
+      chevron.className = 'vc-chevron';
+      chevron.textContent = '\u25B8'; // ▸
+      top.insertBefore(chevron, top.firstChild);
+
+      // Append vote summary to venue-top
+      var summary = document.createElement('span');
+      summary.className = 'vc-vote-summary';
+      top.appendChild(summary);
+
+      // Set initial state
+      if (expandedSet[venueId]) {
+        card.classList.add('vc-expanded');
+        chevron.textContent = '\u25BE'; // ▾
+      } else {
+        card.classList.add('vc-collapsed');
+      }
+
+      // Click handler on venue-top
+      top.addEventListener('click', function(e) {
+        // Don't toggle if clicking inside a button, link, input, or textarea
+        if (e.target.closest('button, a, input, textarea, .fb-own-actions')) return;
+
+        var isCollapsed = card.classList.contains('vc-collapsed');
+        if (isCollapsed) {
+          card.classList.remove('vc-collapsed');
+          card.classList.add('vc-expanded');
+          chevron.textContent = '\u25BE';
+          expandedSet[venueId] = true;
+        } else {
+          card.classList.remove('vc-expanded');
+          card.classList.add('vc-collapsed');
+          chevron.textContent = '\u25B8';
+          delete expandedSet[venueId];
+        }
+        saveExpanded();
+      });
+
+      // Initial vote summary
+      updateVoteSummary(card, summary);
+    });
+
+    // Observe .fb-aggregate changes to update vote summaries
+    var aggObserver = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        var card = m.target.closest ? m.target.closest('.venue-card') : null;
+        if (!card) {
+          // Traverse up manually for older browsers
+          var el = m.target;
+          while (el && !el.classList.contains('venue-card')) el = el.parentElement;
+          card = el;
+        }
+        if (!card) return;
+        var summary = card.querySelector('.vc-vote-summary');
+        if (summary) updateVoteSummary(card, summary);
+      });
+      // Also update filter counts
+      updateFilterCounts();
+    });
+
+    document.querySelectorAll('.fb-aggregate').forEach(function(agg) {
+      aggObserver.observe(agg, { childList: true, subtree: true, characterData: true });
+    });
+
+    // ========== FILTER BAR ==========
+    var filterBar = document.getElementById('filterBar');
+    if (!filterBar) return;
+
+    var filterBtns = filterBar.querySelectorAll('.filter-btn');
+    var currentFilter = 'all';
+
+    function getCardVoteStatus(card) {
+      if (card.classList.contains('fb-must')) return 'must';
+      if (card.classList.contains('fb-skip')) return 'skip';
+      return 'undecided';
+    }
+
+    function applyFilter(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.venue-card').forEach(function(card) {
+        var status = getCardVoteStatus(card);
+        var show = (filter === 'all') ||
+                   (filter === 'must' && status === 'must') ||
+                   (filter === 'skip' && status === 'skip') ||
+                   (filter === 'undecided' && status === 'undecided');
+        card.classList.toggle('vc-filtered-out', !show);
+      });
+      filterBtns.forEach(function(btn) {
+        btn.classList.toggle('filter-active', btn.dataset.filter === filter);
+      });
+    }
+
+    function updateFilterCounts() {
+      var counts = { all: 0, must: 0, skip: 0, undecided: 0 };
+      document.querySelectorAll('.venue-card').forEach(function(card) {
+        counts.all++;
+        counts[getCardVoteStatus(card)]++;
+      });
+      filterBtns.forEach(function(btn) {
+        var f = btn.dataset.filter;
+        var countEl = btn.querySelector('.filter-count');
+        if (countEl) countEl.textContent = counts[f] || 0;
+      });
+    }
+
+    filterBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        applyFilter(btn.dataset.filter);
+      });
+    });
+
+    // Observe card class changes (fb-must / fb-skip toggled by feedback system)
+    var cardObserver = new MutationObserver(function() {
+      updateFilterCounts();
+      if (currentFilter !== 'all') applyFilter(currentFilter);
+    });
+    document.querySelectorAll('.venue-card').forEach(function(card) {
+      cardObserver.observe(card, { attributes: true, attributeFilter: ['class'] });
+    });
+
+    // Sticky top offset: match nav height
+    var nav = document.getElementById('nav');
+    function setFilterTop() {
+      if (nav) filterBar.style.top = nav.offsetHeight + 'px';
+    }
+    setFilterTop();
+    window.addEventListener('resize', setFilterTop);
+
+    // Show/hide filter bar based on active tab
+    function updateFilterBarVisibility() {
+      var activeSection = document.querySelector('.city-section.active');
+      if (activeSection) {
+        var id = activeSection.id;
+        var hasVenues = (id !== 'sec-quickref' && id !== 'sec-practical');
+        filterBar.style.display = hasVenues ? 'flex' : 'none';
+      }
+    }
+    updateFilterBarVisibility();
+
+    // Hook tab switching to update filter bar
+    var origSwitchTab = window.switchTab;
+    window.switchTab = function(btn) {
+      origSwitchTab(btn);
+      updateFilterBarVisibility();
+      applyFilter('all'); // Reset filter on tab switch
+    };
+
+    // Initial counts
+    updateFilterCounts();
+  }
+
+  // Run after feedback system has finished init
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(initVisualDeclutter, 0);
+    });
+  } else {
+    setTimeout(initVisualDeclutter, 0);
+  }
 })();
 </script>
 

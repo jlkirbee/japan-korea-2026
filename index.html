@@ -873,6 +873,252 @@ body {
   body { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
   .scroll-top { bottom: calc(20px + env(safe-area-inset-bottom)); }
 }
+
+/* ============================
+   FEEDBACK SYSTEM
+   ============================ */
+
+/* Card feedback states */
+.venue-card { transition: opacity 0.2s ease, border-color 0.2s ease; }
+.venue-card.fb-must { border-left: 3px solid #4caf50; }
+.venue-card.fb-skip { opacity: 0.4; }
+.venue-card.fb-skip .venue-name { text-decoration: line-through; }
+.venue-card.fb-imported-must { border-left: 3px solid #5c8dd6; }
+.venue-card.fb-imported-skip { border-left: 3px solid #e57373; }
+
+@media (prefers-color-scheme: dark) {
+  .venue-card.fb-must { border-left-color: #66bb6a; }
+  .venue-card.fb-skip { opacity: 0.35; }
+  .venue-card.fb-imported-must { border-left-color: #7cacde; }
+  .venue-card.fb-imported-skip { border-left-color: #ef9a9a; }
+}
+
+/* Feedback buttons row */
+.fb-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-light);
+}
+.fb-btn {
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1;
+  color: var(--text-muted);
+}
+.fb-btn:active { transform: scale(0.93); }
+.fb-btn.fb-active-must { background: #e8f5e9; border-color: #a5d6a7; color: #2e7d32; }
+.fb-btn.fb-active-skip { background: #ffebee; border-color: #ef9a9a; color: #c62828; }
+.fb-btn.fb-active-comment { background: #e3f2fd; border-color: #90caf9; color: #1565c0; }
+
+@media (prefers-color-scheme: dark) {
+  .fb-btn.fb-active-must { background: rgba(76,175,80,0.15); border-color: rgba(76,175,80,0.4); color: #81c784; }
+  .fb-btn.fb-active-skip { background: rgba(229,115,115,0.15); border-color: rgba(229,115,115,0.4); color: #ef9a9a; }
+  .fb-btn.fb-active-comment { background: rgba(100,181,246,0.15); border-color: rgba(100,181,246,0.4); color: #90caf9; }
+}
+
+/* Comment textarea */
+.fb-comment-box { margin-top: 8px; display: none; }
+.fb-comment-box.fb-visible { display: block; }
+.fb-comment-box textarea {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  resize: vertical;
+  line-height: 1.5;
+  min-height: 56px;
+}
+.fb-comment-box textarea:focus { outline: none; border-color: #90caf9; }
+.fb-comment-box textarea::placeholder { color: var(--text-light); }
+
+/* Imported picks label on venue cards */
+.fb-imported-label {
+  font-size: 12px;
+  color: #5c8dd6;
+  margin-top: 6px;
+  font-style: italic;
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  .fb-imported-label { color: #7cacde; }
+}
+
+/* Floating share button */
+.fb-share-fab {
+  position: fixed;
+  bottom: 20px;
+  left: 16px;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: 24px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  z-index: 90;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.fb-share-fab:active { transform: scale(0.95); }
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  .fb-share-fab { bottom: calc(20px + env(safe-area-inset-bottom)); }
+}
+
+/* Share options panel */
+.fb-share-panel {
+  position: fixed;
+  bottom: 72px;
+  left: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow-lg);
+  z-index: 91;
+  min-width: 240px;
+}
+@supports (padding: env(safe-area-inset-bottom)) {
+  .fb-share-panel { bottom: calc(72px + env(safe-area-inset-bottom)); }
+}
+.fb-share-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.fb-share-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--tag-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  color: var(--text);
+  cursor: pointer;
+  margin-bottom: 6px;
+  transition: background 0.15s ease;
+}
+.fb-share-option:hover { background: var(--border-light); }
+.fb-share-option:last-of-type { margin-bottom: 0; }
+.fb-share-status {
+  font-size: 12px;
+  color: #4caf50;
+  margin-top: 8px;
+  text-align: center;
+  min-height: 1.2em;
+}
+
+/* Name prompt modal */
+.fb-name-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+.fb-name-box {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 24px;
+  width: 290px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.fb-name-title {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+.fb-name-sub {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+.fb-name-input {
+  width: 100%;
+  font-size: 15px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.fb-name-input:focus { outline: none; border-color: #90caf9; }
+.fb-name-submit {
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+.fb-name-submit:active { transform: scale(0.97); }
+
+/* Imported picks banner */
+.fb-picks-banner {
+  background: #e3f2fd;
+  border: 1px solid #bbdefb;
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  margin: 0 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #1a1a1a;
+}
+@media (prefers-color-scheme: dark) {
+  .fb-picks-banner {
+    background: rgba(92, 141, 214, 0.12);
+    border-color: rgba(92, 141, 214, 0.25);
+    color: var(--text);
+  }
+}
+.fb-picks-clear {
+  background: none;
+  border: 1px solid #90caf9;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #1976d2;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  white-space: nowrap;
+  font-weight: 600;
+}
+@media (prefers-color-scheme: dark) {
+  .fb-picks-clear { border-color: rgba(100,181,246,0.4); color: #90caf9; }
+}
 </style>
 </head>
 <body>
@@ -3371,13 +3617,393 @@ window.addEventListener('scroll', () => {
 
 // Active tab tracking based on initial load
 document.addEventListener('DOMContentLoaded', () => {
-  // Check URL hash
+  // Check URL hash — but not if it's a picks hash
   const hash = window.location.hash.replace('#', '');
-  if (hash) {
+  if (hash && !hash.startsWith('picks=')) {
     const tab = document.querySelector(`[data-target="${hash}"]`);
     if (tab) switchTab(tab);
   }
 });
+</script>
+
+<!-- ============================
+     FEEDBACK SYSTEM
+     ============================ -->
+<script>
+(function() {
+  'use strict';
+
+  // --- Storage keys ---
+  var STORAGE_KEY = 'travel-feedback';
+  var NAME_KEY = 'travel-feedback-name';
+
+  var feedbackData = {};
+  var userName = '';
+  var importedPicks = null;
+
+  // --- Data persistence ---
+
+  function loadData() {
+    try {
+      feedbackData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      userName = localStorage.getItem(NAME_KEY) || '';
+    } catch (e) { feedbackData = {}; }
+  }
+
+  function saveData() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(feedbackData));
+  }
+
+  function saveName(name) {
+    userName = name;
+    localStorage.setItem(NAME_KEY, name);
+  }
+
+  // --- URL hash import ---
+
+  function checkImportedPicks() {
+    var hash = window.location.hash;
+    if (hash.indexOf('#picks=') === 0) {
+      try {
+        var encoded = hash.substring(7);
+        importedPicks = JSON.parse(decodeURIComponent(escape(atob(encoded))));
+        return true;
+      } catch (e) { console.warn('Invalid picks data in URL'); }
+    }
+    return false;
+  }
+
+  // --- Helpers ---
+
+  function getVenueName(card) {
+    var nameEl = card.querySelector('.venue-name');
+    return nameEl ? nameEl.textContent.trim() : null;
+  }
+
+  // --- Name prompt (casual, not a login) ---
+
+  function promptName(callback) {
+    if (userName) { callback(); return; }
+
+    var modal = document.createElement('div');
+    modal.className = 'fb-name-modal';
+    modal.innerHTML =
+      '<div class="fb-name-box">' +
+        '<div class="fb-name-title">What\'s your name?</div>' +
+        '<div class="fb-name-sub">So John knows who said what 😊</div>' +
+        '<input type="text" class="fb-name-input" placeholder="Your name" maxlength="30">' +
+        '<button class="fb-name-submit">Let\'s go</button>' +
+      '</div>';
+    document.body.appendChild(modal);
+
+    var input = modal.querySelector('.fb-name-input');
+    var btn = modal.querySelector('.fb-name-submit');
+    setTimeout(function() { input.focus(); }, 100);
+
+    function submit() {
+      var name = input.value.trim();
+      if (name) {
+        saveName(name);
+        modal.remove();
+        callback();
+      } else {
+        input.style.borderColor = '#c0392b';
+      }
+    }
+
+    btn.addEventListener('click', submit);
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') submit();
+    });
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) modal.remove();
+    });
+  }
+
+  // --- Apply visual state to a card ---
+
+  function applyState(card, venueName) {
+    var data = feedbackData[venueName];
+    var imported = importedPicks && importedPicks.picks && importedPicks.picks[venueName];
+
+    // Reset card classes
+    card.classList.remove('fb-must', 'fb-skip', 'fb-imported-must', 'fb-imported-skip');
+
+    var mustBtn = card.querySelector('.fb-btn-must');
+    var skipBtn = card.querySelector('.fb-btn-skip');
+    var commentBtn = card.querySelector('.fb-btn-comment');
+    var commentBox = card.querySelector('.fb-comment-box');
+    var importedLabel = card.querySelector('.fb-imported-label');
+
+    // Reset button states
+    if (mustBtn) mustBtn.classList.remove('fb-active-must');
+    if (skipBtn) skipBtn.classList.remove('fb-active-skip');
+    if (commentBtn) commentBtn.classList.remove('fb-active-comment');
+
+    // Apply own feedback
+    var hasOwnVote = data && data.vote;
+    if (data) {
+      if (data.vote === 'must') {
+        card.classList.add('fb-must');
+        if (mustBtn) mustBtn.classList.add('fb-active-must');
+      } else if (data.vote === 'skip') {
+        card.classList.add('fb-skip');
+        if (skipBtn) skipBtn.classList.add('fb-active-skip');
+      }
+      // Restore comment
+      if (data.comment && data.comment.trim() && commentBox) {
+        commentBox.querySelector('textarea').value = data.comment;
+        commentBox.classList.add('fb-visible');
+        if (commentBtn) commentBtn.classList.add('fb-active-comment');
+      }
+    }
+
+    // Apply imported picks (card style only when no own vote)
+    if (imported) {
+      if (!hasOwnVote) {
+        if (imported.vote === 'must') card.classList.add('fb-imported-must');
+        else if (imported.vote === 'skip') card.classList.add('fb-imported-skip');
+      }
+      // Always show imported label
+      if (importedLabel) {
+        var parts = [];
+        if (imported.vote === 'must') parts.push('✅');
+        if (imported.vote === 'skip') parts.push('❌');
+        if (imported.comment && imported.comment.trim()) parts.push('💬 "' + imported.comment.trim() + '"');
+        importedLabel.textContent = (importedPicks.name || 'Someone') + ': ' + parts.join(' ');
+        importedLabel.style.display = 'block';
+      }
+    } else {
+      if (importedLabel) importedLabel.style.display = 'none';
+    }
+  }
+
+  // --- Inject feedback UI into each venue card ---
+
+  function injectFeedback(card) {
+    var venueName = getVenueName(card);
+    if (!venueName) return;
+
+    // Button row
+    var row = document.createElement('div');
+    row.className = 'fb-row';
+    row.innerHTML =
+      '<button class="fb-btn fb-btn-must" title="Must go">✅ Must go</button>' +
+      '<button class="fb-btn fb-btn-skip" title="Skip it">❌ Skip</button>' +
+      '<button class="fb-btn fb-btn-comment" title="Add note">💬</button>';
+    card.appendChild(row);
+
+    // Comment box (hidden)
+    var commentBox = document.createElement('div');
+    commentBox.className = 'fb-comment-box';
+    commentBox.innerHTML = '<textarea placeholder="Add a note\u2026" rows="2"></textarea>';
+    card.appendChild(commentBox);
+
+    // Imported label (hidden)
+    var importedLabel = document.createElement('div');
+    importedLabel.className = 'fb-imported-label';
+    card.appendChild(importedLabel);
+
+    // --- Event handlers ---
+
+    row.querySelector('.fb-btn-must').addEventListener('click', function() {
+      promptName(function() {
+        if (!feedbackData[venueName]) feedbackData[venueName] = {};
+        feedbackData[venueName].vote = feedbackData[venueName].vote === 'must' ? undefined : 'must';
+        if (!feedbackData[venueName].vote) delete feedbackData[venueName].vote;
+        cleanEntry(venueName);
+        saveData();
+        applyState(card, venueName);
+      });
+    });
+
+    row.querySelector('.fb-btn-skip').addEventListener('click', function() {
+      promptName(function() {
+        if (!feedbackData[venueName]) feedbackData[venueName] = {};
+        feedbackData[venueName].vote = feedbackData[venueName].vote === 'skip' ? undefined : 'skip';
+        if (!feedbackData[venueName].vote) delete feedbackData[venueName].vote;
+        cleanEntry(venueName);
+        saveData();
+        applyState(card, venueName);
+      });
+    });
+
+    row.querySelector('.fb-btn-comment').addEventListener('click', function() {
+      promptName(function() {
+        var isVisible = commentBox.classList.contains('fb-visible');
+        commentBox.classList.toggle('fb-visible', !isVisible);
+        row.querySelector('.fb-btn-comment').classList.toggle('fb-active-comment', !isVisible);
+        if (!isVisible) commentBox.querySelector('textarea').focus();
+      });
+    });
+
+    commentBox.querySelector('textarea').addEventListener('input', function(e) {
+      if (!feedbackData[venueName]) feedbackData[venueName] = {};
+      feedbackData[venueName].comment = e.target.value;
+      cleanEntry(venueName);
+      saveData();
+    });
+
+    // Apply saved state
+    applyState(card, venueName);
+  }
+
+  // Remove empty entries
+  function cleanEntry(name) {
+    var d = feedbackData[name];
+    if (d && !d.vote && (!d.comment || !d.comment.trim())) {
+      delete feedbackData[name];
+    }
+  }
+
+  // --- Share functionality ---
+
+  function createShareButton() {
+    var fab = document.createElement('button');
+    fab.className = 'fb-share-fab';
+    fab.textContent = '📤 Share Picks';
+    fab.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleSharePanel();
+    });
+    document.body.appendChild(fab);
+  }
+
+  function toggleSharePanel() {
+    var existing = document.querySelector('.fb-share-panel');
+    if (existing) { existing.remove(); return; }
+
+    var panel = document.createElement('div');
+    panel.className = 'fb-share-panel';
+    panel.innerHTML =
+      '<div class="fb-share-title">Share Your Picks</div>' +
+      '<button class="fb-share-option" data-action="link">\uD83D\uDD17 Copy shareable link</button>' +
+      '<button class="fb-share-option" data-action="text">\uD83D\uDCCB Copy as text</button>' +
+      '<div class="fb-share-status"></div>';
+    document.body.appendChild(panel);
+
+    panel.querySelector('[data-action="link"]').addEventListener('click', function() {
+      var payload = { name: userName, picks: feedbackData };
+      var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+      var url = window.location.origin + window.location.pathname + '#picks=' + encoded;
+      copyToClipboard(url, panel);
+    });
+
+    panel.querySelector('[data-action="text"]').addEventListener('click', function() {
+      copyToClipboard(generateTextSummary(), panel);
+    });
+
+    setTimeout(function() {
+      document.addEventListener('click', function close(e) {
+        if (!panel.contains(e.target) && !e.target.classList.contains('fb-share-fab')) {
+          panel.remove();
+          document.removeEventListener('click', close);
+        }
+      });
+    }, 50);
+  }
+
+  function copyToClipboard(text, panel) {
+    var status = panel.querySelector('.fb-share-status');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        status.textContent = '✓ Copied!';
+        setTimeout(function() { panel.remove(); }, 1200);
+      }).catch(function() { fallbackCopy(text, status, panel); });
+    } else {
+      fallbackCopy(text, status, panel);
+    }
+  }
+
+  function fallbackCopy(text, status, panel) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;left:-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      status.textContent = '✓ Copied!';
+      setTimeout(function() { panel.remove(); }, 1200);
+    } catch (e) { prompt('Copy this:', text); }
+    document.body.removeChild(ta);
+  }
+
+  function generateTextSummary() {
+    var mustGo = [], skip = [], notes = [];
+    for (var name in feedbackData) {
+      if (!feedbackData.hasOwnProperty(name)) continue;
+      var d = feedbackData[name];
+      if (d.vote === 'must') mustGo.push(name);
+      if (d.vote === 'skip') skip.push(name);
+      if (d.comment && d.comment.trim()) {
+        notes.push('- ' + name + ': "' + d.comment.trim() + '"');
+      }
+    }
+    var text = userName ? userName + '\'s picks:\n\n' : '';
+    if (mustGo.length) text += '✅ Must Go: ' + mustGo.join(', ') + '\n';
+    if (skip.length) text += '❌ Skip: ' + skip.join(', ') + '\n';
+    if (notes.length) text += '\n💬 Notes:\n' + notes.join('\n');
+    if (!mustGo.length && !skip.length && !notes.length) text += 'No picks yet!';
+    return text.trim();
+  }
+
+  // --- Imported picks banner ---
+
+  function showImportedBanner() {
+    if (!importedPicks) return;
+    var banner = document.createElement('div');
+    banner.className = 'fb-picks-banner';
+    banner.innerHTML =
+      '<span>Viewing <strong>' + (importedPicks.name || 'someone') + '</strong>\'s picks</span>' +
+      '<button class="fb-picks-clear">Clear</button>';
+
+    // Insert after the hero
+    var hero = document.querySelector('.hero');
+    if (hero && hero.nextElementSibling) {
+      hero.parentNode.insertBefore(banner, hero.nextElementSibling);
+    } else {
+      document.body.insertBefore(banner, document.body.firstChild);
+    }
+
+    banner.querySelector('.fb-picks-clear').addEventListener('click', function() {
+      importedPicks = null;
+      history.replaceState(null, '', window.location.pathname);
+      banner.remove();
+      document.querySelectorAll('.venue-card').forEach(function(card) {
+        var name = getVenueName(card);
+        if (name) applyState(card, name);
+      });
+    });
+  }
+
+  // --- Initialize ---
+
+  function init() {
+    loadData();
+    checkImportedPicks();
+
+    // Inject feedback into all venue cards
+    document.querySelectorAll('.venue-card').forEach(function(card) {
+      injectFeedback(card);
+    });
+
+    // Add floating share button
+    createShareButton();
+
+    // Show imported banner if applicable
+    if (importedPicks) {
+      showImportedBanner();
+    }
+  }
+
+  // Init on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
 
 </body>

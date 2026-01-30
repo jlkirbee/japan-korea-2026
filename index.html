@@ -351,6 +351,77 @@ body {
   line-height: 1.4;
 }
 
+/* ========== FX ROW (converter + cost panel) ========== */
+.fx-row {
+  display: flex;
+  gap: 16px;
+  margin: 0 16px 16px;
+}
+.fx-row .fx-converter {
+  margin: 0;
+  flex: 0 0 auto;
+}
+.cost-panel {
+  flex: 1 1 0%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  min-width: 0;
+}
+.cost-panel h4 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.cost-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 18px;
+}
+.cost-col h5 {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+.cost-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.cost-col li {
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cost-col li .usd {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+@media (max-width: 700px) {
+  .fx-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .fx-row .fx-converter {
+    margin-bottom: 0;
+  }
+  .cost-panel {
+    border-top: none;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  }
+  .fx-row .fx-converter {
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  }
+}
+
 /* ========== CARDS ========== */
 .card {
   background: var(--bg-card);
@@ -1380,19 +1451,54 @@ body {
 <!-- ========================================== -->
 <div class="city-section active" id="sec-quickref">
 
-  <div class="fx-converter" id="fxConverter">
-    <h4>💱 Currency Converter</h4>
-    <div class="fx-input-row">
-      <label for="fxUsd">$</label>
-      <input type="text" id="fxUsd" inputmode="decimal" value="100" autocomplete="off">
-      <span style="font-size:12px;color:var(--text-muted)">USD</span>
+  <div class="fx-row">
+    <div class="fx-converter" id="fxConverter">
+      <h4>💱 Currency Converter</h4>
+      <div class="fx-input-row">
+        <label for="fxUsd">$</label>
+        <input type="text" id="fxUsd" inputmode="decimal" value="100" autocomplete="off">
+        <span style="font-size:12px;color:var(--text-muted)">USD</span>
+      </div>
+      <div class="fx-results">
+        <div class="fx-result" id="fxJpy">¥15,300 <span>JPY</span></div>
+        <div class="fx-result" id="fxKrw">₩143,300 <span>KRW</span></div>
+      </div>
+      <div class="fx-meta">
+        <span id="fxRates">¥153 / $1 · ₩1,433 / $1</span> · <span id="fxUpdated">Loading…</span>
+      </div>
     </div>
-    <div class="fx-results">
-      <div class="fx-result" id="fxJpy">¥15,300 <span>JPY</span></div>
-      <div class="fx-result" id="fxKrw">₩143,300 <span>KRW</span></div>
-    </div>
-    <div class="fx-meta">
-      <span id="fxRates">¥153 / $1 · ₩1,433 / $1</span> · <span id="fxUpdated">Loading…</span>
+
+    <div class="cost-panel">
+      <h4>💰 What Things Cost</h4>
+      <div class="cost-cols">
+        <div class="cost-col">
+          <h5>🇯🇵 Japan</h5>
+          <ul>
+            <li>🚇 Subway: ¥170–320 <span class="usd">(~$1–2)</span></li>
+            <li>🍱 Konbini lunch: ¥500–800 <span class="usd">(~$3–5)</span></li>
+            <li>🍜 Ramen: ¥900–1,500 <span class="usd">(~$6–10)</span></li>
+            <li>🍣 Nice dinner: ¥3k–8k <span class="usd">(~$20–55)</span></li>
+            <li>🍣 Omakase: ¥10k–20k <span class="usd">(~$65–130)</span></li>
+            <li>☕ Coffee: ¥400–700 <span class="usd">(~$3–5)</span></li>
+            <li>🎫 Museum: ¥1k–5k <span class="usd">(~$7–33)</span></li>
+            <li>🚕 Short taxi: ¥500–1,500 <span class="usd">(~$3–10)</span></li>
+            <li>🚄 Shinkansen: ¥14,170 <span class="usd">(~$95)</span></li>
+          </ul>
+        </div>
+        <div class="cost-col">
+          <h5>🇰🇷 Korea</h5>
+          <ul>
+            <li>🚇 Subway: ₩1,400–2k <span class="usd">(~$1–1.50)</span></li>
+            <li>🍱 Street food: ₩5k–10k <span class="usd">(~$3.50–7)</span></li>
+            <li>🍜 Casual lunch: ₩10k–15k <span class="usd">(~$7–10)</span></li>
+            <li>🍖 BBQ dinner: ₩15k–30k <span class="usd">(~$10–21)</span></li>
+            <li>🍽️ Nice dinner: ₩30k–80k <span class="usd">(~$21–55)</span></li>
+            <li>☕ Cafe drink: ₩5k–7k <span class="usd">(~$3.50–5)</span></li>
+            <li>🎫 Palace: ₩3k–10k <span class="usd">(~$2–7)</span></li>
+            <li>🚕 Short taxi: ₩4k–8k <span class="usd">(~$3–6)</span></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2069,13 +2175,64 @@ body {
 
         <h4 style="font-size:14px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">🍩 Desserts & Sweets</h4>
 
-        <div class="info-block">
-          <ul>
-            <li><strong>Higuma Doughnuts</strong> — light and fresh (Ryan's rec)</li>
-            <li><strong>Iyoshi Cola</strong> — artisanal craft cola. Sounds weird, tastes amazing. (Janice's rec)</li>
-            <li><strong>Isetan Depachika wagashi counter</strong> — Japanese confections, a whole world</li>
-            <li><strong>Konbini sweets</strong> — 7-Eleven purin (pudding), mochi ice cream, cream puffs</li>
-          </ul>
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍩</div>
+            <div class="venue-info">
+              <div class="venue-name">Higuma Doughnuts</div>
+              <div class="venue-area">Harajuku / Shimokitazawa</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$3–5</span>
+          </div>
+          <div class="venue-desc">Light, fresh doughnuts. Not greasy or heavy — Japanese-style. (Ryan's rec)</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🥤</div>
+            <div class="venue-info">
+              <div class="venue-name">Iyoshi Cola</div>
+              <div class="venue-area">Shimokitazawa</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$3–5</span>
+          </div>
+          <div class="venue-desc">Artisanal craft cola. Sounds weird, tastes amazing. (Janice's rec)</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍩</div>
+            <div class="venue-info">
+              <div class="venue-name">Isetan Depachika Wagashi Counter</div>
+              <div class="venue-area">Shinjuku (Isetan B1)</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$5–15</span>
+          </div>
+          <div class="venue-desc">Japanese confections — a whole world of wagashi. Beautiful and delicious.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍩</div>
+            <div class="venue-info">
+              <div class="venue-name">Konbini Sweets</div>
+              <div class="venue-area">Everywhere</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$1–3</span>
+          </div>
+          <div class="venue-desc">7-Eleven purin (pudding), mochi ice cream, cream puffs. Don't sleep on konbini desserts.</div>
         </div>
 
       </div>
@@ -2191,35 +2348,197 @@ body {
       <div class="sub-content">
 
         <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 8px 0; text-transform:uppercase; letter-spacing:0.5px;">Must-Do (Free or Cheap)</h4>
-        <div class="info-block">
-          <ul>
-            <li><strong>Meiji Shrine</strong> <em>(optional)</em> — free, peaceful forest walk through torii gates. Nice if you're already in Harajuku, but not a must.</li>
-            <li><strong>Ueno Park</strong> (Ryan's rec) — museums, green space, a zoo. Tokyo National Museum ¥1,000/$7.</li>
-            <li><strong>Walk Shimokitazawa</strong> — Tokyo's coolest neighborhood. Vintage clothing, tiny cafes, record shops. Zero tourists. Amy will love this.</li>
-            <li><strong>Walk Yanaka</strong> — old Tokyo vibes. Traditional shopping street, temples, cats. Like stepping back in time.</li>
-            <li><strong>Shibuya Crossing</strong> — do it once. Watch from the Starbucks 2F in TSUTAYA building.</li>
-            <li><strong>Shinjuku Gyoen</strong> — gorgeous garden, ¥500/$3.50. Peaceful escape.</li>
-            <li><strong>Nakameguro canal</strong> — beautiful walk, great cafes + shops along the water.</li>
-            <li><strong>Imperial Palace East Gardens</strong> — free, open to the public.</li>
-          </ul>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">⛩️</div>
+            <div class="venue-info">
+              <div class="venue-name">Meiji Shrine</div>
+              <div class="venue-area">Harajuku</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">Free</span>
+          </div>
+          <div class="venue-desc">Peaceful forest walk through torii gates. Nice if you're already in Harajuku, but not a must. (Optional)</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🌳</div>
+            <div class="venue-info">
+              <div class="venue-name">Ueno Park</div>
+              <div class="venue-area">Ueno</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">Free (museum ¥1,000/$7)</span>
+          </div>
+          <div class="venue-desc">Museums, green space, a zoo. Tokyo National Museum is here. (Ryan's rec)</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🚶</div>
+            <div class="venue-info">
+              <div class="venue-name">Walk Shimokitazawa</div>
+              <div class="venue-area">Shimokitazawa</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">Free</span>
+          </div>
+          <div class="venue-desc">Tokyo's coolest neighborhood. Vintage clothing, tiny cafes, record shops. Zero tourists. Amy will love this.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🚶</div>
+            <div class="venue-info">
+              <div class="venue-name">Walk Yanaka</div>
+              <div class="venue-area">Yanaka (near Ueno)</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">Free</span>
+          </div>
+          <div class="venue-desc">Old Tokyo vibes. Traditional shopping street, temples, cats. Like stepping back in time.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🏯</div>
+            <div class="venue-info">
+              <div class="venue-name">Shibuya Crossing</div>
+              <div class="venue-area">Shibuya</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">Free</span>
+          </div>
+          <div class="venue-desc">Do it once. Watch from the Starbucks 2F in TSUTAYA building for the best view.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🌳</div>
+            <div class="venue-info">
+              <div class="venue-name">Shinjuku Gyoen</div>
+              <div class="venue-area">Shinjuku</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">¥500/$3.50</span>
+          </div>
+          <div class="venue-desc">Gorgeous garden. Peaceful escape from the city. One of Tokyo's best green spaces.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🚶</div>
+            <div class="venue-info">
+              <div class="venue-name">Nakameguro Canal</div>
+              <div class="venue-area">Nakameguro</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">Free</span>
+          </div>
+          <div class="venue-desc">Beautiful walk, great cafes + shops along the water.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🌳</div>
+            <div class="venue-info">
+              <div class="venue-name">Imperial Palace East Gardens</div>
+              <div class="venue-area">Chiyoda</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">Free</span>
+          </div>
+          <div class="venue-desc">Free, open to the public. Beautiful grounds in the heart of Tokyo.</div>
         </div>
 
         <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">Worth the Splurge</h4>
-        <div class="info-block">
-          <ul>
-            <li><strong>Omakase dinner</strong> — even a $60–100 sushi omakase will blow your mind. THE thing to spend money on.</li>
-            <li><strong>TeamLab Borderless</strong> (Azabudai Hills) — immersive digital art. ~¥4,800/$32pp. Go weekday, buy timed tickets. Stunning.</li>
-            <li><strong>Onsen / Sento</strong> — public bath. <strong>Thermae-Yu</strong> in Kabukicho is 24hrs and foreigner-friendly.</li>
-          </ul>
+
+        <div class="callout">
+          <strong>🍣 Omakase dinner</strong> — even a $60–100 sushi omakase will blow your mind. THE thing to spend money on in Tokyo.
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🎨</div>
+            <div class="venue-info">
+              <div class="venue-name">TeamLab Borderless</div>
+              <div class="venue-area">Azabudai Hills</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Book ahead</span>
+            <span class="badge badge-price">~¥4,800/$32pp</span>
+          </div>
+          <div class="venue-desc">Immersive digital art. Go weekday, buy timed tickets. Stunning.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">♨️</div>
+            <div class="venue-info">
+              <div class="venue-name">Thermae-Yu (Onsen / Sento)</div>
+              <div class="venue-area">Kabukicho, Shinjuku</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">~¥2,400/$16</span>
+          </div>
+          <div class="venue-desc">Public bath — 24hrs and foreigner-friendly. A cultural must-do.</div>
         </div>
 
         <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">Rainy Day Options</h4>
-        <div class="info-block">
-          <ul>
-            <li><strong>Dept store food halls</strong> — Isetan, Takashimaya, Mitsukoshi — hours of browsing</li>
-            <li><strong>Museums</strong> — Mori Art Museum, 21_21 Design Sight, National Art Center Tokyo</li>
-            <li><strong>Konbini + hotel</strong> — grab snacks, stay in. The Park Hyatt room is worth enjoying.</li>
-          </ul>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🛍️</div>
+            <div class="venue-info">
+              <div class="venue-name">Dept Store Food Halls (Depachika)</div>
+              <div class="venue-area">Shinjuku / Nihonbashi</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">Varies</span>
+          </div>
+          <div class="venue-desc">Isetan, Takashimaya, Mitsukoshi — hours of browsing. Free samples everywhere.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🎨</div>
+            <div class="venue-info">
+              <div class="venue-name">Museums (Mori Art, 21_21, National Art Center)</div>
+              <div class="venue-area">Roppongi</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">¥1,000–2,000</span>
+          </div>
+          <div class="venue-desc">Mori Art Museum, 21_21 Design Sight, National Art Center Tokyo. All within walking distance in Roppongi.</div>
+        </div>
+
+        <div class="callout">
+          <strong>🏨 Konbini + hotel</strong> — grab snacks, stay in. The Park Hyatt room is worth enjoying.
         </div>
 
       </div>

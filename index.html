@@ -284,6 +284,73 @@ body {
   vertical-align: middle;
 }
 
+/* ========== CURRENCY CONVERTER ========== */
+.fx-converter {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin: 0 16px 16px;
+}
+.fx-converter h4 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.fx-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.fx-input-row label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+.fx-input-row input {
+  width: 90px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.fx-input-row input:focus {
+  border-color: var(--accent-jp);
+}
+.fx-results {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.fx-result {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.fx-result span {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+.fx-meta {
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
 /* ========== CARDS ========== */
 .card {
   background: var(--bg-card);
@@ -1313,6 +1380,22 @@ body {
 <!-- ========================================== -->
 <div class="city-section active" id="sec-quickref">
 
+  <div class="fx-converter" id="fxConverter">
+    <h4>💱 Currency Converter</h4>
+    <div class="fx-input-row">
+      <label for="fxUsd">$</label>
+      <input type="text" id="fxUsd" inputmode="decimal" value="100" autocomplete="off">
+      <span style="font-size:12px;color:var(--text-muted)">USD</span>
+    </div>
+    <div class="fx-results">
+      <div class="fx-result" id="fxJpy">¥15,300 <span>JPY</span></div>
+      <div class="fx-result" id="fxKrw">₩143,300 <span>KRW</span></div>
+    </div>
+    <div class="fx-meta">
+      <span id="fxRates">¥153 / $1 · ₩1,433 / $1</span> · <span id="fxUpdated">Loading…</span>
+    </div>
+  </div>
+
   <div class="quick-ref">
     <h3>⚡ Quick Reference Cheat Sheet</h3>
     <div class="qr-grid">
@@ -1468,7 +1551,7 @@ body {
         </div>
         <div class="timeline-item">
           <div class="timeline-time">8pm</div>
-          <div class="timeline-desc"><strong>New York Bar</strong> (your hotel, 52F). Skip dinner (overpriced), just cocktails ($18–22 each). Piano jazz + city views are free with your drink.</div>
+          <div class="timeline-desc"><strong>Room service + early sleep.</strong> You just flew 14 hours — the Park Hyatt room IS the experience. Soak in the 52F views from your window. Recharge for tomorrow.</div>
         </div>
       </div>
     </details>
@@ -1517,7 +1600,7 @@ body {
         </div>
         <div class="timeline-item">
           <div class="timeline-time">10pm</div>
-          <div class="timeline-desc"><strong>Bar Benfiddich</strong> (Shinjuku) or <strong>C-Shell</strong> — craft cocktails, intimate settings.</div>
+          <div class="timeline-desc"><strong>Night walk through Ebisu or Meguro</strong> — beautiful, quiet streets. Stop for dessert at a konbini (Japan's ice cream game is elite) or find a late-night parfait café.</div>
         </div>
       </div>
     </details>
@@ -1560,7 +1643,7 @@ body {
         </div>
         <div class="timeline-item">
           <div class="timeline-time">9:30pm</div>
-          <div class="timeline-desc"><strong>Bar Trench</strong> (Ebisu) — tiny, intimate, beautiful. DJ on weekend nights. On Asia's 50 Best list. Or <strong>Roku Nana</strong> (Roppongi) — hidden between buildings, no sign.</div>
+          <div class="timeline-desc"><strong>Stroll Nakameguro at night</strong> — the canal is gorgeous after dark. Grab soft-serve or a pastry from one of the late-night cafés.</div>
         </div>
       </div>
     </details>
@@ -1606,7 +1689,7 @@ body {
         </div>
         <div class="timeline-item">
           <div class="timeline-time">9pm</div>
-          <div class="timeline-desc"><strong>Last night at New York Bar</strong> (Park Hyatt 52F) — one final round of cocktails with the city lights. Piano jazz. Soak it in.</div>
+          <div class="timeline-desc"><strong>Last night in Tokyo.</strong> Walk Shinjuku's neon streets one more time, or relax at the Park Hyatt — enjoy the 52F views from the room. Pack for Kyoto tomorrow.</div>
         </div>
       </div>
     </details>
@@ -2102,105 +2185,6 @@ body {
       </div>
     </details>
 
-    <!-- TOKYO BARS -->
-    <details class="sub-section">
-      <summary>🍸 Bars</summary>
-      <div class="sub-content">
-
-        <div class="venue-card">
-          <div class="venue-top">
-            <div class="venue-emoji">🎹</div>
-            <div class="venue-info">
-              <div class="venue-name">New York Bar</div>
-              <div class="venue-area">Park Hyatt 52F · Your hotel!</div>
-            </div>
-          </div>
-          <div class="venue-meta">
-            <span class="badge badge-walkin">🟢 No cover (hotel guest)</span>
-            <span class="badge badge-price">$18–25/drink</span>
-          </div>
-          <div class="venue-desc">Iconic views, live piano jazz. Go for cocktails, skip the food. The views are free with your drink.</div>
-        </div>
-
-        <div class="venue-card">
-          <div class="venue-top">
-            <div class="venue-emoji">🥃</div>
-            <div class="venue-info">
-              <div class="venue-name">Bar Benfiddich</div>
-              <div class="venue-area">Shinjuku</div>
-            </div>
-          </div>
-          <div class="venue-meta">
-            <span class="badge badge-walkin">🟢 Walk-in</span>
-            <span class="badge badge-price">$20–30/drink</span>
-          </div>
-          <div class="venue-desc">"A real speakeasy joint." Up an unassuming stairwell. Intimate, craft cocktails with foraged ingredients.</div>
-        </div>
-
-        <div class="venue-card">
-          <div class="venue-top">
-            <div class="venue-emoji">🍸</div>
-            <div class="venue-info">
-              <div class="venue-name">C-Shell</div>
-              <div class="venue-area">Various</div>
-            </div>
-          </div>
-          <div class="venue-meta">
-            <span class="badge badge-walkin">🟢 Walk-in</span>
-            <span class="badge badge-price">$18–25/drink</span>
-          </div>
-          <div class="venue-desc">Tiny, intimate, husband-wife team. "Fantastic bespoke drinks." Perfect for Amy.</div>
-        </div>
-
-        <div class="venue-card">
-          <div class="venue-top">
-            <div class="venue-emoji">🍸</div>
-            <div class="venue-info">
-              <div class="venue-name">Roku Nana</div>
-              <div class="venue-area">Roppongi</div>
-            </div>
-          </div>
-          <div class="venue-meta">
-            <span class="badge badge-walkin">🟢 Walk-in</span>
-            <span class="badge badge-price">$15–20/drink</span>
-          </div>
-          <div class="venue-desc">Hidden between buildings, no sign. Unique layout. Intimate and interesting.</div>
-        </div>
-
-        <div class="venue-card">
-          <div class="venue-top">
-            <div class="venue-emoji">🍸</div>
-            <div class="venue-info">
-              <div class="venue-name">Bar Trench</div>
-              <div class="venue-area">Ebisu</div>
-            </div>
-          </div>
-          <div class="venue-meta">
-            <span class="badge badge-walkin">🟢 Walk-in</span>
-            <span class="badge badge-price">$18–22/drink</span>
-            <span class="badge badge-source">Asia's 50 Best</span>
-          </div>
-          <div class="venue-desc">"VERY tiny and intimate and beautiful." DJ on weekend nights after 10pm.</div>
-        </div>
-
-        <div class="venue-card">
-          <div class="venue-top">
-            <div class="venue-emoji">🍶</div>
-            <div class="venue-info">
-              <div class="venue-name">Orihara Shoten</div>
-              <div class="venue-area">Koto-ku</div>
-            </div>
-          </div>
-          <div class="venue-meta">
-            <span class="badge badge-walkin">🟢 Walk-in</span>
-            <span class="badge badge-price">$5–8/glass</span>
-          </div>
-          <div class="venue-desc">Standing sake bar + retail shop. Old-school, locals, cheap. Great to rub shoulders with the neighborhood crowd.</div>
-        </div>
-
-      </div>
-    </details>
-
     <!-- TOKYO ACTIVITIES -->
     <details class="sub-section">
       <summary>🏯 Activities & Experiences</summary>
@@ -2671,23 +2655,18 @@ body {
       </div>
     </details>
 
-    <!-- KYOTO BARS -->
+    <!-- KYOTO PONTOCHO & SAKE NOTE -->
     <details class="sub-section">
-      <summary>🍸 Bars</summary>
+      <summary>🏮 Pontocho & Fushimi</summary>
       <div class="sub-content">
-        <div class="venue-card">
-          <div class="venue-top"><div class="venue-emoji">🥃</div><div class="venue-info"><div class="venue-name">Bar K6</div><div class="venue-area">Gion</div></div></div>
-          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$15–20/drink</span></div>
-          <div class="venue-desc">Legendary Kyoto cocktail bar. Classic, intimate, proper Japanese bartending.</div>
-        </div>
         <div class="venue-card">
           <div class="venue-top"><div class="venue-emoji">🍶</div><div class="venue-info"><div class="venue-name">Fushimi Sake Breweries</div><div class="venue-area">Fushimi district</div></div></div>
           <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$2–3/tasting</span></div>
-          <div class="venue-desc">Kyoto's #2 sake production area. Visit <strong>Gekkeikan Okura</strong> or <strong>Kizakura Kappa Country</strong>. ¥300–500 tastings.</div>
+          <div class="venue-desc">Kyoto's #2 sake production area. Visit <strong>Gekkeikan Okura</strong> or <strong>Kizakura Kappa Country</strong>. ¥300–500 tastings. Cultural experience + museum.</div>
         </div>
         <div class="info-block">
           <h4>🏮 Pontocho Alley</h4>
-          <p>Walk the alley and pick one. Many have riverside seating (though Feb might be too cold for that).</p>
+          <p>Walk the alley and pick a restaurant. Many have riverside seating (though Feb might be too cold for that).</p>
         </div>
       </div>
     </details>
@@ -3296,50 +3275,14 @@ body {
       </div>
     </details>
 
-    <!-- SEOUL BARS -->
+    <!-- SEOUL STREET FOOD CULTURE -->
     <details class="sub-section">
-      <summary>🍸 Bars</summary>
+      <summary>🏮 Late-Night Street Food</summary>
       <div class="sub-content">
         <div class="venue-card">
-          <div class="venue-top"><div class="venue-emoji">🍸</div><div class="venue-info"><div class="venue-name">Bar Cham</div><div class="venue-area">Various</div></div></div>
-          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$15–20/drink</span><span class="badge badge-source">Asia's 50 Best</span></div>
-          <div class="venue-desc">"Quiet, almost meditative." Great for couples or Amy needing a calm space.</div>
-        </div>
-
-        <div class="venue-card">
-          <div class="venue-top"><div class="venue-emoji">🐇</div><div class="venue-info"><div class="venue-name">Alice Cheongdam</div><div class="venue-area">Cheongdam</div></div></div>
-          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$18–25/drink</span><span class="badge badge-source">Asia's 50 Best</span></div>
-          <div class="venue-desc">Whimsical Alice in Wonderland theme. Fun and playful cocktails.</div>
-        </div>
-
-        <div class="venue-card">
-          <div class="venue-top"><div class="venue-emoji">🍸</div><div class="venue-info"><div class="venue-name">Bar Swallow</div><div class="venue-area">Itaewon</div></div></div>
-          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$12–18/drink</span></div>
-          <div class="venue-desc">Cozy, niche, intimate. Mentioned by locals as a favorite.</div>
-        </div>
-
-        <div class="venue-card">
-          <div class="venue-top"><div class="venue-emoji">🍸</div><div class="venue-info"><div class="venue-name">Soko Bar</div><div class="venue-area">Hannam-dong</div></div></div>
-          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$15–20/drink</span></div>
-          <div class="venue-desc">Korean ingredients, intimate. Going since 2017. Part of Seoul's cocktail renaissance.</div>
-        </div>
-
-        <div class="venue-card">
-          <div class="venue-top"><div class="venue-emoji">🍷</div><div class="venue-info"><div class="venue-name">Hills & Europa</div><div class="venue-area">Various</div></div></div>
-          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$12–18/drink</span><span class="badge badge-source">Ryan's rec</span></div>
-          <div class="venue-desc">Wine and cocktails. Good vibes.</div>
-        </div>
-
-        <div class="venue-card">
-          <div class="venue-top"><div class="venue-emoji">🌃</div><div class="venue-info"><div class="venue-name">VVERTIGO</div><div class="venue-area">Conrad Seoul rooftop · Your hotel!</div></div></div>
-          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$15–20/drink</span></div>
-          <div class="venue-desc">Your hotel's sky bar. Convenient, great views. Worth one night.</div>
-        </div>
-
-        <div class="venue-card">
-          <div class="venue-top"><div class="venue-emoji">🏮</div><div class="venue-info"><div class="venue-name">Pojangmacha (Soju Tent Bars)</div><div class="venue-area">Jongno, Euljiro, Sinchon alleys</div></div></div>
+          <div class="venue-top"><div class="venue-emoji">🏮</div><div class="venue-info"><div class="venue-name">Pojangmacha (Street Tent Eateries)</div><div class="venue-area">Jongno, Euljiro, Sinchon alleys</div></div></div>
           <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–10</span></div>
-          <div class="venue-desc">Plastic tents, street vibes. THE most authentic Seoul bar experience. Order soju + anju (bar food).</div>
+          <div class="venue-desc">Plastic tents, street vibes. THE most authentic Seoul late-night experience. Order anju (snack food) — tteokbokki, odeng, egg rolls. A must-try cultural experience.</div>
         </div>
       </div>
     </details>
@@ -3514,7 +3457,7 @@ body {
         </div>
 
         <div class="callout">
-          <strong>💰 Splurge on:</strong> One omakase/kaiseki dinner · One high-end KBBQ with Hanwoo beef · Coffee everywhere · Park Hyatt New York Bar cocktails<br><br>
+          <strong>💰 Splurge on:</strong> One omakase/kaiseki dinner · One high-end KBBQ with Hanwoo beef · Coffee everywhere · A fancy dessert course<br><br>
           <strong>💸 Save on:</strong> JR Pass (don't buy it!) · Breakfast (konbini in Japan, hotel FHR elsewhere) · Lunch (Michelin lunch sets at 1/3 dinner price) · Transport (subway everywhere)
         </div>
 
@@ -3846,6 +3789,53 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tab) switchTab(tab);
   }
 });
+
+// ========== CURRENCY CONVERTER ==========
+(function() {
+  const CACHE_KEY = 'travel-fx-rates';
+  const CACHE_TTL = 60 * 60 * 1000; // 1 hour
+  const FALLBACK = { JPY: 155, KRW: 1450 };
+
+  function fmt(n) { return n.toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+
+  function update(rates) {
+    const raw = document.getElementById('fxUsd').value.replace(/[^0-9.]/g, '');
+    const usd = parseFloat(raw) || 0;
+    document.getElementById('fxJpy').innerHTML = '¥' + fmt(usd * rates.JPY) + ' <span>JPY</span>';
+    document.getElementById('fxKrw').innerHTML = '₩' + fmt(usd * rates.KRW) + ' <span>KRW</span>';
+    document.getElementById('fxRates').textContent = '¥' + fmt(rates.JPY) + ' / $1 · ₩' + fmt(rates.KRW) + ' / $1';
+  }
+
+  function init(rates, ts) {
+    update(rates);
+    const d = new Date(ts);
+    document.getElementById('fxUpdated').textContent = 'Updated ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    document.getElementById('fxUsd').addEventListener('input', function() { update(rates); });
+  }
+
+  // Try cache first
+  try {
+    var cached = JSON.parse(localStorage.getItem(CACHE_KEY));
+    if (cached && Date.now() - cached.ts < CACHE_TTL) {
+      init(cached.rates, cached.ts);
+      return;
+    }
+  } catch(e) {}
+
+  // Fetch live rates
+  fetch('https://api.exchangerate-api.com/v4/latest/USD')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var rates = { JPY: data.rates.JPY, KRW: data.rates.KRW };
+      var ts = Date.now();
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify({ rates: rates, ts: ts })); } catch(e) {}
+      init(rates, ts);
+    })
+    .catch(function() {
+      init(FALLBACK, Date.now());
+      document.getElementById('fxUpdated').textContent = 'Fallback rates';
+    });
+})();
 </script>
 
 <!-- ============================

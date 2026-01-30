@@ -931,6 +931,21 @@ body {
 }
 .fb-comment-box textarea:focus { outline: none; border-color: var(--accent-jp); }
 .fb-comment-box textarea::placeholder { color: var(--text-light); }
+.fb-comment-box .fb-comment-submit-row { display: flex; justify-content: flex-end; margin-top: 6px; }
+.fb-comment-box .fb-comment-post {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 7px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--text);
+  color: var(--bg);
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+.fb-comment-box .fb-comment-post:active { transform: scale(0.96); }
+.fb-comment-box .fb-comment-post:disabled { opacity: 0.4; cursor: default; }
 
 /* Aggregate feedback display */
 .fb-aggregate {
@@ -3836,7 +3851,6 @@ document.addEventListener('DOMContentLoaded', () => {
   var db = __fbDb;
   var fbRef = db.ref('feedback');
   var cardMap = {};       // venueName → card element for real-time updates
-  var commentDebounceTimers = {};
 
   // --- Toast notification ---
   function showToast(msg) {
@@ -3982,6 +3996,11 @@ document.addEventListener('DOMContentLoaded', () => {
         commentBox.querySelector('textarea').value = data.comment;
         commentBox.classList.add('fb-visible');
         if (commentBtn) commentBtn.classList.add('fb-active-comment');
+        var postBtn = commentBox.querySelector('.fb-comment-post');
+        if (postBtn) postBtn.textContent = 'Update';
+      } else if (commentBox) {
+        var postBtn = commentBox.querySelector('.fb-comment-post');
+        if (postBtn) postBtn.textContent = 'Post';
       }
     }
 
@@ -4106,9 +4125,11 @@ document.addEventListener('DOMContentLoaded', () => {
               cleanEntry(venueName);
               saveData();
             }
-            // Clear textarea
+            // Clear textarea and reset Post button
             var cardTa = card.querySelector('.fb-comment-box textarea');
             if (cardTa) cardTa.value = '';
+            var postBtn = card.querySelector('.fb-comment-post');
+            if (postBtn) postBtn.textContent = 'Post';
             var commentBtn = card.querySelector('.fb-btn-comment');
             var commentBox = card.querySelector('.fb-comment-box');
             if (commentBtn) commentBtn.classList.remove('fb-active-comment');
@@ -4145,7 +4166,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Comment box (hidden)
     var commentBox = document.createElement('div');
     commentBox.className = 'fb-comment-box';
-    commentBox.innerHTML = '<textarea placeholder="Add a note\u2026" rows="2"></textarea>';
+    var hasExisting = feedbackData[venueName] && feedbackData[venueName].comment && feedbackData[venueName].comment.trim();
+    commentBox.innerHTML = '<textarea placeholder="Add a note\u2026" rows="2"></textarea>' +
+      '<div class="fb-comment-submit-row"><button class="fb-comment-post" type="button">' +
+      (hasExisting ? 'Update' : 'Post') + '</button></div>';
     card.appendChild(commentBox);
 
     // Aggregate display area
@@ -4192,17 +4216,20 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    commentBox.querySelector('textarea').addEventListener('input', function(e) {
+    commentBox.querySelector('.fb-comment-post').addEventListener('click', function() {
+      var ta = commentBox.querySelector('textarea');
+      var text = ta.value.trim();
+      if (!text) return;
+      var isUpdate = feedbackData[venueName] && feedbackData[venueName].comment && feedbackData[venueName].comment.trim();
       if (!feedbackData[venueName]) feedbackData[venueName] = {};
-      feedbackData[venueName].comment = e.target.value;
-      cleanEntry(venueName);
+      feedbackData[venueName].comment = text;
       saveData();
-      // Debounce Firebase writes for comments (500ms)
-      clearTimeout(commentDebounceTimers[venueName]);
-      commentDebounceTimers[venueName] = setTimeout(function() {
-        writeToFirebase(venueName);
-        if (e.target.value.trim()) showToast('✓ Posted!');
-      }, 500);
+      writeToFirebase(venueName);
+      showToast(isUpdate ? '✓ Updated!' : '✓ Posted!');
+      // After posting: clear textarea, update button label for next post
+      ta.value = '';
+      this.textContent = 'Post';
+      applyState(card, venueName);
     });
 
     // Apply saved state (from localStorage cache)

@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "feedback": {
+      ".read": true,
+      ".write": true
+    },
+    "guest-tips": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}

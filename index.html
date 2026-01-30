@@ -967,6 +967,156 @@ body {
   font-weight: 600;
   color: var(--text);
 }
+.fb-agg-comment-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.fb-agg-comment-wrap .fb-own-actions {
+  display: inline-flex;
+  gap: 2px;
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+.fb-own-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 2px;
+  color: var(--text-light);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  line-height: 1;
+}
+.fb-agg-comment-wrap:hover .fb-own-actions button { opacity: 1; }
+@media (hover: none) {
+  .fb-own-actions button { opacity: 0.7; }
+}
+.fb-own-actions button:hover { color: var(--text); }
+.fb-inline-edit { margin-top: 4px; }
+.fb-inline-edit textarea {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  resize: vertical;
+  line-height: 1.5;
+  min-height: 56px;
+}
+.fb-inline-edit textarea:focus { outline: none; border-color: var(--accent-jp); }
+.fb-inline-edit-btns {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.fb-inline-edit-btns button {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.fb-inline-edit-btns .fb-save-btn {
+  background: var(--accent-jp);
+  color: #fff;
+  border-color: var(--accent-jp);
+}
+.fb-inline-edit-btns .fb-cancel-btn {
+  background: var(--tag-bg);
+  color: var(--text-muted);
+}
+
+/* Toast notification */
+.fb-toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--text);
+  color: var(--bg);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 10000;
+  pointer-events: none;
+}
+.fb-toast.fb-toast-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Guest tip own actions */
+.gt-tip-own-actions {
+  display: inline-flex;
+  gap: 2px;
+  margin-left: 6px;
+}
+.gt-tip-own-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 2px;
+  color: var(--text-light);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  line-height: 1;
+}
+.gt-tip-item:hover .gt-tip-own-actions button { opacity: 1; }
+@media (hover: none) {
+  .gt-tip-own-actions button { opacity: 0.7; }
+}
+.gt-tip-own-actions button:hover { color: var(--text); }
+.gt-inline-edit textarea {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  resize: vertical;
+  line-height: 1.5;
+  min-height: 56px;
+  margin-top: 6px;
+}
+.gt-inline-edit textarea:focus { outline: none; border-color: var(--accent-jp); }
+.gt-inline-edit-btns {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.gt-inline-edit-btns button {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.gt-inline-edit-btns .gt-save-btn {
+  background: var(--accent-jp);
+  color: #fff;
+  border-color: var(--accent-jp);
+}
+.gt-inline-edit-btns .gt-cancel-btn {
+  background: var(--tag-bg);
+  color: var(--text-muted);
+}
 
 /* ============================
    GUEST TIPS
@@ -3688,6 +3838,23 @@ document.addEventListener('DOMContentLoaded', () => {
   var cardMap = {};       // venueName → card element for real-time updates
   var commentDebounceTimers = {};
 
+  // --- Toast notification ---
+  function showToast(msg) {
+    var existing = document.querySelector('.fb-toast');
+    if (existing) existing.remove();
+    var el = document.createElement('div');
+    el.className = 'fb-toast';
+    el.textContent = msg;
+    document.body.appendChild(el);
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() { el.classList.add('fb-toast-show'); });
+    });
+    setTimeout(function() {
+      el.classList.remove('fb-toast-show');
+      setTimeout(function() { el.remove(); }, 300);
+    }, 2000);
+  }
+
   // --- Firebase key encoding ---
   function encodeKey(str) {
     return str.replace(/[.#$\[\]\/]/g, '_');
@@ -3857,11 +4024,104 @@ document.addEventListener('DOMContentLoaded', () => {
     if (comments.length) {
       html += '<div class="fb-agg-comments">';
       comments.forEach(function(c) {
+        var isOwn = userName && c.name === userName;
+        html += '<div class="fb-agg-comment-wrap" data-comment-user="' + escHtml(c.name) + '">';
         html += '<div class="fb-agg-comment">💬 <strong>' + escHtml(c.name) + ':</strong> "' + escHtml(c.text) + '"</div>';
+        if (isOwn) {
+          html += '<span class="fb-own-actions">' +
+            '<button class="fb-edit-btn" title="Edit">✏️</button>' +
+            '<button class="fb-delete-btn" title="Delete">🗑️</button>' +
+          '</span>';
+        }
+        html += '</div>';
       });
       html += '</div>';
     }
     aggEl.innerHTML = html;
+
+    // Attach edit/delete handlers for own comments
+    if (userName) {
+      aggEl.querySelectorAll('.fb-agg-comment-wrap').forEach(function(wrap) {
+        var commentUser = wrap.getAttribute('data-comment-user');
+        if (commentUser !== userName) return;
+
+        var editBtn = wrap.querySelector('.fb-edit-btn');
+        var deleteBtn = wrap.querySelector('.fb-delete-btn');
+
+        if (editBtn) {
+          editBtn.addEventListener('click', function() {
+            var commentEl = wrap.querySelector('.fb-agg-comment');
+            var actionsEl = wrap.querySelector('.fb-own-actions');
+            // Extract current text
+            var currentText = (feedbackData[venueName] && feedbackData[venueName].comment) || '';
+            commentEl.style.display = 'none';
+            if (actionsEl) actionsEl.style.display = 'none';
+
+            var editDiv = document.createElement('div');
+            editDiv.className = 'fb-inline-edit';
+            editDiv.innerHTML = '<textarea rows="2"></textarea>' +
+              '<div class="fb-inline-edit-btns">' +
+                '<button class="fb-save-btn">Save</button>' +
+                '<button class="fb-cancel-btn">Cancel</button>' +
+              '</div>';
+            wrap.appendChild(editDiv);
+            var ta = editDiv.querySelector('textarea');
+            ta.value = currentText;
+            ta.focus();
+
+            editDiv.querySelector('.fb-cancel-btn').addEventListener('click', function() {
+              editDiv.remove();
+              commentEl.style.display = '';
+              if (actionsEl) actionsEl.style.display = '';
+            });
+
+            editDiv.querySelector('.fb-save-btn').addEventListener('click', function() {
+              var newText = ta.value.trim();
+              if (!newText) return;
+              // Update local
+              if (!feedbackData[venueName]) feedbackData[venueName] = {};
+              feedbackData[venueName].comment = newText;
+              saveData();
+              // Update textarea in comment box too
+              var cardTa = card.querySelector('.fb-comment-box textarea');
+              if (cardTa) cardTa.value = newText;
+              // Write to Firebase
+              var venueKey = encodeKey(venueName);
+              var userKey = encodeKey(userName);
+              fbRef.child(venueKey).child(userKey).update({
+                comment: newText,
+                timestamp: firebase.database.ServerValue.TIMESTAMP
+              });
+              showToast('✓ Updated!');
+              // renderAggregate will be called by Firebase listener
+            });
+          });
+        }
+
+        if (deleteBtn) {
+          deleteBtn.addEventListener('click', function() {
+            // Remove comment from local data
+            if (feedbackData[venueName]) {
+              delete feedbackData[venueName].comment;
+              cleanEntry(venueName);
+              saveData();
+            }
+            // Clear textarea
+            var cardTa = card.querySelector('.fb-comment-box textarea');
+            if (cardTa) cardTa.value = '';
+            var commentBtn = card.querySelector('.fb-btn-comment');
+            var commentBox = card.querySelector('.fb-comment-box');
+            if (commentBtn) commentBtn.classList.remove('fb-active-comment');
+            if (commentBox) commentBox.classList.remove('fb-visible');
+            // Remove from Firebase
+            var venueKey = encodeKey(venueName);
+            var userKey = encodeKey(userName);
+            fbRef.child(venueKey).child(userKey).child('comment').remove();
+            showToast('🗑️ Deleted');
+          });
+        }
+      });
+    }
   }
 
   // --- Inject feedback UI into each venue card ---
@@ -3898,24 +4158,28 @@ document.addEventListener('DOMContentLoaded', () => {
     row.querySelector('.fb-btn-must').addEventListener('click', function() {
       promptName(function() {
         if (!feedbackData[venueName]) feedbackData[venueName] = {};
-        feedbackData[venueName].vote = feedbackData[venueName].vote === 'must' ? undefined : 'must';
+        var wasActive = feedbackData[venueName].vote === 'must';
+        feedbackData[venueName].vote = wasActive ? undefined : 'must';
         if (!feedbackData[venueName].vote) delete feedbackData[venueName].vote;
         cleanEntry(venueName);
         saveData();
         applyState(card, venueName);
         writeToFirebase(venueName);
+        showToast(wasActive ? '✅ Vote removed' : '✅ Must go!');
       });
     });
 
     row.querySelector('.fb-btn-skip').addEventListener('click', function() {
       promptName(function() {
         if (!feedbackData[venueName]) feedbackData[venueName] = {};
-        feedbackData[venueName].vote = feedbackData[venueName].vote === 'skip' ? undefined : 'skip';
+        var wasActive = feedbackData[venueName].vote === 'skip';
+        feedbackData[venueName].vote = wasActive ? undefined : 'skip';
         if (!feedbackData[venueName].vote) delete feedbackData[venueName].vote;
         cleanEntry(venueName);
         saveData();
         applyState(card, venueName);
         writeToFirebase(venueName);
+        showToast(wasActive ? '❌ Vote removed' : '❌ Skip!');
       });
     });
 
@@ -3937,6 +4201,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearTimeout(commentDebounceTimers[venueName]);
       commentDebounceTimers[venueName] = setTimeout(function() {
         writeToFirebase(venueName);
+        if (e.target.value.trim()) showToast('✓ Posted!');
       }, 500);
     });
 
@@ -4045,6 +4310,22 @@ document.addEventListener('DOMContentLoaded', () => {
     return d.innerHTML;
   }
 
+  function showToast(msg) {
+    var existing = document.querySelector('.fb-toast');
+    if (existing) existing.remove();
+    var el = document.createElement('div');
+    el.className = 'fb-toast';
+    el.textContent = msg;
+    document.body.appendChild(el);
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() { el.classList.add('fb-toast-show'); });
+    });
+    setTimeout(function() {
+      el.classList.remove('fb-toast-show');
+      setTimeout(function() { el.remove(); }, 300);
+    }, 2000);
+  }
+
   function renderTips(tips) {
     if (!tips || !tips.length) {
       listEl.innerHTML = '<div class="gt-empty">No tips yet — be the first! 🎒</div>';
@@ -4052,16 +4333,71 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // newest first
     tips.sort(function(a, b) { return b.timestamp - a.timestamp; });
+    var currentUser = localStorage.getItem(NAME_KEY) || '';
     listEl.innerHTML = tips.map(function(t) {
-      return '<div class="gt-tip-item">' +
+      var isOwn = currentUser && t.name === currentUser;
+      return '<div class="gt-tip-item" data-tip-key="' + escHtml(t._key) + '" data-tip-name="' + escHtml(t.name) + '">' +
         '<div class="gt-tip-meta">' +
           '<span class="gt-tip-cat">' + (CAT_EMOJI[t.category] || '✈️') + '</span>' +
           '<span class="gt-tip-name">' + escHtml(t.name) + '</span>' +
           '<span class="gt-tip-time">' + timeAgo(t.timestamp) + '</span>' +
+          (isOwn ? '<span class="gt-tip-own-actions">' +
+            '<button class="gt-edit-btn" title="Edit">✏️</button>' +
+            '<button class="gt-delete-btn" title="Delete">🗑️</button>' +
+          '</span>' : '') +
         '</div>' +
         '<div class="gt-tip-text">' + escHtml(t.text) + '</div>' +
       '</div>';
     }).join('');
+
+    // Attach edit/delete handlers
+    listEl.querySelectorAll('.gt-tip-item').forEach(function(item) {
+      var tipKey = item.getAttribute('data-tip-key');
+      var tipName = item.getAttribute('data-tip-name');
+      if (tipName !== currentUser) return;
+
+      var editBtn = item.querySelector('.gt-edit-btn');
+      var deleteBtn = item.querySelector('.gt-delete-btn');
+
+      if (editBtn) {
+        editBtn.addEventListener('click', function() {
+          var textEl = item.querySelector('.gt-tip-text');
+          var currentText = textEl.textContent;
+          textEl.style.display = 'none';
+
+          var editDiv = document.createElement('div');
+          editDiv.className = 'gt-inline-edit';
+          editDiv.innerHTML = '<textarea rows="2"></textarea>' +
+            '<div class="gt-inline-edit-btns">' +
+              '<button class="gt-save-btn">Save</button>' +
+              '<button class="gt-cancel-btn">Cancel</button>' +
+            '</div>';
+          item.appendChild(editDiv);
+          var ta = editDiv.querySelector('textarea');
+          ta.value = currentText;
+          ta.focus();
+
+          editDiv.querySelector('.gt-cancel-btn').addEventListener('click', function() {
+            editDiv.remove();
+            textEl.style.display = '';
+          });
+
+          editDiv.querySelector('.gt-save-btn').addEventListener('click', function() {
+            var newText = ta.value.trim();
+            if (!newText) return;
+            tipsRef.child(tipKey).update({ text: newText });
+            showToast('✓ Updated!');
+          });
+        });
+      }
+
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', function() {
+          tipsRef.child(tipKey).remove();
+          showToast('🗑️ Deleted');
+        });
+      }
+    });
   }
 
   // Real-time listener for tips
@@ -4071,7 +4407,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (data) {
       for (var key in data) {
         if (data.hasOwnProperty(key)) {
-          tips.push(data[key]);
+          var tip = data[key];
+          tip._key = key;
+          tips.push(tip);
         }
       }
     }
@@ -4102,6 +4440,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     textInput.value = '';
+    showToast('✓ Posted!');
     // renderTips will be called by the on('value') listener
   });
 

@@ -50,33 +50,33 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #141210;
-    --bg-card: #1e1c19;
-    --bg-nav: rgba(20, 18, 16, 0.94);
-    --text: #e8e4df;
-    --text-muted: #a09a90;
-    --text-light: #706a60;
-    --border: #2e2a25;
-    --border-light: #252220;
+    --bg: #16140f;
+    --bg-card: #201e18;
+    --bg-nav: rgba(22, 20, 15, 0.94);
+    --text: #e5e0d8;
+    --text-muted: #9a9489;
+    --text-light: #6b655c;
+    --border: #302c25;
+    --border-light: #282420;
     --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
     --shadow-lg: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
-    --accent-jp: #e05a4f;
-    --accent-jp-light: #2a1814;
-    --accent-jp-border: #4a2520;
-    --accent-kr: #5a9fd4;
-    --accent-kr-light: #141e28;
-    --accent-kr-border: #1e3348;
-    --accent-kyoto: #c4a240;
-    --accent-kyoto-light: #221e10;
-    --accent-kyoto-border: #3a3218;
-    --badge-book: #e05a4f;
-    --badge-walkin: #2ecc71;
-    --badge-line: #f1c40f;
-    --tag-bg: #252220;
-    --tag-text: #a09a90;
+    --accent-jp: #6b8db5;
+    --accent-jp-light: #1a2030;
+    --accent-jp-border: #2a3a50;
+    --accent-kr: #7aac94;
+    --accent-kr-light: #142018;
+    --accent-kr-border: #1e3828;
+    --accent-kyoto: #b8a07a;
+    --accent-kyoto-light: #241e14;
+    --accent-kyoto-border: #3a3018;
+    --badge-book: #cf7e68;
+    --badge-walkin: #7aac94;
+    --badge-line: #d4b85e;
+    --tag-bg: #282420;
+    --tag-text: #9a9489;
     --highlight: #2a2510;
-    --quick-ref-bg: #1e1c19;
-    --details-bg: #1a1816;
+    --quick-ref-bg: #201e18;
+    --details-bg: #1c1a14;
   }
 }
 
@@ -446,16 +446,16 @@ body {
   font-size: 11px;
   font-weight: 600;
 }
-.badge-book { background: #fde8e8; color: var(--badge-book); }
-.badge-walkin { background: #e8f8ef; color: var(--badge-walkin); }
-.badge-line { background: #fef9e7; color: #c87f0a; }
+.badge-book { background: #fceee8; color: var(--badge-book); }
+.badge-walkin { background: #ebf5f0; color: var(--badge-walkin); }
+.badge-line { background: #faf5e6; color: #a88930; }
 .badge-price { background: var(--tag-bg); color: var(--tag-text); }
 .badge-source { background: var(--tag-bg); color: var(--text-muted); font-weight: 500; }
 
 @media (prefers-color-scheme: dark) {
-  .badge-book { background: rgba(224, 90, 79, 0.15); color: #e87a70; }
-  .badge-walkin { background: rgba(46, 204, 113, 0.15); color: #5dde9e; }
-  .badge-line { background: rgba(241, 196, 15, 0.15); color: #f1c40f; }
+  .badge-book { background: rgba(207, 126, 104, 0.12); color: #cf7e68; }
+  .badge-walkin { background: rgba(122, 172, 148, 0.12); color: #7aac94; }
+  .badge-line { background: rgba(212, 184, 94, 0.12); color: #d4b85e; }
   .badge-price { background: var(--tag-bg); }
 }
 
@@ -531,7 +531,7 @@ body {
 }
 .hotel-card .fhr-tag {
   display: inline-block;
-  background: linear-gradient(135deg, #b8860b, #d4a017);
+  background: linear-gradient(135deg, #8b7355, #a89470);
   color: #fff;
   font-size: 10px;
   font-weight: 700;
@@ -880,17 +880,14 @@ body {
 
 /* Card feedback states */
 .venue-card { transition: opacity 0.2s ease, border-color 0.2s ease; }
-.venue-card.fb-must { border-left: 3px solid #4caf50; }
+.venue-card.fb-must { border-left: 3px solid var(--accent-kr); }
 .venue-card.fb-skip { opacity: 0.4; }
 .venue-card.fb-skip .venue-name { text-decoration: line-through; }
-.venue-card.fb-imported-must { border-left: 3px solid #5c8dd6; }
-.venue-card.fb-imported-skip { border-left: 3px solid #e57373; }
+.venue-card.fb-imported-must { border-left: 3px solid var(--accent-jp); }
+.venue-card.fb-imported-skip { border-left: 3px solid var(--badge-book); }
 
 @media (prefers-color-scheme: dark) {
-  .venue-card.fb-must { border-left-color: #66bb6a; }
   .venue-card.fb-skip { opacity: 0.35; }
-  .venue-card.fb-imported-must { border-left-color: #7cacde; }
-  .venue-card.fb-imported-skip { border-left-color: #ef9a9a; }
 }
 
 /* Feedback buttons row */
@@ -914,15 +911,9 @@ body {
   color: var(--text-muted);
 }
 .fb-btn:active { transform: scale(0.93); }
-.fb-btn.fb-active-must { background: #e8f5e9; border-color: #a5d6a7; color: #2e7d32; }
-.fb-btn.fb-active-skip { background: #ffebee; border-color: #ef9a9a; color: #c62828; }
-.fb-btn.fb-active-comment { background: #e3f2fd; border-color: #90caf9; color: #1565c0; }
-
-@media (prefers-color-scheme: dark) {
-  .fb-btn.fb-active-must { background: rgba(76,175,80,0.15); border-color: rgba(76,175,80,0.4); color: #81c784; }
-  .fb-btn.fb-active-skip { background: rgba(229,115,115,0.15); border-color: rgba(229,115,115,0.4); color: #ef9a9a; }
-  .fb-btn.fb-active-comment { background: rgba(100,181,246,0.15); border-color: rgba(100,181,246,0.4); color: #90caf9; }
-}
+.fb-btn.fb-active-must { background: var(--accent-kr-light); border-color: var(--accent-kr-border); color: var(--accent-kr); }
+.fb-btn.fb-active-skip { background: #fceee8; border-color: #e0c0b0; color: var(--badge-book); }
+.fb-btn.fb-active-comment { background: var(--accent-jp-light); border-color: var(--accent-jp-border); color: var(--accent-jp); }
 
 /* Comment textarea */
 .fb-comment-box { margin-top: 8px; display: none; }
@@ -940,19 +931,16 @@ body {
   line-height: 1.5;
   min-height: 56px;
 }
-.fb-comment-box textarea:focus { outline: none; border-color: #90caf9; }
+.fb-comment-box textarea:focus { outline: none; border-color: var(--accent-jp); }
 .fb-comment-box textarea::placeholder { color: var(--text-light); }
 
 /* Imported picks label on venue cards */
 .fb-imported-label {
   font-size: 12px;
-  color: #5c8dd6;
+  color: var(--accent-jp);
   margin-top: 6px;
   font-style: italic;
   display: none;
-}
-@media (prefers-color-scheme: dark) {
-  .fb-imported-label { color: #7cacde; }
 }
 
 /* Floating share button */
@@ -1021,7 +1009,7 @@ body {
 .fb-share-option:last-of-type { margin-bottom: 0; }
 .fb-share-status {
   font-size: 12px;
-  color: #4caf50;
+  color: var(--accent-kr);
   margin-top: 8px;
   text-align: center;
   min-height: 1.2em;
@@ -1069,7 +1057,7 @@ body {
   color: var(--text);
   margin-bottom: 12px;
 }
-.fb-name-input:focus { outline: none; border-color: #90caf9; }
+.fb-name-input:focus { outline: none; border-color: var(--accent-jp); }
 .fb-name-submit {
   background: var(--text);
   color: var(--bg);
@@ -1086,8 +1074,8 @@ body {
 
 /* Imported picks banner */
 .fb-picks-banner {
-  background: #e3f2fd;
-  border: 1px solid #bbdefb;
+  background: var(--accent-jp-light);
+  border: 1px solid var(--accent-jp-border);
   border-radius: var(--radius);
   padding: 10px 14px;
   margin: 0 16px 16px;
@@ -1095,29 +1083,19 @@ body {
   align-items: center;
   justify-content: space-between;
   font-size: 13px;
-  color: #1a1a1a;
-}
-@media (prefers-color-scheme: dark) {
-  .fb-picks-banner {
-    background: rgba(92, 141, 214, 0.12);
-    border-color: rgba(92, 141, 214, 0.25);
-    color: var(--text);
-  }
+  color: var(--text);
 }
 .fb-picks-clear {
   background: none;
-  border: 1px solid #90caf9;
+  border: 1px solid var(--accent-jp-border);
   border-radius: 6px;
   padding: 4px 10px;
   font-size: 12px;
-  color: #1976d2;
+  color: var(--accent-jp);
   cursor: pointer;
   font-family: var(--font-sans);
   white-space: nowrap;
   font-weight: 600;
-}
-@media (prefers-color-scheme: dark) {
-  .fb-picks-clear { border-color: rgba(100,181,246,0.4); color: #90caf9; }
 }
 </style>
 </head>
@@ -1235,6 +1213,7 @@ body {
           <li>Quiet on trains in Japan — no phone calls.</li>
           <li>Korea: Use <strong>Naver Maps</strong>, not Google Maps.</li>
           <li>JR Pass: <strong>NOT worth it</strong> for this trip. Buy individual tickets.</li>
+          <li><strong>📦 Yamato Transport</strong> (クロネコヤマト) — send luggage ahead between cities! Drop bags at hotel front desk or any konbini, they arrive next day. Travel light on the Shinkansen &amp; flights. ~¥2,000–3,000/bag. Sister's rec.</li>
         </ul>
       </div>
 
@@ -1358,7 +1337,7 @@ body {
         </div>
         <div class="timeline-item">
           <div class="timeline-time">10:30am</div>
-          <div class="timeline-desc"><strong>Check out</strong> Park Hyatt. Luggage to Shinjuku Station.</div>
+          <div class="timeline-desc"><strong>Check out</strong> Park Hyatt. <span class="tip">📦 Pro tip: Use <strong>Yamato Transport</strong> (クロネコヤマト) to send luggage ahead to Kyoto hotel! Ask the front desk — they'll handle it. Bags arrive next day, ~¥2,000–3,000/bag. Travel light on the Shinkansen.</span></div>
         </div>
         <div class="timeline-item">
           <div class="timeline-time">11:30am</div>
@@ -1605,17 +1584,17 @@ body {
 
         <div class="venue-card">
           <div class="venue-top">
-            <div class="venue-emoji">🍢</div>
+            <div class="venue-emoji">⚠️</div>
             <div class="venue-info">
               <div class="venue-name">Omoide Yokocho (Piss Alley)</div>
               <div class="venue-area">Shinjuku</div>
             </div>
           </div>
           <div class="venue-meta">
-            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-book" style="background:var(--highlight);color:#a88930;">⚠️ Walk through only</span>
             <span class="badge badge-price">$10–20</span>
           </div>
-          <div class="venue-desc">Atmospheric tiny alley of smoke-filled yakitori stalls. Walk through to see it, but <strong>⚠️ skip eating here</strong> — overpriced and known for scamming tourists. Get yakitori elsewhere.</div>
+          <div class="venue-desc">Atmospheric tiny alley of smoke-filled yakitori stalls. Walk through to see it, but <strong>⚠️ skip eating here.</strong> Overpriced and known for scamming tourists — inflated bills, bait-and-switch menus. Get yakitori anywhere else in Shinjuku; it'll be better and cheaper.</div>
         </div>
 
         <h4 style="font-size:14px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">💎 Value Fine Dining & Omakase</h4>
@@ -2031,7 +2010,7 @@ body {
           <ul>
             <li><strong>Onigiri</strong> — rice balls, ¥120–180. A legit meal.</li>
             <li><strong>Egg sandwiches</strong> — fluffy, Japanese-style. ¥200–300.</li>
-            <li><strong>Lawson's karaage</strong> — best fast food in Japan.</li>
+            <li><strong>Fried chicken + egg sando combo:</strong> FamilyMart fried chicken beats Lawson, but Lawson egg sandos can be thicker some days. Try both! Either way, konbini fried chicken + egg sando is a killer breakfast.</li>
             <li><strong>BOSS coffee</strong> — hot canned coffee from vending machines. ¥130.</li>
             <li><strong>Strong Zero</strong> — ¥150 for a 9% canned cocktail. Proceed with caution. 😅</li>
             <li><strong>Heattech from UNIQLO</strong> — buy base layers on arrival if you forgot.</li>

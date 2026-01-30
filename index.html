@@ -1015,6 +1015,92 @@ body {
   min-height: 1.2em;
 }
 
+/* ============================
+   GUEST TIPS
+   ============================ */
+.guest-tips {
+  margin-top: 24px;
+  padding: 24px 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+}
+.guest-tips-hdr { margin-bottom: 16px; }
+.guest-tips-hdr h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 2px;
+}
+.guest-tips-hdr p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+.gt-form { display: flex; flex-direction: column; gap: 10px; }
+.gt-form input[type="text"],
+.gt-form textarea,
+.gt-form select {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+.gt-form input[type="text"]:focus,
+.gt-form textarea:focus,
+.gt-form select:focus { outline: none; border-color: var(--accent-jp); }
+.gt-form textarea { resize: vertical; min-height: 64px; }
+.gt-form select { appearance: none; -webkit-appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238E7B60'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 11px center; padding-right: 28px; }
+.gt-form .gt-submit {
+  align-self: flex-start;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+.gt-form .gt-submit:active { transform: scale(0.96); }
+.gt-form .gt-submit:disabled { opacity: 0.4; cursor: default; }
+.gt-tips-list { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+.gt-tips-list:empty { display: none; }
+.gt-tip-item {
+  padding: 12px 14px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text);
+}
+.gt-tip-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.gt-tip-cat { font-size: 15px; line-height: 1; }
+.gt-tip-name { font-weight: 700; }
+.gt-tip-time { color: var(--text-light); font-size: 11px; margin-left: auto; }
+.gt-tip-text { color: var(--text-muted); }
+.gt-empty {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 13px;
+  padding: 16px 0;
+  font-style: italic;
+}
+
 /* Name prompt modal */
 .fb-name-modal {
   position: fixed;
@@ -1221,6 +1307,25 @@ body {
       </div>
 
     </div>
+  </div>
+
+  <!-- Guest Tips -->
+  <div class="guest-tips" id="guest-tips">
+    <div class="guest-tips-hdr">
+      <h3>✏️ Add Your Own Tips</h3>
+      <p>Been here before? Know a hidden gem? Drop it here.</p>
+    </div>
+    <form class="gt-form" id="gt-form" autocomplete="off">
+      <input type="text" id="gt-name" placeholder="Your name" maxlength="30">
+      <textarea id="gt-text" placeholder="e.g., The 7-Eleven near Shinjuku station has the best egg sandos..." rows="3" maxlength="500"></textarea>
+      <select id="gt-category">
+        <option value="jp">🇯🇵 Japan</option>
+        <option value="kr">🇰🇷 Korea</option>
+        <option value="general">✈️ General</option>
+      </select>
+      <button type="submit" class="gt-submit">Add Tip</button>
+    </form>
+    <div class="gt-tips-list" id="gt-tips-list"></div>
   </div>
 
 </div>
@@ -3994,6 +4099,116 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     init();
   }
+})();
+</script>
+
+<!-- ============================
+     GUEST TIPS
+     ============================ -->
+<script>
+(function() {
+  'use strict';
+
+  var TIPS_KEY = 'travel-guest-tips';
+  var NAME_KEY = 'travel-feedback-name';
+
+  var CAT_EMOJI = { jp: '🇯🇵', kr: '🇰🇷', general: '✈️' };
+
+  var form = document.getElementById('gt-form');
+  var nameInput = document.getElementById('gt-name');
+  var textInput = document.getElementById('gt-text');
+  var catSelect = document.getElementById('gt-category');
+  var listEl = document.getElementById('gt-tips-list');
+
+  if (!form || !listEl) return;
+
+  // Load saved name from existing feedback system
+  var savedName = localStorage.getItem(NAME_KEY) || '';
+  if (savedName) nameInput.value = savedName;
+
+  function loadTips() {
+    try { return JSON.parse(localStorage.getItem(TIPS_KEY) || '[]'); }
+    catch (e) { return []; }
+  }
+
+  function saveTips(tips) {
+    localStorage.setItem(TIPS_KEY, JSON.stringify(tips));
+  }
+
+  function timeAgo(ts) {
+    var diff = Date.now() - ts;
+    var s = Math.floor(diff / 1000);
+    if (s < 60) return 'just now';
+    var m = Math.floor(s / 60);
+    if (m < 60) return m + 'm ago';
+    var h = Math.floor(m / 60);
+    if (h < 24) return h + 'h ago';
+    var d = Math.floor(h / 24);
+    if (d < 30) return d + 'd ago';
+    return new Date(ts).toLocaleDateString();
+  }
+
+  function renderTips() {
+    var tips = loadTips();
+    if (!tips.length) {
+      listEl.innerHTML = '<div class="gt-empty">No tips yet — be the first! 🎒</div>';
+      return;
+    }
+    // newest first
+    tips.sort(function(a, b) { return b.timestamp - a.timestamp; });
+    listEl.innerHTML = tips.map(function(t) {
+      return '<div class="gt-tip-item">' +
+        '<div class="gt-tip-meta">' +
+          '<span class="gt-tip-cat">' + (CAT_EMOJI[t.category] || '✈️') + '</span>' +
+          '<span class="gt-tip-name">' + escHtml(t.name) + '</span>' +
+          '<span class="gt-tip-time">' + timeAgo(t.timestamp) + '</span>' +
+        '</div>' +
+        '<div class="gt-tip-text">' + escHtml(t.text) + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var name = nameInput.value.trim();
+    var text = textInput.value.trim();
+    if (!name || !text) {
+      if (!name) nameInput.style.borderColor = '#c0392b';
+      if (!text) textInput.style.borderColor = '#c0392b';
+      return;
+    }
+    nameInput.style.borderColor = '';
+    textInput.style.borderColor = '';
+
+    // Save name for feedback system too
+    localStorage.setItem(NAME_KEY, name);
+
+    var tips = loadTips();
+    tips.push({
+      id: Date.now().toString(36) + Math.random().toString(36).substr(2, 5),
+      name: name,
+      text: text,
+      category: catSelect.value,
+      timestamp: Date.now()
+    });
+    saveTips(tips);
+
+    textInput.value = '';
+    renderTips();
+  });
+
+  // Reset border on input
+  nameInput.addEventListener('input', function() { nameInput.style.borderColor = ''; });
+  textInput.addEventListener('input', function() { textInput.style.borderColor = ''; });
+
+  // Initial render
+  renderTips();
 })();
 </script>
 

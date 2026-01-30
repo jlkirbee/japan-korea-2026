@@ -883,8 +883,6 @@ body {
 .venue-card.fb-must { border-left: 3px solid var(--accent-kr); }
 .venue-card.fb-skip { opacity: 0.4; }
 .venue-card.fb-skip .venue-name { text-decoration: line-through; }
-.venue-card.fb-imported-must { border-left: 3px solid var(--accent-jp); }
-.venue-card.fb-imported-skip { border-left: 3px solid var(--badge-book); }
 
 @media (prefers-color-scheme: dark) {
   .venue-card.fb-skip { opacity: 0.35; }
@@ -934,85 +932,40 @@ body {
 .fb-comment-box textarea:focus { outline: none; border-color: var(--accent-jp); }
 .fb-comment-box textarea::placeholder { color: var(--text-light); }
 
-/* Imported picks label on venue cards */
-.fb-imported-label {
-  font-size: 12px;
-  color: var(--accent-jp);
-  margin-top: 6px;
-  font-style: italic;
-  display: none;
-}
-
-/* Floating share button */
-.fb-share-fab {
-  position: fixed;
-  bottom: 20px;
-  left: 16px;
-  background: var(--text);
-  color: var(--bg);
-  border: none;
-  border-radius: 24px;
-  padding: 10px 18px;
-  font-size: 13px;
-  font-weight: 600;
-  font-family: var(--font-sans);
-  cursor: pointer;
-  box-shadow: var(--shadow-lg);
-  z-index: 90;
-  -webkit-tap-highlight-color: transparent;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-.fb-share-fab:active { transform: scale(0.95); }
-
-@supports (padding: env(safe-area-inset-bottom)) {
-  .fb-share-fab { bottom: calc(20px + env(safe-area-inset-bottom)); }
-}
-
-/* Share options panel */
-.fb-share-panel {
-  position: fixed;
-  bottom: 72px;
-  left: 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  box-shadow: var(--shadow-lg);
-  z-index: 91;
-  min-width: 240px;
-}
-@supports (padding: env(safe-area-inset-bottom)) {
-  .fb-share-panel { bottom: calc(72px + env(safe-area-inset-bottom)); }
-}
-.fb-share-title {
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 10px;
-  color: var(--text);
-}
-.fb-share-option {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: var(--tag-bg);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  font-size: 13px;
-  font-family: var(--font-sans);
-  color: var(--text);
-  cursor: pointer;
-  margin-bottom: 6px;
-  transition: background 0.15s ease;
-}
-.fb-share-option:hover { background: var(--border-light); }
-.fb-share-option:last-of-type { margin-bottom: 0; }
-.fb-share-status {
-  font-size: 12px;
-  color: var(--accent-kr);
+/* Aggregate feedback display */
+.fb-aggregate {
   margin-top: 8px;
-  text-align: center;
-  min-height: 1.2em;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.fb-agg-counts {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 2px;
+  font-weight: 600;
+  font-size: 13px;
+}
+.fb-agg-counts span { opacity: 0.85; }
+.fb-agg-names {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.fb-agg-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 4px;
+}
+.fb-agg-comment {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+.fb-agg-comment strong {
+  font-weight: 600;
+  color: var(--text);
 }
 
 /* ============================
@@ -1158,31 +1111,7 @@ body {
 }
 .fb-name-submit:active { transform: scale(0.97); }
 
-/* Imported picks banner */
-.fb-picks-banner {
-  background: var(--accent-jp-light);
-  border: 1px solid var(--accent-jp-border);
-  border-radius: var(--radius);
-  padding: 10px 14px;
-  margin: 0 16px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 13px;
-  color: var(--text);
-}
-.fb-picks-clear {
-  background: none;
-  border: 1px solid var(--accent-jp-border);
-  border-radius: 6px;
-  padding: 4px 10px;
-  font-size: 12px;
-  color: var(--accent-jp);
-  cursor: pointer;
-  font-family: var(--font-sans);
-  white-space: nowrap;
-  font-weight: 600;
-}
+
 </style>
 </head>
 <body>
@@ -3713,9 +3642,8 @@ window.addEventListener('scroll', () => {
 
 // Active tab tracking based on initial load
 document.addEventListener('DOMContentLoaded', () => {
-  // Check URL hash — but not if it's a picks hash
   const hash = window.location.hash.replace('#', '');
-  if (hash && !hash.startsWith('picks=')) {
+  if (hash) {
     const tab = document.querySelector(`[data-target="${hash}"]`);
     if (tab) switchTab(tab);
   }
@@ -3723,21 +3651,49 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <!-- ============================
-     FEEDBACK SYSTEM
+     FIREBASE SDK
+     ============================ -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+<script>
+  // Initialize Firebase (global, used by both feedback + guest tips)
+  firebase.initializeApp({
+    apiKey: "AIzaSyBzMQdtyhIwG1tQb99pHPjBuDeBZcJAIM8",
+    authDomain: "japan-korea-2026.firebaseapp.com",
+    databaseURL: "https://japan-korea-2026-default-rtdb.firebaseio.com",
+    projectId: "japan-korea-2026",
+    storageBucket: "japan-korea-2026.firebasestorage.app",
+    messagingSenderId: "568184064002",
+    appId: "1:568184064002:web:3e3a46e1d725c30ee1bf1b"
+  });
+  var __fbDb = firebase.database();
+</script>
+
+<!-- ============================
+     FEEDBACK SYSTEM (Firebase-backed)
      ============================ -->
 <script>
 (function() {
   'use strict';
 
-  // --- Storage keys ---
+  // --- Storage keys (localStorage cache) ---
   var STORAGE_KEY = 'travel-feedback';
   var NAME_KEY = 'travel-feedback-name';
 
-  var feedbackData = {};
+  var feedbackData = {};  // own user's local data (cache)
+  var allFeedback = {};   // all users' data from Firebase: { encodedVenue: { encodedUser: {vote,comment,timestamp} } }
   var userName = '';
-  var importedPicks = null;
+  var db = __fbDb;
+  var fbRef = db.ref('feedback');
+  var cardMap = {};       // venueName → card element for real-time updates
+  var commentDebounceTimers = {};
 
-  // --- Data persistence ---
+  // --- Firebase key encoding ---
+  function encodeKey(str) {
+    return str.replace(/[.#$\[\]\/]/g, '_');
+  }
+
+  // --- Data persistence (localStorage cache) ---
 
   function loadData() {
     try {
@@ -3755,25 +3711,17 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem(NAME_KEY, name);
   }
 
-  // --- URL hash import ---
-
-  function checkImportedPicks() {
-    var hash = window.location.hash;
-    if (hash.indexOf('#picks=') === 0) {
-      try {
-        var encoded = hash.substring(7);
-        importedPicks = JSON.parse(decodeURIComponent(escape(atob(encoded))));
-        return true;
-      } catch (e) { console.warn('Invalid picks data in URL'); }
-    }
-    return false;
-  }
-
   // --- Helpers ---
 
   function getVenueName(card) {
     var nameEl = card.querySelector('.venue-name');
     return nameEl ? nameEl.textContent.trim() : null;
+  }
+
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
   }
 
   // --- Name prompt (casual, not a login) ---
@@ -3786,7 +3734,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.innerHTML =
       '<div class="fb-name-box">' +
         '<div class="fb-name-title">What\'s your name?</div>' +
-        '<div class="fb-name-sub">So John knows who said what 😊</div>' +
+        '<div class="fb-name-sub">So everyone knows who said what 😊</div>' +
         '<input type="text" class="fb-name-input" placeholder="Your name" maxlength="30">' +
         '<button class="fb-name-submit">Let\'s go</button>' +
       '</div>';
@@ -3816,20 +3764,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Apply visual state to a card ---
+  // --- Write vote/comment to Firebase ---
+
+  function writeToFirebase(venueName) {
+    if (!userName) return;
+    var venueKey = encodeKey(venueName);
+    var userKey = encodeKey(userName);
+    var data = feedbackData[venueName];
+
+    if (!data || (!data.vote && (!data.comment || !data.comment.trim()))) {
+      // Remove this user's entry for this venue
+      fbRef.child(venueKey).child(userKey).remove();
+    } else {
+      var payload = { timestamp: firebase.database.ServerValue.TIMESTAMP };
+      if (data.vote) payload.vote = data.vote;
+      if (data.comment && data.comment.trim()) payload.comment = data.comment.trim();
+      fbRef.child(venueKey).child(userKey).set(payload);
+    }
+  }
+
+  // --- Apply visual state to a card (own vote + aggregate) ---
 
   function applyState(card, venueName) {
     var data = feedbackData[venueName];
-    var imported = importedPicks && importedPicks.picks && importedPicks.picks[venueName];
 
     // Reset card classes
-    card.classList.remove('fb-must', 'fb-skip', 'fb-imported-must', 'fb-imported-skip');
+    card.classList.remove('fb-must', 'fb-skip');
 
     var mustBtn = card.querySelector('.fb-btn-must');
     var skipBtn = card.querySelector('.fb-btn-skip');
     var commentBtn = card.querySelector('.fb-btn-comment');
     var commentBox = card.querySelector('.fb-comment-box');
-    var importedLabel = card.querySelector('.fb-imported-label');
 
     // Reset button states
     if (mustBtn) mustBtn.classList.remove('fb-active-must');
@@ -3837,7 +3802,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (commentBtn) commentBtn.classList.remove('fb-active-comment');
 
     // Apply own feedback
-    var hasOwnVote = data && data.vote;
     if (data) {
       if (data.vote === 'must') {
         card.classList.add('fb-must');
@@ -3846,7 +3810,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.classList.add('fb-skip');
         if (skipBtn) skipBtn.classList.add('fb-active-skip');
       }
-      // Restore comment
+      // Restore own comment in textarea
       if (data.comment && data.comment.trim() && commentBox) {
         commentBox.querySelector('textarea').value = data.comment;
         commentBox.classList.add('fb-visible');
@@ -3854,24 +3818,50 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Apply imported picks (card style only when no own vote)
-    if (imported) {
-      if (!hasOwnVote) {
-        if (imported.vote === 'must') card.classList.add('fb-imported-must');
-        else if (imported.vote === 'skip') card.classList.add('fb-imported-skip');
+    // Render aggregate section from Firebase data
+    renderAggregate(card, venueName);
+  }
+
+  // --- Render aggregate counts/names/comments ---
+
+  function renderAggregate(card, venueName) {
+    var venueKey = encodeKey(venueName);
+    var venueData = allFeedback[venueKey] || {};
+    var aggEl = card.querySelector('.fb-aggregate');
+    if (!aggEl) return;
+
+    var mustNames = [], skipNames = [], comments = [];
+    for (var userKey in venueData) {
+      if (!venueData.hasOwnProperty(userKey)) continue;
+      var entry = venueData[userKey];
+      var displayName = entry._displayName || userKey;
+      if (entry.vote === 'must') mustNames.push(displayName);
+      else if (entry.vote === 'skip') skipNames.push(displayName);
+      if (entry.comment && entry.comment.trim()) {
+        comments.push({ name: displayName, text: entry.comment.trim() });
       }
-      // Always show imported label
-      if (importedLabel) {
-        var parts = [];
-        if (imported.vote === 'must') parts.push('✅');
-        if (imported.vote === 'skip') parts.push('❌');
-        if (imported.comment && imported.comment.trim()) parts.push('💬 "' + imported.comment.trim() + '"');
-        importedLabel.textContent = (importedPicks.name || 'Someone') + ': ' + parts.join(' ');
-        importedLabel.style.display = 'block';
-      }
-    } else {
-      if (importedLabel) importedLabel.style.display = 'none';
     }
+
+    var html = '';
+    if (mustNames.length || skipNames.length) {
+      html += '<div class="fb-agg-counts">';
+      if (mustNames.length) html += '<span>✅ ' + mustNames.length + '</span>';
+      if (skipNames.length) html += '<span>❌ ' + skipNames.length + '</span>';
+      html += '</div>';
+      html += '<div class="fb-agg-names">';
+      if (mustNames.length) html += '✅ ' + mustNames.map(escHtml).join(', ');
+      if (mustNames.length && skipNames.length) html += ' &nbsp;·&nbsp; ';
+      if (skipNames.length) html += '❌ ' + skipNames.map(escHtml).join(', ');
+      html += '</div>';
+    }
+    if (comments.length) {
+      html += '<div class="fb-agg-comments">';
+      comments.forEach(function(c) {
+        html += '<div class="fb-agg-comment">💬 <strong>' + escHtml(c.name) + ':</strong> "' + escHtml(c.text) + '"</div>';
+      });
+      html += '</div>';
+    }
+    aggEl.innerHTML = html;
   }
 
   // --- Inject feedback UI into each venue card ---
@@ -3879,6 +3869,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function injectFeedback(card) {
     var venueName = getVenueName(card);
     if (!venueName) return;
+
+    // Store card reference for real-time updates
+    cardMap[venueName] = card;
 
     // Button row
     var row = document.createElement('div');
@@ -3895,10 +3888,10 @@ document.addEventListener('DOMContentLoaded', () => {
     commentBox.innerHTML = '<textarea placeholder="Add a note\u2026" rows="2"></textarea>';
     card.appendChild(commentBox);
 
-    // Imported label (hidden)
-    var importedLabel = document.createElement('div');
-    importedLabel.className = 'fb-imported-label';
-    card.appendChild(importedLabel);
+    // Aggregate display area
+    var aggDiv = document.createElement('div');
+    aggDiv.className = 'fb-aggregate';
+    card.appendChild(aggDiv);
 
     // --- Event handlers ---
 
@@ -3910,6 +3903,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cleanEntry(venueName);
         saveData();
         applyState(card, venueName);
+        writeToFirebase(venueName);
       });
     });
 
@@ -3921,6 +3915,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cleanEntry(venueName);
         saveData();
         applyState(card, venueName);
+        writeToFirebase(venueName);
       });
     });
 
@@ -3938,9 +3933,14 @@ document.addEventListener('DOMContentLoaded', () => {
       feedbackData[venueName].comment = e.target.value;
       cleanEntry(venueName);
       saveData();
+      // Debounce Firebase writes for comments (500ms)
+      clearTimeout(commentDebounceTimers[venueName]);
+      commentDebounceTimers[venueName] = setTimeout(function() {
+        writeToFirebase(venueName);
+      }, 500);
     });
 
-    // Apply saved state
+    // Apply saved state (from localStorage cache)
     applyState(card, venueName);
   }
 
@@ -3952,124 +3952,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- Share functionality ---
+  // --- Real-time Firebase listener ---
 
-  function createShareButton() {
-    var fab = document.createElement('button');
-    fab.className = 'fb-share-fab';
-    fab.textContent = '📤 Share Picks';
-    fab.addEventListener('click', function(e) {
-      e.stopPropagation();
-      toggleSharePanel();
-    });
-    document.body.appendChild(fab);
-  }
+  function startRealtimeListener() {
+    fbRef.on('value', function(snapshot) {
+      allFeedback = snapshot.val() || {};
 
-  function toggleSharePanel() {
-    var existing = document.querySelector('.fb-share-panel');
-    if (existing) { existing.remove(); return; }
-
-    var panel = document.createElement('div');
-    panel.className = 'fb-share-panel';
-    panel.innerHTML =
-      '<div class="fb-share-title">Share Your Picks</div>' +
-      '<button class="fb-share-option" data-action="link">\uD83D\uDD17 Copy shareable link</button>' +
-      '<button class="fb-share-option" data-action="text">\uD83D\uDCCB Copy as text</button>' +
-      '<div class="fb-share-status"></div>';
-    document.body.appendChild(panel);
-
-    panel.querySelector('[data-action="link"]').addEventListener('click', function() {
-      var payload = { name: userName, picks: feedbackData };
-      var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
-      var url = window.location.origin + window.location.pathname + '#picks=' + encoded;
-      copyToClipboard(url, panel);
-    });
-
-    panel.querySelector('[data-action="text"]').addEventListener('click', function() {
-      copyToClipboard(generateTextSummary(), panel);
-    });
-
-    setTimeout(function() {
-      document.addEventListener('click', function close(e) {
-        if (!panel.contains(e.target) && !e.target.classList.contains('fb-share-fab')) {
-          panel.remove();
-          document.removeEventListener('click', close);
+      // Tag each entry with its display name (the Firebase key = encoded user name)
+      for (var venueKey in allFeedback) {
+        if (!allFeedback.hasOwnProperty(venueKey)) continue;
+        var users = allFeedback[venueKey];
+        for (var uk in users) {
+          if (users.hasOwnProperty(uk)) {
+            users[uk]._displayName = uk;
+          }
         }
-      });
-    }, 50);
-  }
-
-  function copyToClipboard(text, panel) {
-    var status = panel.querySelector('.fb-share-status');
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function() {
-        status.textContent = '✓ Copied!';
-        setTimeout(function() { panel.remove(); }, 1200);
-      }).catch(function() { fallbackCopy(text, status, panel); });
-    } else {
-      fallbackCopy(text, status, panel);
-    }
-  }
-
-  function fallbackCopy(text, status, panel) {
-    var ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.cssText = 'position:fixed;left:-9999px';
-    document.body.appendChild(ta);
-    ta.select();
-    try {
-      document.execCommand('copy');
-      status.textContent = '✓ Copied!';
-      setTimeout(function() { panel.remove(); }, 1200);
-    } catch (e) { prompt('Copy this:', text); }
-    document.body.removeChild(ta);
-  }
-
-  function generateTextSummary() {
-    var mustGo = [], skip = [], notes = [];
-    for (var name in feedbackData) {
-      if (!feedbackData.hasOwnProperty(name)) continue;
-      var d = feedbackData[name];
-      if (d.vote === 'must') mustGo.push(name);
-      if (d.vote === 'skip') skip.push(name);
-      if (d.comment && d.comment.trim()) {
-        notes.push('- ' + name + ': "' + d.comment.trim() + '"');
       }
-    }
-    var text = userName ? userName + '\'s picks:\n\n' : '';
-    if (mustGo.length) text += '✅ Must Go: ' + mustGo.join(', ') + '\n';
-    if (skip.length) text += '❌ Skip: ' + skip.join(', ') + '\n';
-    if (notes.length) text += '\n💬 Notes:\n' + notes.join('\n');
-    if (!mustGo.length && !skip.length && !notes.length) text += 'No picks yet!';
-    return text.trim();
-  }
 
-  // --- Imported picks banner ---
-
-  function showImportedBanner() {
-    if (!importedPicks) return;
-    var banner = document.createElement('div');
-    banner.className = 'fb-picks-banner';
-    banner.innerHTML =
-      '<span>Viewing <strong>' + (importedPicks.name || 'someone') + '</strong>\'s picks</span>' +
-      '<button class="fb-picks-clear">Clear</button>';
-
-    // Insert after the hero
-    var hero = document.querySelector('.hero');
-    if (hero && hero.nextElementSibling) {
-      hero.parentNode.insertBefore(banner, hero.nextElementSibling);
-    } else {
-      document.body.insertBefore(banner, document.body.firstChild);
-    }
-
-    banner.querySelector('.fb-picks-clear').addEventListener('click', function() {
-      importedPicks = null;
-      history.replaceState(null, '', window.location.pathname);
-      banner.remove();
-      document.querySelectorAll('.venue-card').forEach(function(card) {
-        var name = getVenueName(card);
-        if (name) applyState(card, name);
-      });
+      // Update all card aggregate displays
+      for (var venueName in cardMap) {
+        if (cardMap.hasOwnProperty(venueName)) {
+          renderAggregate(cardMap[venueName], venueName);
+        }
+      }
     });
   }
 
@@ -4077,20 +3982,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function init() {
     loadData();
-    checkImportedPicks();
 
     // Inject feedback into all venue cards
     document.querySelectorAll('.venue-card').forEach(function(card) {
       injectFeedback(card);
     });
 
-    // Add floating share button
-    createShareButton();
-
-    // Show imported banner if applicable
-    if (importedPicks) {
-      showImportedBanner();
-    }
+    // Start real-time sync
+    startRealtimeListener();
   }
 
   // Init on DOM ready
@@ -4103,14 +4002,15 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <!-- ============================
-     GUEST TIPS
+     GUEST TIPS (Firebase-backed)
      ============================ -->
 <script>
 (function() {
   'use strict';
 
-  var TIPS_KEY = 'travel-guest-tips';
   var NAME_KEY = 'travel-feedback-name';
+  var db = __fbDb;
+  var tipsRef = db.ref('guest-tips');
 
   var CAT_EMOJI = { jp: '🇯🇵', kr: '🇰🇷', general: '✈️' };
 
@@ -4126,15 +4026,6 @@ document.addEventListener('DOMContentLoaded', () => {
   var savedName = localStorage.getItem(NAME_KEY) || '';
   if (savedName) nameInput.value = savedName;
 
-  function loadTips() {
-    try { return JSON.parse(localStorage.getItem(TIPS_KEY) || '[]'); }
-    catch (e) { return []; }
-  }
-
-  function saveTips(tips) {
-    localStorage.setItem(TIPS_KEY, JSON.stringify(tips));
-  }
-
   function timeAgo(ts) {
     var diff = Date.now() - ts;
     var s = Math.floor(diff / 1000);
@@ -4148,9 +4039,14 @@ document.addEventListener('DOMContentLoaded', () => {
     return new Date(ts).toLocaleDateString();
   }
 
-  function renderTips() {
-    var tips = loadTips();
-    if (!tips.length) {
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function renderTips(tips) {
+    if (!tips || !tips.length) {
       listEl.innerHTML = '<div class="gt-empty">No tips yet — be the first! 🎒</div>';
       return;
     }
@@ -4168,11 +4064,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }).join('');
   }
 
-  function escHtml(s) {
-    var d = document.createElement('div');
-    d.textContent = s;
-    return d.innerHTML;
-  }
+  // Real-time listener for tips
+  tipsRef.on('value', function(snapshot) {
+    var data = snapshot.val();
+    var tips = [];
+    if (data) {
+      for (var key in data) {
+        if (data.hasOwnProperty(key)) {
+          tips.push(data[key]);
+        }
+      }
+    }
+    renderTips(tips);
+  });
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -4189,26 +4093,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Save name for feedback system too
     localStorage.setItem(NAME_KEY, name);
 
-    var tips = loadTips();
-    tips.push({
-      id: Date.now().toString(36) + Math.random().toString(36).substr(2, 5),
+    // Push to Firebase
+    tipsRef.push({
       name: name,
       text: text,
       category: catSelect.value,
-      timestamp: Date.now()
+      timestamp: firebase.database.ServerValue.TIMESTAMP
     });
-    saveTips(tips);
 
     textInput.value = '';
-    renderTips();
+    // renderTips will be called by the on('value') listener
   });
 
   // Reset border on input
   nameInput.addEventListener('input', function() { nameInput.style.borderColor = ''; });
   textInput.addEventListener('input', function() { textInput.style.borderColor = ''; });
-
-  // Initial render
-  renderTips();
 })();
 </script>
 

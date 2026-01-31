@@ -1496,6 +1496,94 @@ body {
 }
 .fb-name-submit:active { transform: scale(0.97); }
 
+/* ========== DEEP RESEARCH ADDITIONS ========== */
+.route-visual {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+}
+.route-stop {
+  background: var(--accent-kyoto-light);
+  color: var(--accent-kyoto);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.route-arrow {
+  color: var(--text-light);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.route-note {
+  width: 100%;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-style: italic;
+}
+.basecamp-tag {
+  display: inline-block;
+  background: var(--accent-kr);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.badge-validated { background: #E8F5E9; color: #2E7D32; }
+.badge-bib { background: #FFF3E0; color: #E65100; }
+@media (prefers-color-scheme: dark) {
+  .badge-validated { background: rgba(46, 125, 50, 0.15); color: #66BB6A; }
+  .badge-bib { background: rgba(230, 81, 0, 0.15); color: #FFB74D; }
+  .route-stop { background: var(--accent-kyoto-light); color: var(--accent-kyoto); }
+}
+.kbbq-ritual {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.kbbq-ritual h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.kbbq-ritual .kbbq-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.kbbq-ritual .kbbq-detail {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.kbbq-ritual .kbbq-order {
+  font-size: 12px;
+  color: var(--accent-kyoto);
+  font-weight: 600;
+  margin-top: 6px;
+}
+.section-intro {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
 
 </style>
 </head>
@@ -2910,6 +2998,279 @@ body {
       </div>
     </details>
 
+    <!-- ========== DEEP RESEARCH: TOKYO FOOD GUIDE ========== -->
+    <details class="sub-section" id="tokyo-food-guide">
+      <summary>🍜 Deep Research Food Guide</summary>
+      <div class="sub-content">
+        <p class="section-intro">Curated picks from ChatGPT deep research — cross-validated across multiple 2025–2026 sources (GO TOKYO, Condé Nast Traveler, Time Out, Eater, Reddit). These supplement the existing recommendations above.</p>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🌅 Breakfast</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍲</div>
+            <div class="venue-info">
+              <div class="venue-name">MISOJYU</div>
+              <div class="venue-area">Asakusa</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$8–12</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Miso soup + onigiri breakfast set. GO TOKYO uses it as THE model "traditional Japanese breakfast" in Asakusa. Perfect first morning in Tokyo — warm, comforting, zero decision fatigue.
+          <span class="rec">Pair with an early Senso-ji walk before the crowds.</span></div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍙</div>
+            <div class="venue-info">
+              <div class="venue-name">Onigiri Cafe Risaku</div>
+              <div class="venue-area">Sendagi</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$6–10</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Fresh hand-formed onigiri set with side dishes. GO TOKYO highlight — dedicated onigiri breakfast in a charming Yanaka neighborhood setting.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🥞</div>
+            <div class="venue-info">
+              <div class="venue-name">IVY PLACE</div>
+              <div class="venue-area">Daikanyama</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$12–18</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Western-style breakfast. This is your "Western breakfast that still feels Tokyo" pick — spacious, beautiful setting. GO TOKYO calls it out specifically for breakfast.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🥞</div>
+            <div class="venue-info">
+              <div class="venue-name">crisscross</div>
+              <div class="venue-area">Omotesando</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$10–15</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Pancakes + bakery toast. Popular Omotesando breakfast with an attached bakery. GO TOKYO explicitly frames it as a go-to morning spot.</div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🍜 Lunch</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Hanayama Udon</div>
+              <div class="venue-area">Nihonbashi</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Expect lines</span>
+            <span class="badge badge-price">$10–15</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Oni-himokawa (wide ribbon udon). Condé Nast Traveler's B-kyū reporting singles this out as a signature Tokyo comfort-food stop. The line culture is part of the experience — teaches you Tokyo dining rhythms.
+          <span class="rec">The line moves fast. Worth it.</span></div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Tsukemen Kinryu</div>
+              <div class="venue-area">Kanda</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Expect lines</span>
+            <span class="badge badge-price">$10–15</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Tsukemen (dipping ramen). Fast line discipline + quick turnover — "learn Tokyo ramen etiquette by doing." CN Traveler details the experience.
+          <span class="rec">Great introduction to tsukemen if you've never had it.</span></div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍛</div>
+            <div class="venue-info">
+              <div class="venue-name">Pannya Cafe Curry</div>
+              <div class="venue-area">Shimokitazawa</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$10–15</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Katsu curry. Shimokitazawa is THE curry neighborhood in Tokyo — this is the signature shop. CN Traveler details the curry-house culture here. Pair with a Shimokitazawa afternoon of vintage shops and cafes.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍕</div>
+            <div class="venue-info">
+              <div class="venue-name">Seirinkan</div>
+              <div class="venue-area">Nakameguro</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$15–25</span>
+            <span class="badge badge-source">Eater Top 38</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Marinara or Margherita. Neapolitan pizza classic in a beautiful Nakameguro setting. Perfect lunch after walking the canal.</div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🌙 Late Night</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🏮</div>
+            <div class="venue-info">
+              <div class="venue-name">Shinjuku Golden Gai</div>
+              <div class="venue-area">Kabukicho, Shinjuku</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$5–15 per bar</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>What to do:</strong> Tiny bars, high vibe density. Eat first, then bar-hop — places are small and fill fast. Some have cover charges (¥500–1000). Look for bars that say "tourists welcome." Best after 9pm.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🏮</div>
+            <div class="venue-info">
+              <div class="venue-name">Shinbashi Standing Bars</div>
+              <div class="venue-area">Shinbashi</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$8–15</span>
+          </div>
+          <div class="venue-desc"><strong>What to do:</strong> Practical "locals drinking" zone with lots of standing bars and izakaya density. GO TOKYO frames this as the salaryman nightlife district. Less touristy than Golden Gai.</div>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: TOKYO BARS ========== -->
+    <details class="sub-section" id="tokyo-bars">
+      <summary>🍸 Bars & Cocktails</summary>
+      <div class="sub-content">
+        <p class="section-intro">Tokyo's cocktail scene is world-class. These are globally ranked bars with traveler corroboration — the highest "signal per step" options.</p>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍸</div>
+            <div class="venue-info">
+              <div class="venue-name">Bar Benfiddich</div>
+              <div class="venue-area">Shinjuku</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve recommended</span>
+            <span class="badge badge-price">$20–30 per drink</span>
+            <span class="badge badge-validated">✓ Global ranking</span>
+          </div>
+          <div class="venue-desc">Ranked on global "best bars" lists repeatedly. The bartender hand-grinds spices and forages ingredients. Molecular-meets-classical cocktails. One of Tokyo's elite cocktail experiences.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍸</div>
+            <div class="venue-info">
+              <div class="venue-name">The Bellwood</div>
+              <div class="venue-area">Shibuya</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in OK</span>
+            <span class="badge badge-price">$18–25 per drink</span>
+            <span class="badge badge-validated">✓ Global ranking</span>
+          </div>
+          <div class="venue-desc">Newer global-ranker. Condé Nast Traveler's bar review supports it as a destination bar. Casual-cool vibe, excellent for couples.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-jp);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍸</div>
+            <div class="venue-info">
+              <div class="venue-name">Virtù</div>
+              <div class="venue-area">Roppongi / High-floor</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve recommended</span>
+            <span class="badge badge-price">$25–35 per drink</span>
+            <span class="badge badge-validated">✓ Global ranking</span>
+          </div>
+          <div class="venue-desc">High-floor city view + serious drinks. Great for a "special night out" cocktail. Awards coverage and hospitality press recognition.</div>
+        </div>
+
+        <div class="callout">
+          <strong>🍸 Pro tip:</strong> Tokyo bar culture = small, intimate, often 8–12 seats. Dress smart-casual. Many bars have a "charm charge" (¥500–1500 cover). Don't try to hit too many — one great bar experience beats three rushed ones.
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: TOKYO BASE CAMP HOTELS ========== -->
+    <details class="sub-section" id="tokyo-basecamp">
+      <summary>🏨 Base Camp Hotels (Budget Alternative)</summary>
+      <div class="sub-content">
+        <p class="section-intro">If you're not using Hyatt points for the Park Hyatt, here are the best-value "sleep/shower/explore" hotels from deep research — Reddit's darlings for first-timers.</p>
+
+        <div class="callout" style="border-left-color: var(--accent-jp);">
+          <strong>💡 The Reddit consensus:</strong> "Save on hotels, spend on food and experiences." Japanese business hotels are clean, efficient, and perfectly comfortable. The room is just a place to crash after 25,000 steps.
+        </div>
+
+        <div class="hotel-card">
+          <h4>Dormy Inn Premium Kanda <span class="basecamp-tag">Base Camp</span></h4>
+          <p class="hotel-sub">Kanda · ~$98/night · Multi-line transit hub</p>
+          <p class="hotel-detail">Reddit's cult favorite. <strong>Free onsen</strong> (hot spring bath) — incredible after a day of walking. <strong>Free late-night ramen.</strong> Free ice cream, coffee, yogurt drinks. "As a long-time resident of Japan, I always stay in Dormy Inn." Kanda location gives you fast east/west access across Tokyo.</p>
+        </div>
+
+        <div class="hotel-card">
+          <h4>Tokyu Stay Shinjuku Eastside <span class="basecamp-tag">Base Camp</span></h4>
+          <p class="hotel-sub">Shinjuku · ~$170/night · 3 min to Higashi-Shinjuku Stn</p>
+          <p class="hotel-detail"><strong>In-room washer/dryer + microwave</strong> — a serious advantage on long trips. Pack lighter, don't waste time on laundromats. Multiple Reddit trip reports recommend this exact property for Shinjuku base-camp logic.</p>
+        </div>
+
+        <div class="hotel-card">
+          <h4>Sotetsu Fresa Inn Kanda Otemachi <span class="basecamp-tag">Base Camp</span></h4>
+          <p class="hotel-sub">Kanda/Otemachi · ~$70/night · Central office-district</p>
+          <p class="hotel-detail">The "win on math" option — optimize location + cleanliness and spend savings on food/experiences. Central adjacency with efficient "in/out" logistics. No frills, just a great clean bed in a great location.</p>
+        </div>
+
+        <div class="callout">
+          <strong>💰 The math:</strong> Dormy Inn at ~$100/night vs Park Hyatt at ~$500+/night saves you $400/night. Over 3 nights that's $1,200 back in your pocket for omakase, cocktail bars, and day trips. And you still get an onsen every night.
+        </div>
+
+      </div>
+    </details>
+
   </div>
 </div>
 
@@ -3534,6 +3895,354 @@ body {
         <div class="callout mt-sm">
           <strong>✅ Ginkakuji > Kinkakuji.</strong> Reddit strongly recommends the Silver Pavilion over the Golden one. Better gardens, less crowds, more atmosphere.
         </div>
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: KYOTO FOOD GUIDE ========== -->
+    <details class="sub-section" id="kyoto-food-guide">
+      <summary>🍜 Deep Research Food Guide</summary>
+      <div class="sub-content">
+        <p class="section-intro">Additional validated picks from deep research — cross-referenced across InsideKyoto, Michelin Guide, Condé Nast Traveler, and Reddit. Supplements the existing recommendations above.</p>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🌅 Breakfast</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">OGAWA COFFEE</div>
+              <div class="venue-area">Kyoto Station</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$8–12</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Coffee + morning set. Leaf Kyoto editorial staff highlight it as a Kyoto Station morning anchor. Perfect before an early temple day — get caffeinated and fueled at the station before heading out.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍚</div>
+            <div class="venue-info">
+              <div class="venue-name">Kamado-Takitate-Gohan Doi</div>
+              <div class="venue-area">Kyoto Station area</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$10–15</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Pickle-shop breakfast buffet — rice cooked in clay pots + pickles + obanzai sides. Multiple Kyoto Station breakfast guides describe it. Uniquely Kyoto, deeply satisfying on a cold morning.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Dai-Ichi Asahi</div>
+              <div class="venue-area">Near Kyoto Station</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Early morning line</span>
+            <span class="badge badge-price">$8–10</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Ramen breakfast. Yes, ramen for breakfast — a Kyoto tradition. Leaf Kyoto lists it as an early-morning staple. Perfect fuel before a big walking day to Arashiyama.</div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🍜 Lunch</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Omen</div>
+              <div class="venue-area">Ginkaku-ji branch</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$12–18</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Udon with dipping broth + seasonal vegetables. InsideKyoto calls it a favorite — pairs perfectly with the Ginkaku-ji → Philosopher's Path walking route. Stop here before or after the Silver Pavilion.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Honke Owariya</div>
+              <div class="venue-area">Central Kyoto · Since 1465</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$12–20</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Soba (buckwheat noodles). A Kyoto soba classic — operating since 1465. Easy downtown insertion between temple visits. The building itself is worth seeing.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Komedokoro Inamoto</div>
+              <div class="venue-area">Kyoto</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$12–18</span>
+            <span class="badge badge-bib">🏅 Bib Gourmand</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Rice-focused set meal. Michelin Guide 2025 newly awarded Bib Gourmand. InsideKyoto also lists it. A "quiet excellence" lunch that showcases Kyoto ingredients.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🥟</div>
+            <div class="venue-info">
+              <div class="venue-name">Gyoza Hohei</div>
+              <div class="venue-area">Gion area</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$8–12</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Pan-fried gyoza. InsideKyoto recommends it — a hot, casual Gion-area stop. Also works as late-night food after a Pontocho stroll.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍱</div>
+            <div class="venue-info">
+              <div class="venue-name">Kikkoya</div>
+              <div class="venue-area">Central Kyoto</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$12–18</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Obanzai (Kyoto homestyle) set. Small dishes, seasonal vegetables, tofu, pickles — this IS the Kyoto lunch move. InsideKyoto emphasizes it as a non-fine-dining solution that still feels deeply local.</div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🌆 Dinner</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">⭐</div>
+            <div class="venue-info">
+              <div class="venue-name">Kikunoi</div>
+              <div class="venue-area">Higashiyama · Michelin 3★</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Book far ahead</span>
+            <span class="badge badge-price">$200–300pp</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Kaiseki tasting menu. If you do ONE "Kyoto splurge," kaiseki is the category and Kikunoi is the gold standard. A true splurge — book far ahead. The sister restaurant Roan Kikunoi is slightly more accessible.
+          <span class="rec">This is where "the hotel savings" pay for themselves.</span></div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🐟</div>
+            <div class="venue-info">
+              <div class="venue-name">Kane-yo</div>
+              <div class="venue-area">Central Kyoto</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Line expected</span>
+            <span class="badge badge-price">$20–35</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Unagi (freshwater eel) over rice. "Old Kyoto charm" — InsideKyoto recommends it, CN Traveler calls it "packed since opening." A must-try dinner that's uniquely Kyoto.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍷</div>
+            <div class="venue-info">
+              <div class="venue-name">Badu</div>
+              <div class="venue-area">Central Kyoto</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve recommended</span>
+            <span class="badge badge-price">$30–50pp</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Seasonal small plates + wine. CN Traveler explicitly flags it as packed and "Kyoto cool crowd." InsideKyoto supports it as part of Kyoto's approachable-but-hot dining scene.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍶</div>
+            <div class="venue-info">
+              <div class="venue-name">Suiba</div>
+              <div class="venue-area">Shijo Kawaramachi</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$15–25pp</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Izakaya small plates + sake/beer. Casual izakaya energy that soaks up "Kyoto night walks." InsideKyoto recommends it as reliable dinner/drinks. Perfect post-Pontocho stroll landing spot.</div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🌙 Late Night</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🏮</div>
+            <div class="venue-info">
+              <div class="venue-name">Pontocho Alley Night Stroll</div>
+              <div class="venue-area">Along the Kamo River</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">Free (food extra)</span>
+          </div>
+          <div class="venue-desc"><strong>What to do:</strong> Atmospheric micro-lane — Kyoto's most efficient "night out" zone. Avoid expensive tourist-trap set menus; duck into smaller spots. Pair with a walk along the Kamo River for decompression. Kyoto late-night is about a <em>night stroll + one good small place</em>, not bar-hopping until 3am.</div>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: KYOTO COFFEE & BARS ========== -->
+    <details class="sub-section" id="kyoto-coffee-bars">
+      <summary>☕ Deep Research Coffee & Bars</summary>
+      <div class="sub-content">
+        <p class="section-intro">Additional validated coffee shops and bar picks beyond the existing recommendations.</p>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">☕ Coffee</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">Kurasu Kyoto</div>
+              <div class="venue-area">Near Kyoto Station</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$5–8</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc">Specialized Kyoto coffee brand with global credibility. Appears in both Kyoto coffee coverage and InsideKyoto's cafe picks. Great start to a morning before heading to temples.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">☕</div>
+            <div class="venue-info">
+              <div class="venue-name">Cafe Bibliotic Hello!</div>
+              <div class="venue-area">Nakagyo Ward</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$5–8</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc">"Kyoto machiya meets design cafe" — beautiful traditional townhouse converted to a book-filled cafe. InsideKyoto and specialty coffee guides both recommend it. Amy will love this one.</div>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: KYOTO WALKING ROUTES ========== -->
+    <details class="sub-section" id="kyoto-walking-routes">
+      <summary>🗺️ The Ultimate Walking Route</summary>
+      <div class="sub-content">
+        <p class="section-intro">The highest-signal traveler advice from deep research: compress "Kyoto greatest hits" into one continuous walk. Multiple Reddit travelers endorse this exact route.</p>
+
+        <div class="route-visual">
+          <span class="route-stop">🏛️ Ginkaku-ji</span>
+          <span class="route-arrow">→</span>
+          <span class="route-stop">🌿 Philosopher's Path</span>
+          <span class="route-arrow">→</span>
+          <span class="route-stop">⛩️ Nanzen-ji</span>
+          <span class="route-arrow">→</span>
+          <span class="route-stop">🌸 Maruyama Park</span>
+          <span class="route-arrow">→</span>
+          <span class="route-stop">⛩️ Yasaka Shrine</span>
+          <span class="route-arrow">→</span>
+          <span class="route-stop">🏛️ Kiyomizu-dera</span>
+          <span class="route-note">~4–5 hours walking · 6–7 major sites in one continuous walk · Beautiful even with bare winter trees</span>
+        </div>
+
+        <div class="callout" style="border-left-color: var(--accent-kyoto);">
+          <strong>💡 Pro tip:</strong> "Ginkakuji is underrated, and you can walk 2 miles south from Ginkakuji to Philosophy Road, Nanzenji… Maruyama Park… and then to Kiyomizu." Start early (8am) for the best light and fewest crowds. The Philosopher's Path in winter has a quiet, contemplative beauty — fewer people, bare branches, occasional plum blossoms.
+        </div>
+
+        <div class="info-block">
+          <h4>🗺️ Route Tips</h4>
+          <ul>
+            <li><strong>Start at Ginkaku-ji</strong> — take bus 17 or 100 from downtown. Arrive by 8:30am.</li>
+            <li><strong>Philosopher's Path</strong> — 2km canal-side walk, cafes and small temples along the way.</li>
+            <li><strong>Lunch break at Omen</strong> (near Ginkaku-ji) or pack onigiri from a konbini.</li>
+            <li><strong>Nanzen-ji</strong> — free grounds, stunning aqueduct. Don't miss the back gardens.</li>
+            <li><strong>Yasaka Shrine → Gion</strong> — transition into the historic district for evening.</li>
+            <li><strong>Finish at Kiyomizu-dera</strong> — sunset views from the temple stage.</li>
+          </ul>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: KYOTO BASE CAMP HOTELS ========== -->
+    <details class="sub-section" id="kyoto-basecamp">
+      <summary>🏨 Base Camp Hotels (Budget Alternative)</summary>
+      <div class="sub-content">
+        <p class="section-intro">Best-value alternatives to the Dusit Thani — if you want to save on hotels and pour the difference into kaiseki and coffee.</p>
+
+        <div class="hotel-card">
+          <h4>Hotel Forza Kyoto Shijo Kawaramachi <span class="basecamp-tag">Base Camp</span></h4>
+          <p class="hotel-sub">Shijo/Kawaramachi · ~$62/night · Downtown grid</p>
+          <p class="hotel-detail">Reddit stay report emphasizes "great location," quiet rooms, and a bigger bathroom/tub feel. Strong walkability to food, shopping, and Nishiki Market. Excellent ROI when you're out all day.</p>
+        </div>
+
+        <div class="hotel-card">
+          <h4>Tokyu Stay Kyoto Sakaiza <span class="basecamp-tag">Base Camp</span></h4>
+          <p class="hotel-sub">Kawaramachi (near Nishiki) · ~$57/night · 3 min to station</p>
+          <p class="hotel-detail"><strong>In-room washer/dryer</strong> — the big differentiator. Location near markets and arcades is extremely "walk out, do stuff." Multiple trip reports recommend it for location + laundry convenience.</p>
+        </div>
+
+        <div class="hotel-card">
+          <h4>Mitsui Garden Hotel Kyoto Shijo <span class="basecamp-tag">Base Camp</span></h4>
+          <p class="hotel-sub">Shijo · ~$68/night · Practical transit hub</p>
+          <p class="hotel-detail">Frequently framed on Reddit as a "tier up" from the most barebones business chains — often worth a modest premium for comfort without luxury pricing.</p>
+        </div>
+
+        <div class="hotel-card">
+          <h4>Onyado Nono Kyoto Shichijo <span class="basecamp-tag">Base Camp</span></h4>
+          <p class="hotel-sub">Near Kyoto Station · ~$96/night · Ryokan-themed Dormy brand</p>
+          <p class="hotel-detail">"Ryokan-themed Dormy brand" — tatami ambiance + modern bed/shower + <strong>onsen-style baths</strong>. High comfort per dollar for winter walking days. ⚠️ Warning: crowding at check-in is a recurring complaint. Plan to drop luggage early and return later.</p>
+        </div>
+
+        <div class="callout" style="border-left-color: var(--accent-kyoto);">
+          <strong>🏯 Ryokan Splurge (one night)</strong><br>
+          <strong>Towa Ryokan</strong> (~$248/night) — Traditional stay with kaiseki dinner + breakfast included. Vegetarian/vegan options. The "ryokan experience" without leaving Kyoto proper. Book this for one night and do business hotels the rest.<br><br>
+          <strong>Ryokan Sanga</strong> (~$162/night) — More budget-leaning. Tatami ambience without the full kaiseki production. Great if you'd rather eat out and just sleep in a Japanese-style room.
+        </div>
+
       </div>
     </details>
 
@@ -4669,6 +5378,419 @@ body {
       </div>
     </details>
 
+    <!-- ========== DEEP RESEARCH: SEOUL FOOD GUIDE ========== -->
+    <details class="sub-section" id="seoul-food-guide">
+      <summary>🍜 Deep Research Food Guide</summary>
+      <div class="sub-content">
+        <p class="section-intro">Curated picks from ChatGPT deep research — cross-validated across The Infatuation, Eater, Reuters, Michelin Guide, and Reddit. These supplement the existing recommendations above.</p>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🌅 Breakfast</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍚</div>
+            <div class="venue-info">
+              <div class="venue-name">Seung-Woo Nae Sikdang</div>
+              <div class="venue-area">Gwangjang Market area</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">~$7 (₩10,000)</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Baekban set (rice + soup + side dishes). Tiny, cash-only. The Infatuation frames it as a "real Korean breakfast" under ₩10,000. Market-adjacent classic that locals actually eat at. The anti-tourist-trap breakfast.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🥯</div>
+            <div class="venue-info">
+              <div class="venue-name">London Bagel Museum</div>
+              <div class="venue-area">Anguk / Jongno</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Expect lines</span>
+            <span class="badge badge-price">$5–10</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Any seasonal cream cheese bagel. Eater highlights it as a major draw in Anguk. Lines are real but move fast. Worth it for the pastry quality — Seoul's bakery game is elite.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🏪</div>
+            <div class="venue-info">
+              <div class="venue-name">Gwangjang Market (Morning Stalls)</div>
+              <div class="venue-area">Jongno</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$5–10</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Bindaetteok (mung bean pancake) + soondae (blood sausage). Reuters uses it as the go-to market for a walk. ⚠️ Note: the market is touristy and prices are up — morning is better than midday. Focus on the pancake and yukhoe stalls, skip the rest.
+          <span class="rec">Go early before 10am for the local experience.</span></div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🍜 Lunch</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Hwangsaengga Kalguksu</div>
+              <div class="venue-area">Jongno</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$8–12</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Beef bone broth kalguksu (knife-cut noodles). Eater details the signature; Reuters supports Jongno-area eating. High comfort in winter — exactly what you want after walking through Bukchon.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">⭐</div>
+            <div class="venue-info">
+              <div class="venue-name">Onjium</div>
+              <div class="venue-area">Jongno</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve</span>
+            <span class="badge badge-price">$80–150pp</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Multi-course refined Korean tasting menu. Eater's description is strong — this is Seoul's answer to kaiseki. If you do one "Seoul splurge dinner," consider this alongside the KBBQ options.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍲</div>
+            <div class="venue-info">
+              <div class="venue-name">Miro Sikdang</div>
+              <div class="venue-area">Near Hongik University</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$12–20pp</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Chef-favorite drinking food. The Infatuation frames it as where chefs go on their night off. Hearty, unpretentious, and near Hongdae. Great for a casual lunch that turns into afternoon beers.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🏮</div>
+            <div class="venue-info">
+              <div class="venue-name">Yeonseo Market</div>
+              <div class="venue-area">Central Seoul</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$10–20pp</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Wander and graze — indoor pojangmacha cluster. The Infatuation calls it "the most electric" food market in Seoul. Works for lunch, dinner, or late-night drinking food. The energy is the point.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🥩</div>
+            <div class="venue-info">
+              <div class="venue-name">Woo Lae Oak</div>
+              <div class="venue-area">Jung-gu</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$20–35pp</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Bulgogi + naengmyeon (cold noodles). Reuters explicitly recommends these dishes; Eater validates it as a long-established Seoul anchor. A "classic Seoul" restaurant that's been around for decades. The naengmyeon is the move.</div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🌆 Dinner</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🥩</div>
+            <div class="venue-info">
+              <div class="venue-name">Nari's House</div>
+              <div class="venue-area">Seoul</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Expect lines</span>
+            <span class="badge badge-price">$15–25pp</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Thin-sliced pork belly + scallion salad. Old-school nopo (no-brand pork spot) that refuses to change. The Infatuation review provides strong detail — know the ticket system. A "locals who know" place. Raw, authentic, no-frills KBBQ at its finest.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🥩</div>
+            <div class="venue-info">
+              <div class="venue-name">Geumdwaeji Sikdang</div>
+              <div class="venue-area">Seoul</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$15–25pp</span>
+            <span class="badge badge-bib">🏅 Bib Gourmand</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>Order:</strong> Pork cuts (ask staff for the best set) + kimchi jjigae. Michelin Bib Gourmand listing (2025 Guide) + detailed 2025 review coverage. When Michelin gives a Bib Gourmand to a KBBQ joint, pay attention.</div>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🌙 Late Night</h4>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🏮</div>
+            <div class="venue-info">
+              <div class="venue-name">Ikseon-dong at Night</div>
+              <div class="venue-area">Jongno</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">Varies</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc"><strong>What to do:</strong> Reuters explicitly calls out nighttime energy here — food stalls, bars, jazz clubs in converted hanok spaces. This is Seoul's best "wander until you find your vibe" late-night zone. Pair with a walk along Cheonggyecheon stream.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🏮</div>
+            <div class="venue-info">
+              <div class="venue-name">Euljiro Back Alleys</div>
+              <div class="venue-area">Euljiro</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$10–20</span>
+          </div>
+          <div class="venue-desc"><strong>What to do:</strong> "Hip" bar density + backstreet food. Where you go for "hidden door" bars — they literally hide. Use Naver Map to pin a few targets before heading out. The industrial-meets-trendy vibe is peak Seoul nightlife.</div>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: SEOUL BARS ========== -->
+    <details class="sub-section" id="seoul-bars">
+      <summary>🍸 Bars & Cocktails</summary>
+      <div class="sub-content">
+        <p class="section-intro">Seoul's cocktail scene has exploded — multiple bars now rank on Asia's 50 Best and World's Best lists. These are the cream of the crop.</p>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍸</div>
+            <div class="venue-info">
+              <div class="venue-name">Zest</div>
+              <div class="venue-area">Seoul</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve recommended</span>
+            <span class="badge badge-price">$18–25 per drink</span>
+            <span class="badge badge-validated">✓ #2 Asia's 50 Best</span>
+          </div>
+          <div class="venue-desc">No. 2 on Asia's 50 Best Bars 2025, also ranked on the World's list. If you visit one cocktail bar in Seoul, this is the one. Book ahead.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍸</div>
+            <div class="venue-info">
+              <div class="venue-name">Bar Cham</div>
+              <div class="venue-area">Seoul</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in OK</span>
+            <span class="badge badge-price">$15–22 per drink</span>
+            <span class="badge badge-validated">✓ Asia's 50 Best</span>
+          </div>
+          <div class="venue-desc">Asia's 50 Best Bar with strong "know before you go" detail from Eater. Korean-inspired cocktails using local ingredients.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍸</div>
+            <div class="venue-info">
+              <div class="venue-name">Alice</div>
+              <div class="venue-area">Seoul</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in OK</span>
+            <span class="badge badge-price">$15–22 per drink</span>
+            <span class="badge badge-validated">✓ Asia's 50 Best</span>
+          </div>
+          <div class="venue-desc">Asia's 50 Best Bar. Korean Herald coverage ties the ranking to the experience — creative cocktails in a Wonderland-themed space.</div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">🍸</div>
+            <div class="venue-info">
+              <div class="venue-name">Le Chamber</div>
+              <div class="venue-area">Gangnam</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$18–25 per drink</span>
+            <span class="badge badge-validated">✓ Asia's 50 Best</span>
+          </div>
+          <div class="venue-desc">Speakeasy with a <strong>bookshelf entrance</strong> — 50Best Discovery details the mechanics. The experience starts at the door. One of Seoul's best "date night" bars.</div>
+        </div>
+
+        <div class="callout">
+          <strong>🍸 Seoul bar tip:</strong> Ikseon-dong has great small bars in converted hanok buildings — perfect for a more casual, walk-around evening. Euljiro has the "hidden door" speakeasy scene. Both are more accessible than the ranked bars above.
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: SEOUL KBBQ GUIDE ========== -->
+    <details class="sub-section" id="seoul-kbbq-guide">
+      <summary>🥩 KBBQ Master Guide</summary>
+      <div class="sub-content">
+        <p class="section-intro">A dedicated guide to getting the most out of Seoul's KBBQ scene — the validated picks, the rituals, and the tips that separate great meals from tourist-trap experiences.</p>
+
+        <div class="kbbq-ritual">
+          <h4>🔥 Mongtan</h4>
+          <p class="kbbq-sub">Yongsan · $30–50pp · Beef-focused</p>
+          <p class="kbbq-detail"><strong>The ritual:</strong> Udae galbi (beef rib) seared over straw fire, then the signature <strong>fried rice finish</strong> — they make it in the remaining beef fat on the grill. The Infatuation explains "the wait is part of the ritual." Go at opening (11am) to minimize the line.</p>
+          <p class="kbbq-order">Order: Udae galbi → watch them cook → fried rice finish. Don't skip the fried rice.</p>
+        </div>
+
+        <div class="kbbq-ritual">
+          <h4>🏅 Geumdwaeji Sikdang</h4>
+          <p class="kbbq-sub">Seoul · $15–25pp · Pork-focused · Michelin Bib Gourmand</p>
+          <p class="kbbq-detail"><strong>The ritual:</strong> Pork cuts grilled to perfection with disciplined sides and stew. Michelin Bib Gourmand listing in the 2025 Guide says everything — excellent quality at accessible prices. Ask staff for the best pork set of the day.</p>
+          <p class="kbbq-order">Order: Staff-recommended pork set + kimchi jjigae on the side.</p>
+        </div>
+
+        <div class="kbbq-ritual">
+          <h4>🐷 Nari's House</h4>
+          <p class="kbbq-sub">Seoul · $15–25pp · Pork belly · Old-school nopo</p>
+          <p class="kbbq-detail"><strong>The ritual:</strong> Old-school, no-frills pork belly joint. "A nopo that refuses to change." They have a ticket/numbering system — learn it or risk confusion. Thin-sliced pork belly + scallion salad is the signature. The Infatuation provides detailed intel.</p>
+          <p class="kbbq-order">Order: Thin-sliced pork belly + scallion salad. Wrap in lettuce with ssamjang.</p>
+        </div>
+
+        <div class="kbbq-ritual">
+          <h4>🥩 Woo Lae Oak</h4>
+          <p class="kbbq-sub">Jung-gu · $20–35pp · Beef · Seoul institution</p>
+          <p class="kbbq-detail"><strong>The ritual:</strong> Classic Seoul bulgogi + naengmyeon (cold buckwheat noodles). Operating for decades — Reuters explicitly recommends these dishes. The bulgogi is cooked in broth on the table. End with naengmyeon to cleanse the palate.</p>
+          <p class="kbbq-order">Order: Bulgogi (cooked tableside) → naengmyeon to finish.</p>
+        </div>
+
+        <div class="info-block mt-md">
+          <h4>📋 KBBQ Tips for Couples</h4>
+          <ul>
+            <li><strong>Minimum orders:</strong> Most places require 2-portion minimums (even for 2 people). Budget accordingly — this is usually ~$30–50 total for pork, $50–80 for beef.</li>
+            <li><strong>Wait systems:</strong> Many top spots use paper numbering or digital waitlists. Arrive early (opening time) or be prepared to wait 30–60 min at dinner.</li>
+            <li><strong>Let staff cook:</strong> At many places, the staff will grill for you. Let them — they know the timing better than you do.</li>
+            <li><strong>Wrap everything:</strong> Lettuce + perilla leaf + ssamjang + garlic + meat = the proper bite. Raw garlic on the grill is also standard.</li>
+            <li><strong>Side dish refills:</strong> Banchan (side dishes) are free to refill. Just ask.</li>
+            <li><strong>Skip tourist KBBQ:</strong> Born and Bred, Samwon Garden = tourist traps. Stick to the validated picks above.</li>
+          </ul>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: SEOUL JJIMJILBANG ========== -->
+    <details class="sub-section" id="seoul-jjimjilbang">
+      <summary>♨️ Jjimjilbang (Korean Spa)</summary>
+      <div class="sub-content">
+        <p class="section-intro">The Korean spa experience — communal bathing, saunas, sleeping rooms, and snacks. A cultural must-do that also happens to be the perfect recovery after a day of walking in February cold.</p>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">♨️</div>
+            <div class="venue-info">
+              <div class="venue-name">Sparex Good Morning City</div>
+              <div class="venue-area">Dongdaemun</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">~$12–15</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc">Central, tourist-accessible, multiple saunas and pools. Both Klook and Trazy provide operating-hour specifics. The "safe first jjimjilbang" pick — well-run, clean, and easy to navigate even if it's your first time.
+          <span class="rec">Bring your own towel or rent one there. You will be naked in the bathing area (gender-separated).</span></div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kr);">
+          <div class="venue-top">
+            <div class="venue-emoji">♨️</div>
+            <div class="venue-info">
+              <div class="venue-name">Aquafield Hanam</div>
+              <div class="venue-area">Hanam (outside Seoul)</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">~$25–35</span>
+            <span class="badge badge-validated">✓ Multi-source</span>
+          </div>
+          <div class="venue-desc">Modern "fancy jjimjilbang" — the luxury version. Worth the commute if you want the full Korean spa experience done at the highest level. Infinity pools, themed saunas, restaurant on-site. Klook's 2025 blog and destination page both recommend it.
+          <span class="rec">⚠️ About 40 min from central Seoul. Only do this if you have a free half-day.</span></div>
+        </div>
+
+        <div class="callout">
+          <strong>♨️ Jjimjilbang etiquette:</strong> Shower thoroughly before entering pools. Nudity is required in gender-separated bathing areas (you get pajamas for the shared common areas). Bring your own toiletries or buy there. Don't rush — the whole point is to slow down and recover.
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: SEOUL BASE CAMP HOTELS ========== -->
+    <details class="sub-section" id="seoul-basecamp">
+      <summary>🏨 Base Camp Hotels (Budget Alternative)</summary>
+      <div class="sub-content">
+        <p class="section-intro">Best-value alternatives if you're not using hotel points — saving on hotels means more KBBQ, more cocktail bars, more jjimjilbang.</p>
+
+        <div class="hotel-card">
+          <h4>Nine Tree by Parnas Myeongdong <span class="basecamp-tag">Base Camp</span></h4>
+          <p class="hotel-sub">Myeongdong · ~$106/night · 5 min to Euljiro 3-ga Stn</p>
+          <p class="hotel-detail">Multiple firsthand reports emphasize "great location," daily cleaning, friendly staff, and useful common areas. Also noted for an in-building convenience store. Repeatedly mentioned as a solid Myeongdong pick on Reddit.</p>
+        </div>
+
+        <div class="hotel-card">
+          <h4>Holiday Inn Express Seoul Hongdae <span class="basecamp-tag">Base Camp</span></h4>
+          <p class="hotel-sub">Hongdae · ~$99/night · Near station (Hongik University)</p>
+          <p class="hotel-detail">Explicitly recommended as "best option overall" in Hongdae discussions on Reddit. Effectively "station-integrated," minimizing walking friction. Breakfast included — improves total value. Great if you want Hongdae energy without boutique pricing.</p>
+        </div>
+
+        <div class="hotel-card">
+          <h4>L7 Myeongdong by Lotte <span class="basecamp-tag">Base Camp</span></h4>
+          <p class="hotel-sub">Myeongdong · ~$122/night · Central convenience</p>
+          <p class="hotel-detail">Consistent "clean + convenient" positioning. Multiple travelers note the neighborhood convenience as the reason to choose it. Myeongdong is Seoul's easiest base for international travelers — high transit density, easy shopping/food.</p>
+        </div>
+
+        <div class="callout">
+          <strong>💡 Seoul hotel tip:</strong> Myeongdong = maximum convenience (transit, shopping, food). Hongdae = more energy, better nightlife, slightly cheaper. Both are excellent bases. Seoul's subway system is world-class, so you're never far from anywhere.
+        </div>
+
+      </div>
+    </details>
+
   </div>
 </div>
 
@@ -5005,6 +6127,92 @@ body {
             <tr><td>맛있어요 (Mashisseoyo)</td><td>It's delicious!</td></tr>
             <tr><td>계산이요 (Gyesanniyo)</td><td>Check please</td></tr>
             <tr><td>화장실 (Hwajangshil)</td><td>Bathroom</td></tr>
+          </table>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: COMMON MISTAKES ========== -->
+    <details class="sub-section" id="common-mistakes">
+      <summary>🚫 Top 10 First-Timer Mistakes</summary>
+      <div class="sub-content">
+        <p class="section-intro">Compiled from deep research across hundreds of Reddit threads, travel blogs, and expert guides. Avoid these and you're already ahead of 90% of first-time visitors.</p>
+
+        <div class="info-block">
+          <div class="skip-item"><span class="skip-icon">1️⃣</span><span><strong>Trying to "see everything"</strong> — Treat Tokyo as neighborhoods, not a checklist. One major area + one adjacent micro-area per day is the sustainable pattern. Zig-zagging across the city is the #1 planning mistake.</span></div>
+          <div class="skip-item"><span class="skip-icon">2️⃣</span><span><strong>Not aligning Kyoto days to walking routes</strong> — Use the Ginkaku-ji → Philosopher's Path corridor. Kyoto's payoff comes from routes + early timing, not checking temple boxes.</span></div>
+          <div class="skip-item"><span class="skip-icon">3️⃣</span><span><strong>Underpacking warm layers for Seoul</strong> — Seoul in February is -6°C to 3°C. It's significantly colder than Japan. Pack a real winter layer for the Korea leg.</span></div>
+          <div class="skip-item"><span class="skip-icon">4️⃣</span><span><strong>Not carrying cash in Japan</strong> — Cash-only is still common enough to matter. Carry ¥10,000–20,000. ATMs at 7-Eleven and FamilyMart work with foreign cards.</span></div>
+          <div class="skip-item"><span class="skip-icon">5️⃣</span><span><strong>Waiting 2 hours for one restaurant</strong> — There's always equally good food nearby. Use Tabelog ratings (3.5+ = good, 3.8+ = excellent, 4.0+ = world-class). Build a 2–3 spot cluster per meal as fallback.</span></div>
+          <div class="skip-item"><span class="skip-icon">6️⃣</span><span><strong>Buying a full JR Pass</strong> — For Tokyo → Kyoto only, it's NOT worth it. Buy individual shinkansen tickets via SmartEX. The math never works for this route.</span></div>
+          <div class="skip-item"><span class="skip-icon">7️⃣</span><span><strong>Ignoring KBBQ minimum orders in Seoul</strong> — Most places require 2-portion minimums. Budget accordingly — and learn the wait/numbering systems before you go.</span></div>
+          <div class="skip-item"><span class="skip-icon">8️⃣</span><span><strong>Over-trusting "viral" food picks</strong> — Use the "multi-source validated" lens. If only one influencer recommends it, verify before planning your day around it.</span></div>
+          <div class="skip-item"><span class="skip-icon">9️⃣</span><span><strong>Not checking winter closing times</strong> — Many temples and attractions close 1 hour earlier in winter. Last entry can be 3:30pm. The 10am–4pm window is precious — don't waste it on things that can be done at night.</span></div>
+          <div class="skip-item"><span class="skip-icon">🔟</span><span><strong>Using Google Maps in Korea</strong> — Google Maps is unreliable in South Korea. Download <strong>Naver Map</strong> (essential) and <strong>KakaoMap</strong> (backup) before you arrive.</span></div>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: CASH VS CARD ========== -->
+    <details class="sub-section" id="cash-card-tips">
+      <summary>💳 Cash vs Card Tips</summary>
+      <div class="sub-content">
+
+        <div class="info-block">
+          <h4>🇯🇵 Japan</h4>
+          <ul>
+            <li><strong>Carry cash:</strong> ¥10,000–20,000 at all times. Many small restaurants, izakaya, and market stalls are cash-only.</li>
+            <li><strong>IC card (Suica/Pasmo):</strong> Load in Apple Wallet before arrival. Works for trains, buses, konbini, vending machines.</li>
+            <li><strong>ATMs:</strong> 7-Eleven and FamilyMart ATMs accept foreign cards reliably. Post Office ATMs also work.</li>
+            <li><strong>Credit cards:</strong> Accepted at department stores, chain restaurants, and hotels. Not at many small shops.</li>
+            <li><strong>No tipping.</strong> Ever. It's considered rude.</li>
+            <li>⚠️ <strong>Metal credit cards</strong> are sometimes rejected by card readers. Bring a regular plastic backup.</li>
+          </ul>
+        </div>
+
+        <div class="info-block">
+          <h4>🇰🇷 South Korea</h4>
+          <ul>
+            <li><strong>Card-friendly:</strong> South Korea is much more card-friendly than Japan. Credit/debit cards work almost everywhere.</li>
+            <li><strong>T-money card:</strong> Buy at any convenience store (₩2,500/$1.75). Works on all subway and buses. Tap on AND off.</li>
+            <li><strong>Some cash still needed:</strong> Market stalls, small nopo restaurants, pojangmacha stands often prefer cash.</li>
+            <li><strong>No tipping.</strong> Same as Japan.</li>
+          </ul>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ========== DEEP RESEARCH: ADDITIONAL KEY PHRASES ========== -->
+    <details class="sub-section" id="extra-phrases">
+      <summary>🗣️ More Key Phrases (Deep Research)</summary>
+      <div class="sub-content">
+        <p class="section-intro">Additional phrases beyond the basics above — useful for dining, shopping, and getting around.</p>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 12px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🇯🇵 Japanese (Romanized)</h4>
+        <div class="info-block">
+          <table class="phrase-table">
+            <tr><td>Ohayō gozaimasu</td><td>Good morning</td></tr>
+            <tr><td>Konbanwa</td><td>Good evening</td></tr>
+            <tr><td>Ikura desu ka?</td><td>How much is it?</td></tr>
+            <tr><td>Eki wa doko desu ka?</td><td>Where is the station?</td></tr>
+            <tr><td>Daijōbu desu</td><td>It's okay / I'm fine</td></tr>
+            <tr><td>Oishii desu</td><td>It's delicious!</td></tr>
+          </table>
+        </div>
+
+        <h4 style="font-size:11px; font-weight:600; color:var(--text-muted); margin: 16px 0 8px; text-transform:uppercase; letter-spacing:0.5px;">🇰🇷 Korean (Romanized)</h4>
+        <div class="info-block">
+          <table class="phrase-table">
+            <tr><td>Annyeonghaseyo</td><td>Hello (formal)</td></tr>
+            <tr><td>Eodi-yeyo?</td><td>Where is it?</td></tr>
+            <tr><td>Hwajangsil eodi-yeyo?</td><td>Where is the bathroom?</td></tr>
+            <tr><td>Maepji angeyo</td><td>Not spicy (important!)</td></tr>
+            <tr><td>Maewo-yo</td><td>It's spicy</td></tr>
+            <tr><td>Jal meokgesseumnida</td><td>"I will eat well" (say before eating)</td></tr>
+            <tr><td>Jal meogeosseumnida</td><td>"I ate well" (say after eating)</td></tr>
           </table>
         </div>
 

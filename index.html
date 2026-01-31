@@ -2993,8 +2993,79 @@ body {
       <h2>📋 Practical Info</h2>
     </div>
 
-    <!-- BUDGET -->
+    <!-- CURRENCY CONVERTER -->
     <details class="sub-section" open>
+      <summary>💱 Currency Converter</summary>
+      <div class="sub-content">
+        <div class="info-block" style="padding:16px;">
+
+          <!-- JPY Converter -->
+          <h4 style="margin-bottom:10px;">🇯🇵 USD ↔ JPY</h4>
+          <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+            <div style="flex:1;">
+              <label style="font-size:11px; color:var(--text-muted); font-weight:600;">USD $</label>
+              <input type="number" id="usd-jpy" placeholder="100" inputmode="decimal"
+                style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); color:var(--text); font-size:16px; font-family:var(--font-sans);"
+                oninput="convertCurrency('usd-jpy','jpy-usd',154.15,true)">
+            </div>
+            <div style="font-size:20px; color:var(--text-muted); padding-top:16px;">⇄</div>
+            <div style="flex:1;">
+              <label style="font-size:11px; color:var(--text-muted); font-weight:600;">¥ JPY</label>
+              <input type="number" id="jpy-usd" placeholder="15,415" inputmode="decimal"
+                style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); color:var(--text); font-size:16px; font-family:var(--font-sans);"
+                oninput="convertCurrency('jpy-usd','usd-jpy',154.15,false)">
+            </div>
+          </div>
+          <p style="font-size:11px; color:var(--text-light); margin-bottom:16px;">Rate: $1 = ¥154.15 · <em>Updated Jan 31, 2026</em></p>
+
+          <!-- Quick reference chips for JPY -->
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
+            <button onclick="quickConvert('usd-jpy','jpy-usd',154.15,true,500)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">¥500 → ?</button>
+            <button onclick="quickConvert('usd-jpy','jpy-usd',154.15,false,1000)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">¥1,000</button>
+            <button onclick="quickConvert('usd-jpy','jpy-usd',154.15,false,5000)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">¥5,000</button>
+            <button onclick="quickConvert('usd-jpy','jpy-usd',154.15,false,10000)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">¥10,000</button>
+            <button onclick="quickConvert('usd-jpy','jpy-usd',154.15,true,20)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">$20</button>
+            <button onclick="quickConvert('usd-jpy','jpy-usd',154.15,true,50)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">$50</button>
+            <button onclick="quickConvert('usd-jpy','jpy-usd',154.15,true,100)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">$100</button>
+          </div>
+
+          <div style="height:1px; background:var(--border); margin:16px 0;"></div>
+
+          <!-- KRW Converter -->
+          <h4 style="margin-bottom:10px;">🇰🇷 USD ↔ KRW</h4>
+          <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+            <div style="flex:1;">
+              <label style="font-size:11px; color:var(--text-muted); font-weight:600;">USD $</label>
+              <input type="number" id="usd-krw" placeholder="100" inputmode="decimal"
+                style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); color:var(--text); font-size:16px; font-family:var(--font-sans);"
+                oninput="convertCurrency('usd-krw','krw-usd',1450,true)">
+            </div>
+            <div style="font-size:20px; color:var(--text-muted); padding-top:16px;">⇄</div>
+            <div style="flex:1;">
+              <label style="font-size:11px; color:var(--text-muted); font-weight:600;">₩ KRW</label>
+              <input type="number" id="krw-usd" placeholder="145,000" inputmode="decimal"
+                style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); color:var(--text); font-size:16px; font-family:var(--font-sans);"
+                oninput="convertCurrency('krw-usd','usd-krw',1450,false)">
+            </div>
+          </div>
+          <p style="font-size:11px; color:var(--text-light); margin-bottom:16px;">Rate: $1 = ₩1,450 · <em>Updated Jan 31, 2026</em></p>
+
+          <!-- Quick reference chips for KRW -->
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <button onclick="quickConvert('usd-krw','krw-usd',1450,false,5000)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">₩5,000</button>
+            <button onclick="quickConvert('usd-krw','krw-usd',1450,false,10000)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">₩10,000</button>
+            <button onclick="quickConvert('usd-krw','krw-usd',1450,false,50000)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">₩50,000</button>
+            <button onclick="quickConvert('usd-krw','krw-usd',1450,true,10)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">$10</button>
+            <button onclick="quickConvert('usd-krw','krw-usd',1450,true,50)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">$50</button>
+            <button onclick="quickConvert('usd-krw','krw-usd',1450,true,100)" class="badge" style="cursor:pointer; border:1px solid var(--border); background:var(--tag-bg); color:var(--tag-text);">$100</button>
+          </div>
+
+        </div>
+      </div>
+    </details>
+
+    <!-- BUDGET -->
+    <details class="sub-section">
       <summary>💰 Budget Summary</summary>
       <div class="sub-content">
 
@@ -3368,6 +3439,29 @@ window.addEventListener('scroll', () => {
     ticking = true;
   }
 }, { passive: true });
+
+// Currency converter - bidirectional
+function convertCurrency(fromId, toId, rate, isUsdToForeign) {
+  const fromEl = document.getElementById(fromId);
+  const toEl = document.getElementById(toId);
+  const val = parseFloat(fromEl.value);
+  if (isNaN(val) || val === 0) { toEl.value = ''; return; }
+  if (isUsdToForeign) {
+    toEl.value = Math.round(val * rate);
+  } else {
+    toEl.value = (val / rate).toFixed(2);
+  }
+}
+
+function quickConvert(usdId, foreignId, rate, isUsd, amount) {
+  if (isUsd) {
+    document.getElementById(usdId).value = amount;
+    document.getElementById(foreignId).value = Math.round(amount * rate);
+  } else {
+    document.getElementById(foreignId).value = amount;
+    document.getElementById(usdId).value = (amount / rate).toFixed(2);
+  }
+}
 
 // Active tab tracking based on initial load
 document.addEventListener('DOMContentLoaded', () => {

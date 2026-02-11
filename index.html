@@ -689,6 +689,18 @@ body {
   opacity: 0.7;
   margin-left: 2px;
 }
+.filter-search {
+  margin-left: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: var(--font-sans);
+  background: var(--bg-card);
+  color: var(--text);
+  min-width: 220px;
+}
+.filter-search:focus { outline: none; border-color: var(--accent-jp); }
 .vc-filtered-out { display: none !important; }
 
 /* ========== COLLAPSIBLE SUBSECTIONS ========== */
@@ -1622,6 +1634,7 @@ body {
   <button class="filter-btn" data-filter="must">🔥 Must Go <span class="filter-count">0</span></button>
   <button class="filter-btn" data-filter="skip">❌ Skip <span class="filter-count">0</span></button>
   <button class="filter-btn" data-filter="undecided">🤷 Undecided <span class="filter-count">0</span></button>
+  <input id="venueSearch" class="filter-search" type="search" placeholder="Search restaurants, coffee, bars…" />
 </div>
 
 <!-- ========================================== -->
@@ -1708,6 +1721,16 @@ body {
 
   <div class="quick-ref">
     <h3>⚡ Quick Reference Cheat Sheet</h3>
+    <div class="callout" style="margin: 10px 0 14px; border-left-color: var(--badge-book);">
+      <strong>✅ Confirmed Bookings (Locked)</strong>
+      <ul style="margin-top:8px;">
+        <li><strong>Flight in:</strong> LAX → NRT, ANA NH005, Feb 18, Business Class (Reservation #E6XFGQ)</li>
+        <li><strong>Tokyo hotel:</strong> Dormy Inn Premium Kanda, Feb 19–23 (4 nights) — ¥114,770</li>
+        <li><strong>Shinkansen:</strong> Tokyo → Kyoto, Nozomi 31, Feb 23, Car 12 seats 11-D/11-E — ¥27,940</li>
+        <li><strong>Kyoto hotel:</strong> Sakura Terrace, Feb 23–25 (2 nights) — $155.65 (Reservation #T6F65A2EEC128)</li>
+        <li><strong>TeamLab Biovortex Kyoto:</strong> Feb 24, 9:00–9:30am entry, 2 adults — ¥9,200 (Ticket #KY7AXRAWNWRPM-0001)</li>
+      </ul>
+    </div>
     <div class="qr-grid">
 
       <div class="qr-item">
@@ -1873,6 +1896,22 @@ body {
       <h2>🗼 Tokyo</h2>
     </div>
     <p class="text-sm text-muted mb-md">Feb 19–23 · Park Hyatt Tokyo · 4 nights</p>
+
+    <div class="callout">
+      <strong>2026 re-consolidated tiers (keeps your Must Go / Skip votes):</strong><br>
+      <strong>Tier 1 anchors:</strong> Ginza Hachigou ⚠️, Nakiryu, Tonki, Taimeiken, L'ambre, Koffee Mameya Kakeru ⚠️, Azukitokouri ⚠️, Bar Benfiddich ⚠️.<br>
+      <strong>New adds worth considering:</strong> Badu 🆕, Hitohi 🆕, Ginza HARU CHAN Ramen 🆕, Kuro Mame coffee omakase 🆕, Virtù 🆕.<br>
+      <span class="text-sm text-muted">Legend: ⚠️ reserve ahead, 🚶 walk-in friendly. Existing cards kept intact so your going/not-going marks remain.</span>
+    </div>
+
+    <div class="info-block">
+      <h4>📊 Tokyo v2 Tier Board</h4>
+      <ul>
+        <li><strong>Tier 1 — Don’t Miss:</strong> Ginza Hachigou ⚠️ · Nakiryu 🚶 · Tonki 🚶 · Taimeiken 🚶 · L'ambre 🚶 · Koffee Mameya Kakeru ⚠️ · Azukitokouri ⚠️ · Bar Benfiddich ⚠️</li>
+        <li><strong>Tier 2 — Strong Picks:</strong> Butagumi ⚠️ · Ginza Katsukami 2 ⚠️ · Hikiniku to Come 🚶 · Sato Yosuke 🚶 · Glitch Coffee 🚶 · The Bellwood ⚠️</li>
+        <li><strong>Tier 3 — If Time:</strong> Pizza Marumo 🚶 · PST 🚶 · Yoshinoya 🚶 · Sézanne ⚠️💰 · Kanda ⚠️💰</li>
+      </ul>
+    </div>
 
     <!-- Hotel -->
     <div class="hotel-card">
@@ -3396,6 +3435,22 @@ body {
     </div>
     <p class="text-sm text-muted mb-md">Feb 23–26 · Dusit Thani Kyoto · 3 nights</p>
 
+    <div class="callout">
+      <strong>2026 re-consolidated tiers:</strong><br>
+      <strong>Tier 1 anchors:</strong> Wajoryomen Sugari 🚶, Men-ya Inoichi 🚶, Hikiniku to Come OG 🚶, Kurasu 🚶, Bee's Knees ⚠️.<br>
+      <strong>New adds:</strong> Sonoba 🆕, Badu Kyoto 🆕, Suiba Shijo 🆕, Inoda Coffee (1940) 🆕, Torinokoku (2025 speakeasy) 🆕.<br>
+      <span class="text-sm text-muted">Kyoto is tight at 3 nights — these are best leverage picks.</span>
+    </div>
+
+    <div class="info-block">
+      <h4>📊 Kyoto v2 Tier Board</h4>
+      <ul>
+        <li><strong>Tier 1 — Don’t Miss:</strong> Wajoryomen Sugari 🚶 · Men-ya Inoichi 🚶 · Hikiniku to Come OG 🚶 · Sonoba 🆕 · Kurasu 🚶 · Bee's Knees ⚠️</li>
+        <li><strong>Tier 2 — Strong Picks:</strong> Gion Duck Rice 🚶 · Menbakaichidai 🚶 · Inoda Coffee 🆕 · Smart Coffee 🆕 · Torinokoku 🆕</li>
+        <li><strong>Tier 3 — If Time:</strong> Blue Bottle Kyoto 🚶 · K36 rooftop ⚠️ · hotel omakase/fine dining ⚠️💰</li>
+      </ul>
+    </div>
+
     <!-- Hotel -->
     <div class="hotel-card">
       <h4>Dusit Thani Kyoto <span class="fhr-tag">Amex FHR</span></h4>
@@ -3706,6 +3761,102 @@ body {
           <div class="venue-desc">"PLEASE go here, so worth it" — Reddit. Japanese set meal. Get there before the line builds.</div>
         </div>
 
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🔥</div>
+            <div class="venue-info">
+              <div class="venue-name">Badu</div>
+              <div class="venue-area">Higashiyama</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve recommended</span>
+            <span class="badge badge-price">$30–55pp</span>
+            <span class="badge badge-source">Tier 1</span>
+          </div>
+          <div class="venue-desc">Charcoal-grilled vegetables and Italian-izakaya dishes from a chef with Monk roots. Strong dinner anchor after Higashiyama walks.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍜</div>
+            <div class="venue-info">
+              <div class="venue-name">Sonoba</div>
+              <div class="venue-area">Central Kyoto</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-line">🟡 Small room</span>
+            <span class="badge badge-price">$15–30pp</span>
+            <span class="badge badge-source">Tier 1</span>
+          </div>
+          <div class="venue-desc">Hand-cut soba and duck nanban in a tiny room; chef also makes the pottery. A distinctly Kyoto meal that still feels casual.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍶</div>
+            <div class="venue-info">
+              <div class="venue-name">Suiba Shijo</div>
+              <div class="venue-area">Shijo Kawaramachi</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-walkin">🟢 Walk-in</span>
+            <span class="badge badge-price">$12–25pp</span>
+            <span class="badge badge-source">Tier 1</span>
+          </div>
+          <div class="venue-desc">Standing izakaya with local energy, strong value, and fast service. Great casual first-night or post-walk dinner option.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🍽️</div>
+            <div class="venue-info">
+              <div class="venue-name">Ima</div>
+              <div class="venue-area">Kyoto</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve</span>
+            <span class="badge badge-price">$65–110pp</span>
+            <span class="badge badge-source">Tier 2</span>
+          </div>
+          <div class="venue-desc">Wood-fire French-Japanese spot with only about a dozen seats. Good fit for one intentional Kyoto dinner.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">⭐</div>
+            <div class="venue-info">
+              <div class="venue-name">Moko</div>
+              <div class="venue-area">Kyoto</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve</span>
+            <span class="badge badge-price">$85–140pp</span>
+            <span class="badge badge-source">Tier 2</span>
+          </div>
+          <div class="venue-desc">Michelin-starred nose-to-tail fine dining with a warm, less-stiff tone. Useful as the splurge alternative to kaiseki.</div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-top">
+            <div class="venue-emoji">🌿</div>
+            <div class="venue-info">
+              <div class="venue-name">Tan</div>
+              <div class="venue-area">Kyoto</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Reserve</span>
+            <span class="badge badge-price">$70–120pp</span>
+            <span class="badge badge-source">Tier 2</span>
+          </div>
+          <div class="venue-desc">Michelin Green Star farm-to-table cooking focused on seasonal produce. High-quality Kyoto splurge with sustainability focus.</div>
+        </div>
+
         <div class="callout">
           <strong>Kyoto hack:</strong> Kaiseki lunch sets (¥5,000–8,000) at restaurants that charge ¥15,000–30,000 for dinner. Also look for <strong>obanzai</strong> — Kyoto's home-style cooking. Small dishes, seasonal vegetables, tofu, pickles.
         </div>
@@ -3732,6 +3883,21 @@ body {
           <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–7</span></div>
           <div class="venue-desc">Cozy, bookish. Hidden, quiet, surrounded by trees. Perfect Amy cafe.</div>
         </div>
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">☕</div><div class="venue-info"><div class="venue-name">Inoda Coffee (Honten)</div><div class="venue-area">Central Kyoto · Since 1940</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$8–12</span><span class="badge badge-source">Tier 1</span></div>
+          <div class="venue-desc">Classic European-retro kissaten breakfast stop. A top-tier Kyoto morning move before Nishiki or TeamLab.</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🥞</div><div class="venue-info"><div class="venue-name">Smart Coffee</div><div class="venue-area">Central Kyoto</div></div></div>
+          <div class="venue-meta"><span class="badge badge-line">🟡 Popular mornings</span><span class="badge badge-price">$8–12</span><span class="badge badge-source">Tier 1</span></div>
+          <div class="venue-desc">Generations-old coffee shop known for fluffy hotcakes and old-school service. Great for Feb 25 slow morning.</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">☕</div><div class="venue-info"><div class="venue-name">Goodman Roaster</div><div class="venue-area">Kyoto</div></div></div>
+          <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$5–8</span><span class="badge badge-source">Tier 1</span></div>
+          <div class="venue-desc">Widely praised for espresso quality and bean roasting. Strong specialty stop if you want one high-signal coffee run.</div>
+        </div>
       </div>
     </details>
 
@@ -3743,6 +3909,16 @@ body {
           <div class="venue-top"><div class="venue-emoji">🍶</div><div class="venue-info"><div class="venue-name">Fushimi Sake Breweries</div><div class="venue-area">Fushimi district</div></div></div>
           <div class="venue-meta"><span class="badge badge-walkin">🟢 Walk-in</span><span class="badge badge-price">$2–3/tasting</span></div>
           <div class="venue-desc">Kyoto's #2 sake production area. Visit <strong>Gekkeikan Okura</strong> or <strong>Kizakura Kappa Country</strong>. ¥300–500 tastings. Cultural experience + museum.</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🥃</div><div class="venue-info"><div class="venue-name">Bar K6</div><div class="venue-area">Kyoto · Whisky Bar</div></div></div>
+          <div class="venue-meta"><span class="badge badge-book">🔴 Go early</span><span class="badge badge-price">~¥1,200+ per pour</span><span class="badge badge-source">Tier 1</span></div>
+          <div class="venue-desc">High-signal whisky bar with a massive Japanese whisky lineup. Ideal for one focused cocktail/whisky night.</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-top"><div class="venue-emoji">🍸</div><div class="venue-info"><div class="venue-name">Bar Cordon Noir</div><div class="venue-area">Kyoto · Cocktail/Whisky</div></div></div>
+          <div class="venue-meta"><span class="badge badge-book">🔴 Late-night favorite</span><span class="badge badge-price">$12–22 per drink</span><span class="badge badge-source">Tier 1</span></div>
+          <div class="venue-desc">Rare whisky bottles plus polished classic cocktails. Strong second stop after dinner in central Kyoto.</div>
         </div>
         <div class="info-block">
           <h4>🏮 Pontocho Alley</h4>
@@ -3770,6 +3946,22 @@ body {
             <span class="badge badge-price">Free</span>
           </div>
           <div class="venue-desc">GO BEFORE 9AM. Keep walking past where everyone stops. The mountain loop is the real experience. <em>The one temple you need to do. Skip the rest.</em></div>
+        </div>
+
+        <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
+          <div class="venue-top">
+            <div class="venue-emoji">🌀</div>
+            <div class="venue-info">
+              <div class="venue-name">TeamLab Biovortex Kyoto</div>
+              <div class="venue-area">Kyoto Station area</div>
+            </div>
+          </div>
+          <div class="venue-meta">
+            <span class="badge badge-book">🔴 Ticket booked</span>
+            <span class="badge badge-price">¥9,200 (2 adults)</span>
+            <span class="badge badge-source">Feb 24 · 9:00–9:30am entry</span>
+          </div>
+          <div class="venue-desc">Immersive digital art installation. Confirmed booking with timed entry ticket #KY7AXRAWNWRPM-0001.</div>
         </div>
 
         <div class="venue-card" style="border-left-color: var(--accent-kyoto);">
@@ -4381,6 +4573,22 @@ body {
       <h2>🇰🇷 Seoul</h2>
     </div>
     <p class="text-sm text-muted mb-md">Feb 26 – Mar 2/3 · Conrad Seoul · 4 nights</p>
+
+    <div class="callout">
+      <strong>2026 re-consolidated tiers:</strong><br>
+      <strong>Tier 1 anchors:</strong> Mongtan ⚠️, Woo Lae Oak, Hadongkwan, Imun Seolnongtang, Gwangjang Market, Bar Cham ⚠️, Zest ⚠️ 🆕.<br>
+      <strong>New adds:</strong> Pigbar 🆕, Sancheong Charcoal Garden ⚠️🆕, Café Onion Gwangjang 🆕, Artist Bakery 🆕, Alice Cheongdam ⚠️🆕.<br>
+      <span class="text-sm text-muted">You said fancy + touristy are both fair game, so this keeps iconic + soulful together.</span>
+    </div>
+
+    <div class="info-block">
+      <h4>📊 Seoul v2 Tier Board</h4>
+      <ul>
+        <li><strong>Tier 1 — Don’t Miss:</strong> Mongtan ⚠️ · Woo Lae Oak 🚶 · Hadongkwan 🚶 · Imun Seolnongtang 🚶 · Gwangjang Market 🚶 · Bar Cham ⚠️ · Zest ⚠️ 🆕</li>
+        <li><strong>Tier 2 — Strong Picks:</strong> Pigbar 🆕 · Sancheong Charcoal Garden ⚠️🆕 · Sanullim 1992 ⚠️ · Fritz Wonseo 🚶 · Café Onion Anguk 🚶 · Seoul Gypsy 🚶</li>
+        <li><strong>Tier 3 — If Time:</strong> London Bagel Museum 🚶(line) · Shilla Bingsoo 💰 · Alice Cheongdam ⚠️🆕 · Mingles ⚠️💰</li>
+      </ul>
+    </div>
 
     <!-- Hotel -->
     <div class="hotel-card">
@@ -7227,7 +7435,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!filterBar) return;
 
     var filterBtns = filterBar.querySelectorAll('.filter-btn');
+    var searchInput = document.getElementById('venueSearch');
     var currentFilter = 'all';
+    var currentQuery = '';
 
     function getCardVoteStatus(card) {
       if (card.classList.contains('fb-must')) return 'must';
@@ -7235,19 +7445,30 @@ document.addEventListener('DOMContentLoaded', () => {
       return 'undecided';
     }
 
-    function applyFilter(filter) {
-      currentFilter = filter;
+    function matchesText(card, query) {
+      if (!query) return true;
+      var t = (card.textContent || '').toLowerCase();
+      return t.indexOf(query) !== -1;
+    }
+
+    function applyCombinedFilters() {
       document.querySelectorAll('.venue-card').forEach(function(card) {
         var status = getCardVoteStatus(card);
-        var show = (filter === 'all') ||
-                   (filter === 'must' && status === 'must') ||
-                   (filter === 'skip' && status === 'skip') ||
-                   (filter === 'undecided' && status === 'undecided');
-        card.classList.toggle('vc-filtered-out', !show);
+        var passVote = (currentFilter === 'all') ||
+                       (currentFilter === 'must' && status === 'must') ||
+                       (currentFilter === 'skip' && status === 'skip') ||
+                       (currentFilter === 'undecided' && status === 'undecided');
+        var passText = matchesText(card, currentQuery);
+        card.classList.toggle('vc-filtered-out', !(passVote && passText));
       });
       filterBtns.forEach(function(btn) {
-        btn.classList.toggle('filter-active', btn.dataset.filter === filter);
+        btn.classList.toggle('filter-active', btn.dataset.filter === currentFilter);
       });
+    }
+
+    function applyFilter(filter) {
+      currentFilter = filter;
+      applyCombinedFilters();
     }
 
     function updateFilterCounts() {
@@ -7269,10 +7490,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        currentQuery = (searchInput.value || '').trim().toLowerCase();
+        applyCombinedFilters();
+      });
+    }
+
     // Observe card class changes (fb-must / fb-skip toggled by feedback system)
     var cardObserver = new MutationObserver(function() {
       updateFilterCounts();
-      if (currentFilter !== 'all') applyFilter(currentFilter);
+      applyCombinedFilters();
     });
     document.querySelectorAll('.venue-card').forEach(function(card) {
       cardObserver.observe(card, { attributes: true, attributeFilter: ['class'] });
@@ -7302,7 +7530,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.switchTab = function(btn) {
       origSwitchTab(btn);
       updateFilterBarVisibility();
-      applyFilter('all'); // Reset filter on tab switch
+      applyFilter('all'); // Reset vote filter on tab switch
+      currentQuery = '';
+      if (searchInput) searchInput.value = '';
+      applyCombinedFilters();
     };
 
     // Initial counts
